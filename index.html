@@ -3,934 +3,506 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stool Dynasty</title>
+<title>STOOLVERSE</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+:root {
+    --bg: #090909;
+    --panel: #121212;
+    --panel2: #181818;
+    --border: #292929;
+    --text: #f4f4f4;
+    --muted: #929292;
+    --accent: #e31837;
+    --accent2: #ff304f;
 }
 
-:root {
-    --bg: #080808;
-    --panel: #111;
-    --panel2: #181818;
-    --panel3: #202020;
-    --border: #303030;
-    --red: #d71920;
-    --red2: #ff3038;
-    --text: #f5f5f5;
-    --muted: #929292;
-    --green: #27c76f;
-    --yellow: #d9b329;
+* {
+    box-sizing: border-box;
 }
 
 body {
+    margin: 0;
     background: var(--bg);
     color: var(--text);
     font-family: Arial, Helvetica, sans-serif;
-    min-height: 100vh;
 }
 
 button,
 input,
 select {
-    font: inherit;
+    font-family: inherit;
 }
 
 button {
     cursor: pointer;
 }
 
-.app {
-    min-height: 100vh;
-}
-
-/* =========================
-   TOP BAR
-========================= */
-
-.topbar {
-    height: 70px;
-    background: #101010;
+header {
+    height: 72px;
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 28px;
+    padding: 0 5%;
     position: sticky;
     top: 0;
     z-index: 50;
+    background: rgba(9,9,9,.95);
+    backdrop-filter: blur(12px);
 }
 
 .logo {
     font-size: 24px;
     font-weight: 900;
     letter-spacing: -1px;
-    cursor: pointer;
 }
 
 .logo span {
-    color: var(--red);
+    color: var(--accent);
 }
 
-.top-right {
+nav {
     display: flex;
-    gap: 22px;
-    align-items: center;
+    gap: 24px;
 }
 
-.top-stat {
+nav button {
     color: var(--muted);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.top-stat strong {
-    display: block;
-    color: white;
-    font-size: 15px;
-    margin-bottom: 3px;
-}
-
-/* =========================
-   LAYOUT
-========================= */
-
-.layout {
-    display: flex;
-    min-height: calc(100vh - 70px);
-}
-
-.sidebar {
-    width: 235px;
-    flex-shrink: 0;
-    background: #0e0e0e;
-    border-right: 1px solid var(--border);
-    padding: 20px 12px;
-}
-
-.sidebar-label {
-    color: #666;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin: 17px 12px 8px;
-}
-
-.nav-button {
-    width: 100%;
+    background: none;
     border: none;
-    background: transparent;
-    color: #aaa;
-    text-align: left;
-    padding: 13px 14px;
-    border-radius: 6px;
-    margin-bottom: 3px;
-    font-size: 14px;
-    transition: .2s;
+    font-weight: bold;
+    font-size: 13px;
 }
 
-.nav-button:hover {
-    background: #1e1e1e;
+nav button:hover {
     color: white;
 }
 
-.nav-button.active {
-    background: #242424;
-    color: white;
-    border-left: 3px solid var(--red);
+main {
+    max-width: 1400px;
+    margin: auto;
+    padding: 35px 5% 80px;
 }
 
-.content {
-    flex: 1;
-    padding: 34px;
-    overflow-x: hidden;
+.page {
+    display: none;
 }
 
-.page-title {
-    font-size: 36px;
+.page.active {
+    display: block;
+}
+
+.hero {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.hero-text {
+    max-width: 700px;
+}
+
+.kicker {
+    color: var(--accent);
     font-weight: 900;
-    letter-spacing: -1px;
-    margin-bottom: 7px;
+    letter-spacing: 2px;
+    font-size: 13px;
+    text-transform: uppercase;
 }
 
-.page-subtitle {
+h1 {
+    font-size: clamp(52px, 9vw, 120px);
+    line-height: .85;
+    margin: 15px 0 25px;
+    letter-spacing: -7px;
+}
+
+h2 {
+    font-size: 36px;
+    margin-top: 0;
+}
+
+h3 {
+    margin-top: 0;
+}
+
+.hero p {
     color: var(--muted);
-    margin-bottom: 28px;
-    line-height: 1.5;
+    font-size: 18px;
+    max-width: 600px;
+    line-height: 1.6;
 }
-
-/* =========================
-   BUTTONS
-========================= */
 
 .primary-btn {
-    background: var(--red);
-    border: none;
+    background: var(--accent);
     color: white;
-    padding: 13px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: .2s;
+    border: none;
+    padding: 15px 24px;
+    font-weight: 900;
+    margin-top: 15px;
 }
 
 .primary-btn:hover {
-    background: var(--red2);
-    transform: translateY(-1px);
+    background: var(--accent2);
 }
 
 .secondary-btn {
-    background: #252525;
-    border: 1px solid #444;
+    background: var(--panel2);
     color: white;
-    padding: 12px 18px;
-    border-radius: 5px;
-}
-
-.secondary-btn:hover {
-    background: #333;
-}
-
-.danger-btn {
-    background: #4d1111;
-    color: #ff7777;
-    border: 1px solid #762020;
-    padding: 10px 15px;
-    border-radius: 5px;
-}
-
-/* =========================
-   DASHBOARD
-========================= */
-
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-bottom: 35px;
-}
-
-.mode-card {
-    background: linear-gradient(145deg, #1c1c1c, #111);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 22px;
-    min-height: 145px;
-    transition: .2s;
-    cursor: pointer;
+    padding: 14px 20px;
+    font-weight: bold;
 }
 
-.mode-card:hover {
-    border-color: var(--red);
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 45px 0 20px;
+}
+
+.section-title h2 {
+    margin: 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 18px;
+    transition: .2s;
+}
+
+.card:hover {
+    border-color: var(--accent);
     transform: translateY(-3px);
 }
 
-.mode-icon {
-    font-size: 30px;
-    margin-bottom: 13px;
-}
-
-.mode-card h3 {
-    margin-bottom: 8px;
-    font-size: 18px;
-}
-
-.mode-card p {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.5;
-}
-
-.dashboard-bottom {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 20px;
-}
-
-.panel {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 22px;
-}
-
-.panel-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 16px;
-}
-
-.news-item {
-    border-bottom: 1px solid #292929;
-    padding: 13px 0;
-    font-size: 14px;
-}
-
-.news-item:last-child {
-    border-bottom: none;
-}
-
-.news-item small {
-    display: block;
-    color: #777;
-    margin-top: 5px;
-}
-
-/* =========================
-   MAP
-========================= */
-
-.map {
-    height: 570px;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px),
-        #151515;
-    background-size: 45px 45px;
-}
-
-.map-title {
-    position: absolute;
-    top: 20px;
-    left: 25px;
-    color: #4c4c4c;
-    letter-spacing: 4px;
-    font-size: 11px;
-}
-
-.map-line {
-    position: absolute;
-    height: 2px;
-    background: #333;
-    transform-origin: left center;
-    opacity: .7;
-}
-
-.location {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    text-align: center;
+.person-card {
     cursor: pointer;
 }
 
-.location-dot {
-    width: 23px;
-    height: 23px;
-    background: var(--red);
-    border-radius: 50%;
-    margin: auto;
-    box-shadow: 0 0 22px rgba(215,25,32,.7);
-    transition: .2s;
-}
-
-.location:hover .location-dot {
-    transform: scale(1.5);
-}
-
-.location-name {
-    margin-top: 9px;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-.location-count {
-    color: #777;
-    font-size: 10px;
-    margin-top: 3px;
-}
-
-.chicago {
-    left: 30%;
-    top: 39%;
-}
-
-.new-york {
-    left: 73%;
-    top: 33%;
-}
-
-.philly {
-    left: 68%;
-    top: 50%;
-}
-
-.boston {
-    left: 82%;
-    top: 19%;
-}
-
-.las-vegas {
-    left: 14%;
-    top: 58%;
-}
-
-.other {
-    left: 48%;
-    top: 74%;
-}
-
-/* =========================
-   PLAYER DATABASE
-========================= */
-
-.toolbar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.search {
-    background: #171717;
-    border: 1px solid #393939;
-    color: white;
-    padding: 12px 15px;
-    border-radius: 5px;
-    min-width: 280px;
-}
-
-.filter {
-    background: #171717;
-    border: 1px solid #393939;
-    color: white;
-    padding: 12px 15px;
-    border-radius: 5px;
-}
-
-.player-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-}
-
-.player-card {
-    background: linear-gradient(145deg, #202020, #111);
-    border: 1px solid #343434;
-    border-radius: 9px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: .2s;
-}
-
-.player-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--red);
-}
-
-.player-image {
-    height: 125px;
-    background: linear-gradient(135deg, #333, #171717);
+.person-photo {
+    height: 190px;
+    background: #222;
+    margin: -18px -18px 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 42px;
+    overflow: hidden;
+}
+
+.person-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-placeholder {
+    font-size: 48px;
     font-weight: 900;
-    color: #777;
+    color: #444;
 }
 
-.player-info {
-    padding: 14px;
+.person-card h3 {
+    margin-bottom: 5px;
 }
 
-.player-name {
-    font-size: 16px;
+.role {
+    color: var(--accent);
+    font-size: 12px;
     font-weight: bold;
-}
-
-.player-role {
-    color: #888;
-    font-size: 11px;
     text-transform: uppercase;
-    margin-top: 4px;
-}
-
-.player-bottom {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 14px;
-}
-
-.ovr {
-    font-size: 26px;
-    font-weight: 900;
-}
-
-.ovr-label {
-    color: #777;
-    font-size: 9px;
 }
 
 .tags {
     display: flex;
-    gap: 4px;
     flex-wrap: wrap;
+    gap: 6px;
     margin-top: 12px;
 }
 
 .tag {
-    background: #2b2b2b;
-    color: #aaa;
-    font-size: 9px;
-    padding: 4px 6px;
-    border-radius: 3px;
-}
-
-/* =========================
-   SHOW BUILDER
-========================= */
-
-.builder-layout {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 22px;
-}
-
-.format-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-
-.format-card {
-    background: #1a1a1a;
-    border: 1px solid #333;
-    padding: 16px;
-    border-radius: 7px;
-    cursor: pointer;
-    transition: .2s;
-}
-
-.format-card:hover,
-.format-card.selected {
-    border-color: var(--red);
-    background: #281414;
-}
-
-.format-card strong {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.format-card small {
-    color: #888;
-    line-height: 1.4;
-}
-
-.cast-slots {
-    margin-top: 20px;
-}
-
-.cast-slot {
-    background: #181818;
-    border: 1px dashed #444;
-    min-height: 55px;
-    border-radius: 6px;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    padding: 10px 13px;
-    justify-content: space-between;
-}
-
-.cast-slot.empty {
-    color: #666;
-}
-
-.cast-slot-name {
-    font-weight: bold;
-}
-
-.cast-slot-role {
-    color: #777;
     font-size: 11px;
+    color: #bbb;
+    border: 1px solid #333;
+    padding: 5px 8px;
 }
 
-.cast-list {
-    max-height: 520px;
-    overflow-y: auto;
+.search-box {
+    width: 100%;
+    background: var(--panel);
+    color: white;
+    border: 1px solid var(--border);
+    padding: 17px;
+    font-size: 16px;
+    margin: 20px 0;
 }
 
-.cast-option {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px;
-    border-bottom: 1px solid #292929;
-    cursor: pointer;
+.profile-header {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 35px;
+    margin-bottom: 40px;
 }
 
-.cast-option:hover {
-    background: #202020;
-}
-
-.cast-option-info {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-}
-
-.mini-avatar {
-    width: 35px;
-    height: 35px;
-    background: #333;
+.profile-photo {
+    height: 350px;
+    background: #222;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.add-button {
-    background: #292929;
-    color: white;
-    border: 1px solid #444;
-    border-radius: 4px;
-    padding: 6px 10px;
-}
-
-.result-box {
-    margin-top: 22px;
-    background: linear-gradient(145deg, #211111, #111);
-    border: 1px solid #602020;
-    border-radius: 9px;
-    padding: 22px;
-}
-
-.result-score {
-    font-size: 55px;
-    font-weight: 900;
-    color: var(--red2);
-}
-
-.stat-row {
-    margin: 12px 0;
-}
-
-.stat-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    margin-bottom: 5px;
-}
-
-.stat-bar {
-    height: 8px;
-    background: #292929;
-    border-radius: 4px;
     overflow: hidden;
 }
 
-.stat-fill {
+.profile-photo img {
+    width: 100%;
     height: 100%;
-    background: var(--red);
-    border-radius: 4px;
+    object-fit: cover;
 }
 
-/* =========================
-   YAK WHEEL
-========================= */
-
-.wheel-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
+.profile-name {
+    font-size: clamp(42px, 7vw, 85px);
+    line-height: .9;
+    margin: 0 0 10px;
+    letter-spacing: -4px;
 }
 
-.wheel {
-    width: 330px;
-    height: 330px;
-    border-radius: 50%;
-    margin: 20px auto;
-    background: conic-gradient(
-        #d71920 0deg 45deg,
-        #222 45deg 90deg,
-        #d71920 90deg 135deg,
-        #222 135deg 180deg,
-        #d71920 180deg 225deg,
-        #222 225deg 270deg,
-        #d71920 270deg 315deg,
-        #222 315deg 360deg
-    );
-    border: 8px solid #444;
-    box-shadow: 0 0 35px rgba(0,0,0,.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 3s cubic-bezier(.15,.8,.2,1);
-}
-
-.wheel-center {
-    width: 90px;
-    height: 90px;
-    background: #111;
-    border: 4px solid #555;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.profile-subtitle {
+    color: var(--accent);
+    font-size: 15px;
     font-weight: bold;
-    font-size: 13px;
+    text-transform: uppercase;
 }
 
-.wheel-result {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 18px;
-    min-height: 35px;
-}
-
-.wheel-controls {
+.info-grid {
     display: grid;
-    gap: 14px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 25px;
 }
 
-.wheel-control {
-    background: #171717;
-    border: 1px solid #333;
-    padding: 17px;
-    border-radius: 7px;
+.info-box {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 15px;
 }
 
-.wheel-control label {
+.info-box label {
+    color: var(--muted);
     display: block;
-    color: #888;
     font-size: 11px;
     text-transform: uppercase;
     margin-bottom: 7px;
 }
 
-/* =========================
-   WHO AM I
-========================= */
-
-.guess-input {
-    width: 100%;
-    background: #161616;
-    border: 1px solid #444;
-    color: white;
-    padding: 14px;
-    border-radius: 5px;
-    margin-bottom: 10px;
+.timeline {
+    border-left: 2px solid var(--accent);
+    margin-left: 10px;
+    padding-left: 25px;
 }
 
-.guess-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 22px;
+.timeline-item {
+    position: relative;
+    margin-bottom: 25px;
 }
 
-.guess-table th {
-    color: #777;
-    font-size: 10px;
-    text-transform: uppercase;
-    padding: 10px 5px;
-    text-align: center;
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -33px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
 }
 
-.guess-table td {
-    border: 1px solid #333;
-    padding: 13px 6px;
-    text-align: center;
-    font-size: 12px;
-    font-weight: bold;
+.timeline-year {
+    color: var(--accent);
+    font-weight: 900;
+    font-size: 13px;
 }
 
-.green {
-    background: #1c6e43;
+.moment {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 18px;
+    margin-bottom: 12px;
 }
 
-.yellow {
-    background: #806d18;
-}
-
-.gray {
-    background: #303030;
-    color: #888;
-}
-
-.guess-name {
-    text-align: left !important;
-    background: #1a1a1a !important;
-}
-
-/* =========================
-   RANDOMIZER
-========================= */
-
-.random-result {
-    min-height: 200px;
-    background: #171717;
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 25px;
-    margin-top: 20px;
-}
-
-.random-result h2 {
-    margin-bottom: 15px;
-}
-
-.random-result p {
-    color: #bbb;
-    line-height: 1.7;
-}
-
-/* =========================
-   MEDICAL
-========================= */
-
-.injury-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-}
-
-.injury-card {
-    background: #171717;
-    border: 1px solid #333;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.injury-card h3 {
+.moment h3 {
     margin-bottom: 8px;
 }
 
-.injury-card p {
-    color: #888;
-    font-size: 13px;
+.moment p {
+    color: #bbb;
     line-height: 1.5;
 }
 
-.injury-badge {
-    display: inline-block;
-    margin-top: 15px;
-    background: #401717;
-    color: #ff6f6f;
-    padding: 5px 8px;
-    font-size: 10px;
-    border-radius: 3px;
+.moment-meta {
+    color: var(--muted);
+    font-size: 12px;
 }
 
-/* =========================
-   MODAL
-========================= */
-
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.8);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+.builder {
+    max-width: 900px;
 }
 
-.modal-box {
-    width: min(700px, 100%);
-    max-height: 90vh;
-    overflow-y: auto;
-    background: #171717;
-    border: 1px solid #444;
-    border-radius: 10px;
+.builder-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
     padding: 25px;
-}
-
-.modal-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
     margin-bottom: 20px;
 }
 
-.close {
-    background: transparent;
-    border: none;
-    color: #888;
-    font-size: 25px;
-}
-
-.detail-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.detail-stat {
-    background: #202020;
-    padding: 13px;
-    border-radius: 5px;
-}
-
-.detail-stat span {
-    color: #888;
-    font-size: 11px;
+.builder-panel label {
     display: block;
-    margin-bottom: 5px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 7px;
+    text-transform: uppercase;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width: 1100px) {
-    .player-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .dashboard-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.builder-panel input,
+.builder-panel select {
+    width: 100%;
+    background: #0b0b0b;
+    color: white;
+    border: 1px solid var(--border);
+    padding: 14px;
+    margin-bottom: 15px;
 }
 
-@media(max-width: 800px) {
-    .sidebar {
-        display: none;
+.cast-search {
+    display: flex;
+    gap: 10px;
+}
+
+.cast-search input {
+    margin: 0;
+}
+
+.cast-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.cast-person {
+    background: #252525;
+    padding: 9px 12px;
+    font-size: 13px;
+}
+
+.cast-person button {
+    background: none;
+    color: #aaa;
+    border: none;
+    margin-left: 8px;
+}
+
+.result {
+    display: none;
+    background: linear-gradient(135deg, #171717, #0c0c0c);
+    border: 1px solid var(--accent);
+    padding: 28px;
+    margin-top: 20px;
+}
+
+.result.show {
+    display: block;
+}
+
+.reaction {
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--accent);
+}
+
+.map-container {
+    min-height: 600px;
+    background:
+        radial-gradient(circle at 20% 30%, #252525 0 2px, transparent 3px),
+        radial-gradient(circle at 70% 60%, #252525 0 2px, transparent 3px),
+        #101010;
+    background-size: 80px 80px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+}
+
+.map-location {
+    position: absolute;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 13px;
+    font-weight: 900;
+    border-radius: 3px;
+}
+
+.map-location:hover {
+    transform: scale(1.08);
+}
+
+.location-info {
+    margin-top: 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 25px;
+    display: none;
+}
+
+.location-info.show {
+    display: block;
+}
+
+.empty {
+    color: var(--muted);
+    padding: 30px 0;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    padding: 0;
+    margin-bottom: 25px;
+}
+
+.back-btn:hover {
+    color: white;
+}
+
+@media (max-width: 700px) {
+    nav {
+        gap: 10px;
     }
 
-    .content {
-        padding: 20px;
+    nav button {
+        font-size: 10px;
     }
 
-    .builder-layout,
-    .wheel-layout,
-    .dashboard-bottom {
+    .profile-header {
         grid-template-columns: 1fr;
     }
 
-    .player-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .profile-photo {
+        height: 300px;
     }
 
-    .injury-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media(max-width: 550px) {
-    .player-grid,
-    .dashboard-grid,
-    .injury-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .top-right {
-        display: none;
-    }
-
-    .content {
-        padding: 15px;
+    h1 {
+        letter-spacing: -4px;
     }
 }
 </style>
@@ -938,6653 +510,1421 @@ button {
 
 <body>
 
-<div class="app">
+<header>
+    <div class="logo" onclick="showPage('home')">STOOL<span>VERSE</span></div>
 
-<header class="topbar">
-    <div class="logo" onclick="showPage('dashboard')">
-        STOOL <span>DYNASTY</span>
-    </div>
-
-    <div class="top-right">
-        <div class="top-stat">
-            <strong id="budgetDisplay">$50.0M</strong>
-            Budget
-        </div>
-
-        <div class="top-stat">
-            <strong id="showDisplay">0</strong>
-            Shows
-        </div>
-
-        <div class="top-stat">
-            <strong id="fanDisplay">0</strong>
-            Fans
-        </div>
-    </div>
+    <nav>
+        <button onclick="showPage('people')">PEOPLE</button>
+        <button onclick="showPage('builder')">BUILD A SHOW</button>
+        <button onclick="showPage('map')">MAP</button>
+    </nav>
 </header>
 
-<div class="layout">
+<main>
 
-<aside class="sidebar">
+<!-- =====================================================
+     HOME
+===================================================== -->
 
-    <div class="sidebar-label">Empire</div>
+<section id="home" class="page active">
 
-    <button class="nav-button active" onclick="showPage('dashboard')">
-        🏟️ Dashboard
-    </button>
+    <div class="hero">
+        <div class="hero-text">
+            <div class="kicker">The Interactive Barstool Universe</div>
 
-    <button class="nav-button" onclick="showPage('dynasty')">
-        🏆 Dynasty Mode
-    </button>
+            <h1>EXPLORE<br>THE STOOLVERSE.</h1>
 
-    <button class="nav-button" onclick="showPage('builder')">
-        🎙️ Show Builder
-    </button>
+            <p>
+                Explore the people, places, shows, moments, chaos and history
+                that make up the Barstool universe.
+            </p>
 
-    <div class="sidebar-label">Games</div>
+            <button class="primary-btn" onclick="showPage('builder')">
+                BUILD A SHOW
+            </button>
 
-    <button class="nav-button" onclick="showPage('wheel')">
-        🎡 Yak Wheel
-    </button>
+            <button class="secondary-btn" onclick="randomPerson()">
+                RANDOM PERSONALITY
+            </button>
+        </div>
+    </div>
 
-    <button class="nav-button" onclick="showPage('whoami')">
-        🧩 Who Am I?
-    </button>
+    <div class="section-title">
+        <h2>Featured Personalities</h2>
+    </div>
 
-    <button class="nav-button" onclick="showPage('randomizer')">
-        🎲 Randomizer
-    </button>
+    <div id="featuredPeople" class="grid"></div>
 
-    <div class="sidebar-label">Universe</div>
+</section>
 
-    <button class="nav-button" onclick="showPage('players')">
-        🃏 Personalities
-    </button>
 
-    <button class="nav-button" onclick="showPage('map')">
-        🗺️ Stool Universe
-    </button>
+<!-- =====================================================
+     PEOPLE DATABASE
+===================================================== -->
 
-    <button class="nav-button" onclick="showPage('medical')">
-        🏥 Medical Center
-    </button>
+<section id="people" class="page">
 
-    <button class="nav-button" onclick="showPage('hall')">
-        🏆 Hall of Fame
-    </button>
+    <button class="back-btn" onclick="showPage('home')">← BACK HOME</button>
 
-</aside>
+    <h2>PERSONALITIES</h2>
 
-<main class="content" id="content"></main>
+    <p style="color:var(--muted)">
+        Search the Stoolverse.
+    </p>
 
-</div>
-</div>
+    <input
+        class="search-box"
+        id="personSearch"
+        placeholder="Search people, roles, tags, shows..."
+        oninput="renderPeople()"
+    >
 
-<div class="modal" id="modal">
-    <div class="modal-box" id="modalContent"></div>
-</div>
+    <div id="peopleGrid" class="grid"></div>
+
+</section>
+
+
+<!-- =====================================================
+     PROFILE PAGE
+===================================================== -->
+
+<section id="profile" class="page">
+
+    <button class="back-btn" onclick="showPage('people')">← BACK TO PEOPLE</button>
+
+    <div id="profileContent"></div>
+
+</section>
+
+
+<!-- =====================================================
+     SHOW BUILDER
+===================================================== -->
+
+<section id="builder" class="page">
+
+    <button class="back-btn" onclick="showPage('home')">← BACK HOME</button>
+
+    <div class="builder">
+
+        <h2>BUILD A SHOW</h2>
+
+        <p style="color:var(--muted)">
+            Put anybody together. See what happens.
+        </p>
+
+        <div class="builder-panel">
+
+            <label>Show Name</label>
+
+            <input
+                id="showName"
+                placeholder="Example: The Worst Show Ever"
+            >
+
+            <label>Show Format</label>
+
+            <select id="showFormat">
+                <option>Talk Show</option>
+                <option>Sports Talk</option>
+                <option>Comedy Show</option>
+                <option>Cooking Show</option>
+                <option>Pick'em Show</option>
+                <option>Trivia Show</option>
+                <option>Debate Show</option>
+                <option>Travel Show</option>
+                <option>Competition Show</option>
+                <option>Custom</option>
+            </select>
+
+        </div>
+
+        <div class="builder-panel">
+
+            <label>Add Cast Members</label>
+
+            <div class="cast-search">
+                <input
+                    id="castSearch"
+                    placeholder="Search for someone..."
+                    oninput="showCastSuggestions()"
+                >
+            </div>
+
+            <div id="castSuggestions"></div>
+
+            <div>
+                <strong>CAST:</strong>
+            </div>
+
+            <div id="selectedCast" class="cast-list"></div>
+
+        </div>
+
+        <button class="primary-btn" onclick="generateShow()">
+            CREATE SHOW
+        </button>
+
+        <div id="showResult" class="result"></div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MAP
+===================================================== -->
+
+<section id="map" class="page">
+
+    <button class="back-btn" onclick="showPage('home')">← BACK HOME</button>
+
+    <h2>THE STOOLVERSE MAP</h2>
+
+    <p style="color:var(--muted)">
+        Offices, cities, events, incidents and places connected to the universe.
+    </p>
+
+    <div class="map-container">
+
+        <button
+            class="map-location"
+            style="left:22%;top:22%;"
+            onclick="showLocation('newyork')">
+            NEW YORK
+        </button>
+
+        <button
+            class="map-location"
+            style="left:43%;top:40%;"
+            onclick="showLocation('chicago')">
+            CHICAGO
+        </button>
+
+        <button
+            class="map-location"
+            style="left:28%;top:58%;"
+            onclick="showLocation('philadelphia')">
+            PHILADELPHIA
+        </button>
+
+        <button
+            class="map-location"
+            style="left:70%;top:48%;"
+            onclick="showLocation('arizona')">
+            ARIZONA
+        </button>
+
+    </div>
+
+    <div id="locationInfo" class="location-info"></div>
+
+</section>
+
+</main>
+
 
 <script>
 
 /* =====================================================
-   PERSONALITY DATABASE
-   ADD MORE PEOPLE BY COPYING ONE OBJECT
-===================================================== */
-
-const players = [
-
-/* CORE / CHICAGO */
-
-{
-name:"Big Cat",
-role:"Host",
-city:"Chicago",
-shows:["Pardon My Take","The Yak","Pick Em"],
-overall:98,
-comedy:96,
-sports:97,
-chaos:88,
-chemistry:99,
-clips:99,
-knowledge:93,
-era:"Modern",
-tags:["Leader","Sports","Host"],
-abilities:["Emergency Podcast","Turns Everything Into A Bit"]
-},
-
-{
-name:"PFT Commenter",
-role:"Host",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:98,
-comedy:99,
-sports:91,
-chaos:94,
-chemistry:98,
-clips:100,
-knowledge:90,
-era:"Modern",
-tags:["Comedy","Sports","Host"],
-abilities:["Fake Expert","Football Guy"]
-},
-
-{
-name:"Nick Turani",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:96,
-comedy:99,
-sports:82,
-chaos:92,
-chemistry:100,
-clips:100,
-knowledge:81,
-era:"Modern",
-tags:["Comedy","Yak","Elite Chemistry"],
-abilities:["Random Story","Instant Bit"]
-},
-
-{
-name:"KB",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak","Macrodosing"],
-overall:97,
-comedy:100,
-sports:76,
-chaos:96,
-chemistry:99,
-clips:100,
-knowledge:92,
-era:"Modern",
-tags:["Comedy","Yak","Writer"],
-abilities:["Historical Reference","Unpredictable Genius"]
-},
-
-{
-name:"Brandon Walker",
-role:"Host",
-city:"Chicago",
-shows:["The Yak","Pick Em","Rundown"],
-overall:94,
-comedy:93,
-sports:98,
-chaos:92,
-chemistry:96,
-clips:98,
-knowledge:99,
-era:"Modern",
-tags:["Sports","Debate","Host"],
-abilities:["Southern Rant","Knows Ball"]
-},
-
-{
-name:"TJ Hitchings",
-role:"Producer",
-city:"Chicago",
-shows:["The Yak"],
-overall:96,
-comedy:88,
-sports:74,
-chaos:90,
-chemistry:98,
-clips:95,
-knowledge:88,
-era:"Modern",
-tags:["Producer","Yak","Content"],
-abilities:["Wheel Master","Finds Weird Website"]
-},
-
-{
-name:"Mintzy",
-role:"Chaos Agent",
-city:"Chicago",
-shows:["Pick Em","The Yak"],
-overall:89,
-comedy:94,
-sports:78,
-chaos:100,
-chemistry:87,
-clips:100,
-knowledge:72,
-era:"Modern",
-tags:["Chaos","Wildcard","Legend"],
-abilities:["Somehow Survives","One Clip Away","The Ankle"]
-},
-
-{
-name:"WSD",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak","Rundown"],
-overall:88,
-comedy:90,
-sports:95,
-chaos:89,
-chemistry:90,
-clips:91,
-knowledge:96,
-era:"Modern",
-tags:["Sports","Chaos","Chicago"],
-abilities:["Accidental Injury","Loud Opinion"]
-},
-
-{
-name:"Rone",
-role:"Host",
-city:"Chicago",
-shows:["The Yak"],
-overall:96,
-comedy:98,
-sports:81,
-chaos:86,
-chemistry:98,
-clips:98,
-knowledge:88,
-era:"Modern",
-tags:["Comedy","Yak","Writer"],
-abilities:["Freestyle","Instant Song"]
-},
-
-{
-name:"Kate",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:93,
-comedy:94,
-sports:79,
-chaos:91,
-chemistry:96,
-clips:94,
-knowledge:82,
-era:"Modern",
-tags:["Comedy","Yak","Wildcard"],
-abilities:["Unexpected Answer","Bit Accelerator"]
-},
-
-{
-name:"Frank The Tank",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak","Cubs Content"],
-overall:91,
-comedy:94,
-sports:94,
-chaos:98,
-chemistry:87,
-clips:98,
-knowledge:93,
-era:"Modern",
-tags:["Chicago","Sports","Chaos"],
-abilities:["Historical Rant","Chicago Energy"]
-},
-
-{
-name:"Sas",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:92,
-comedy:96,
-sports:74,
-chaos:83,
-chemistry:94,
-clips:96,
-knowledge:79,
-era:"Modern",
-tags:["Comedy","Yak","Writer"],
-abilities:["One Liner","Young Gun"]
-},
-
-{
-name:"Nicky Smokes",
-role:"Chaos Agent",
-city:"Chicago",
-shows:["The Yak"],
-overall:90,
-comedy:91,
-sports:70,
-chaos:99,
-chemistry:88,
-clips:99,
-knowledge:68,
-era:"Modern",
-tags:["Chaos","Wildcard","Young Gun"],
-abilities:["Bad Decision","Instant Clip"]
-},
-
-{
-name:"Caleb Pressley",
-role:"Host",
-city:"Chicago",
-shows:["Sundae Conversation"],
-overall:95,
-comedy:96,
-sports:84,
-chaos:89,
-chemistry:94,
-clips:97,
-knowledge:82,
-era:"Modern",
-tags:["Interview","Comedy","Host"],
-abilities:["Awkward Question","Walks Away"]
-},
-
-{
-name:"Mark Titus",
-role:"Host",
-city:"Chicago",
-shows:["Mark Titus Show"],
-overall:94,
-comedy:91,
-sports:100,
-chaos:79,
-chemistry:91,
-clips:91,
-knowledge:100,
-era:"Modern",
-tags:["Sports","Basketball","Host"],
-abilities:["College Basketball Encyclopedia","Rant"]
-},
-
-{
-name:"Jack Mac",
-role:"Personality",
-city:"Chicago",
-shows:["Sports Content"],
-overall:87,
-comedy:86,
-sports:92,
-chaos:82,
-chemistry:85,
-clips:87,
-knowledge:94,
-era:"Modern",
-tags:["Sports","Debate"],
-abilities:["Sports Take","Overreaction"]
-},
-
-{
-name:"Nick Piccone",
-role:"Personality",
-city:"Chicago",
-shows:["Sports Content"],
-overall:85,
-comedy:83,
-sports:91,
-chaos:80,
-chemistry:84,
-clips:84,
-knowledge:93,
-era:"Modern",
-tags:["Sports","Football"],
-abilities:["Stats Guy","Game Day"]
-},
-
-/* NEW YORK */
-
-{
-name:"Dave Portnoy",
-role:"Founder",
-city:"New York",
-shows:["Rundown","One Bite"],
-overall:99,
-comedy:94,
-sports:91,
-chaos:100,
-chemistry:92,
-clips:100,
-knowledge:87,
-era:"Early",
-tags:["Founder","Chaos","Legend"],
-abilities:["One Bite","Emergency Meeting","Fire Someone"]
-},
-
-{
-name:"Kirk Minihane",
-role:"Host",
-city:"New York",
-shows:["The Kirk Minihane Show"],
-overall:95,
-comedy:95,
-sports:79,
-chaos:97,
-chemistry:85,
-clips:98,
-knowledge:89,
-era:"Modern",
-tags:["Comedy","Talk","Chaos"],
-abilities:["Investigative Rant","No Filter"]
-},
-
-{
-name:"Nate",
-role:"Producer",
-city:"New York",
-shows:["Kirk Minihane Show"],
-overall:86,
-comedy:87,
-sports:74,
-chaos:81,
-chemistry:90,
-clips:83,
-knowledge:78,
-era:"Modern",
-tags:["Producer","Talk"],
-abilities:["Keeps The Show Moving"]
-},
-
-{
-name:"Smitty",
-role:"Personality",
-city:"New York",
-shows:["Rundown","Sports Content"],
-overall:88,
-comedy:88,
-sports:94,
-chaos:84,
-chemistry:88,
-clips:89,
-knowledge:94,
-era:"Modern",
-tags:["Sports","New York"],
-abilities:["Fantasy Sports","Angry Take"]
-},
-
-{
-name:"Rico Bosco",
-role:"Competitor",
-city:"New York",
-shows:["Pick Em","Sports Content"],
-overall:93,
-comedy:87,
-sports:98,
-chaos:96,
-chemistry:89,
-clips:99,
-knowledge:97,
-era:"Modern",
-tags:["Sports","Competitor","Chaos"],
-abilities:["Pick Em","Suspension Risk","Angry Walkout"]
-},
-
-{
-name:"Marty Mush",
-role:"Personality",
-city:"New York",
-shows:["Pick Em","Sports Content"],
-overall:89,
-comedy:92,
-sports:89,
-chaos:90,
-chemistry:91,
-clips:93,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Bad Pick","Backpedal"]
-},
-
-{
-name:"Tommy Smokes",
-role:"Personality",
-city:"New York",
-shows:["Pick Em","Sports Content"],
-overall:87,
-comedy:89,
-sports:90,
-chaos:88,
-chemistry:88,
-clips:90,
-knowledge:87,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Confidently Wrong","Vibes"]
-},
-
-{
-name:"Jerry",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:90,
-comedy:94,
-sports:72,
-chaos:98,
-chemistry:85,
-clips:100,
-knowledge:68,
-era:"Modern",
-tags:["Chaos","Wildcard","Legend"],
-abilities:["Random Appearance","Somehow Involved"]
-},
-
-{
-name:"Glenny Balls",
-role:"Personality",
-city:"New York",
-shows:["Food Content","Sports Content"],
-overall:88,
-comedy:89,
-sports:83,
-chaos:87,
-chemistry:91,
-clips:91,
-knowledge:80,
-era:"Modern",
-tags:["Food","Comedy"],
-abilities:["Food Review","New York Energy"]
-},
-
-{
-name:"Steven Cheah",
-role:"Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:88,
-comedy:84,
-sports:93,
-chaos:86,
-chemistry:89,
-clips:87,
-knowledge:94,
-era:"Modern",
-tags:["Sports","Football"],
-abilities:["Steelers Take","Fantasy Football"]
-},
-
-{
-name:"Jack Mac",
-role:"Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:87,
-comedy:84,
-sports:93,
-chaos:80,
-chemistry:84,
-clips:85,
-knowledge:95,
-era:"Modern",
-tags:["Sports","Football"],
-abilities:["Film Study","Sports Debate"]
-},
-
-{
-name:"Nate",
-role:"Producer",
-city:"New York",
-shows:["Talk Shows"],
-overall:83,
-comedy:82,
-sports:70,
-chaos:79,
-chemistry:88,
-clips:80,
-knowledge:73,
-era:"Modern",
-tags:["Producer"],
-abilities:["Keeps Everyone On Schedule"]
-},
-
-{
-name:"Sully",
-role:"Personality",
-city:"New York",
-shows:["Office Content"],
-overall:82,
-comedy:85,
-sports:77,
-chaos:85,
-chemistry:84,
-clips:82,
-knowledge:76,
-era:"Modern",
-tags:["Wildcard","Comedy"],
-abilities:["Office Lore"]
-},
-
-/* SPORTS / PICK EM */
-
-{
-name:"PFT Commenter",
-role:"Host",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:98,
-comedy:99,
-sports:91,
-chaos:94,
-chemistry:98,
-clips:100,
-knowledge:90,
-era:"Modern",
-tags:["Comedy","Sports"],
-abilities:["Fake Expert","Football Guy"]
-},
-
-{
-name:"Dan Katz",
-role:"Host",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:98,
-comedy:96,
-sports:97,
-chaos:88,
-chemistry:99,
-clips:99,
-knowledge:93,
-era:"Modern",
-tags:["Comedy","Sports"],
-abilities:["Emergency Podcast","Producer Brain"]
-},
-
-{
-name:"Billy Football",
-role:"Competitor",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:91,
-comedy:91,
-sports:94,
-chaos:95,
-chemistry:91,
-clips:96,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Chaos","Competitor"],
-abilities:["Football Guy","Bad Idea"]
-},
-
-{
-name:"Jake Marsh",
-role:"Host",
-city:"Chicago",
-shows:["Pardon My Take","The Dozen"],
-overall:94,
-comedy:82,
-sports:99,
-chaos:69,
-chemistry:93,
-clips:84,
-knowledge:100,
-era:"Modern",
-tags:["Sports","Knowledge","Host"],
-abilities:["Stat Machine","Actually Prepared"]
-},
-
-{
-name:"Frankie Borrelli",
-role:"Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:86,
-comedy:85,
-sports:90,
-chaos:87,
-chemistry:87,
-clips:86,
-knowledge:91,
-era:"Modern",
-tags:["Sports","New York"],
-abilities:["Football Opinion"]
-},
-
-{
-name:"Brandon Newman",
-role:"Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:84,
-comedy:82,
-sports:90,
-chaos:82,
-chemistry:83,
-clips:82,
-knowledge:92,
-era:"Modern",
-tags:["Sports"],
-abilities:["Sports Guy"]
-},
-
-{
-name:"Marty Mush",
-role:"Competitor",
-city:"New York",
-shows:["Pick Em"],
-overall:89,
-comedy:92,
-sports:89,
-chaos:90,
-chemistry:91,
-clips:93,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Bad Pick","Backpedal"]
-},
-
-{
-name:"Max Homa",
-role:"Athlete",
-city:"Other",
-shows:["Golf Content"],
-overall:93,
-comedy:88,
-sports:97,
-chaos:72,
-chemistry:90,
-clips:89,
-knowledge:91,
-era:"Modern",
-tags:["Golf","Athlete"],
-abilities:["Professional Athlete"]
-},
-
-{
-name:"Riggs",
-role:"Host",
-city:"Other",
-shows:["Fore Play"],
-overall:90,
-comedy:82,
-sports:94,
-chaos:74,
-chemistry:90,
-clips:86,
-knowledge:94,
-era:"Modern",
-tags:["Golf","Host"],
-abilities:["Golf Guy"]
-},
-
-{
-name:"Trent",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:89,
-comedy:87,
-sports:91,
-chaos:79,
-chemistry:91,
-clips:88,
-knowledge:89,
-era:"Modern",
-tags:["Golf","Comedy"],
-abilities:["Golf Trip"]
-},
-
-{
-name:"Frankie",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:87,
-comedy:86,
-sports:88,
-chaos:85,
-chemistry:87,
-clips:87,
-knowledge:85,
-era:"Modern",
-tags:["Golf","Comedy"],
-abilities:["Golf Guy"]
-},
-
-{
-name:"Lurch",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:85,
-comedy:81,
-sports:88,
-chaos:83,
-chemistry:85,
-clips:82,
-knowledge:88,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Trip"]
-},
-
-/* TRIVIA / CONTENT */
-
-{
-name:"Megan Makin' Money",
-role:"Competitor",
-city:"New York",
-shows:["The Dozen"],
-overall:91,
-comedy:82,
-sports:87,
-chaos:67,
-chemistry:87,
-clips:80,
-knowledge:99,
-era:"Modern",
-tags:["Trivia","Knowledge"],
-abilities:["Trivia Machine"]
-},
-
-{
-name:"KenJac",
-role:"Competitor",
-city:"New York",
-shows:["The Dozen"],
-overall:94,
-comedy:84,
-sports:92,
-chaos:70,
-chemistry:90,
-clips:82,
-knowledge:100,
-era:"Modern",
-tags:["Trivia","Knowledge"],
-abilities:["Final Answer"]
-},
-
-{
-name:"Glenny Balls",
-role:"Competitor",
-city:"New York",
-shows:["The Dozen"],
-overall:86,
-comedy:89,
-sports:84,
-chaos:87,
-chemistry:89,
-clips:90,
-knowledge:80,
-era:"Modern",
-tags:["Trivia","Comedy"],
-abilities:["Guess The Food"]
-},
-
-{
-name:"Nicky Smokes",
-role:"Competitor",
-city:"Chicago",
-shows:["The Dozen"],
-overall:88,
-comedy:91,
-sports:74,
-chaos:99,
-chemistry:88,
-clips:99,
-knowledge:70,
-era:"Modern",
-tags:["Trivia","Chaos"],
-abilities:["Confident Guess"]
-},
-
-{
-name:"Kelly Keegs",
-role:"Host",
-city:"New York",
-shows:["Chicks in the Office"],
-overall:91,
-comedy:88,
-sports:72,
-chaos:76,
-chemistry:92,
-clips:88,
-knowledge:82,
-era:"Modern",
-tags:["Talk","Entertainment"],
-abilities:["Pop Culture"]
-},
-
-{
-name:"KFC",
-role:"Host",
-city:"New York",
-shows:["KFC Radio"],
-overall:93,
-comedy:95,
-sports:82,
-chaos:85,
-chemistry:92,
-clips:94,
-knowledge:85,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["Story Time","Podcast Veteran"]
-},
-
-{
-name:"Feits",
-role:"Host",
-city:"New York",
-shows:["KFC Radio"],
-overall:92,
-comedy:94,
-sports:83,
-chaos:88,
-chemistry:94,
-clips:94,
-knowledge:82,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["Story Time","Bit Machine"]
-},
-
-{
-name:"Chaps",
-role:"Host",
-city:"Other",
-shows:["Military Content"],
-overall:89,
-comedy:86,
-sports:85,
-chaos:80,
-chemistry:90,
-clips:86,
-knowledge:91,
-era:"Modern",
-tags:["Military","Sports"],
-abilities:["Leadership"]
-},
-
-{
-name:"Smitty",
-role:"Personality",
-city:"New York",
-shows:["Rundown"],
-overall:88,
-comedy:88,
-sports:94,
-chaos:84,
-chemistry:88,
-clips:89,
-knowledge:94,
-era:"Modern",
-tags:["Sports"],
-abilities:["Fantasy Sports"]
-},
-
-/* LEGENDS / FORMER / CLASSIC */
-
-{
-name:"El Pres",
-role:"Founder",
-city:"New York",
-shows:["Barstool Classics"],
-overall:99,
-comedy:95,
-sports:92,
-chaos:100,
-chemistry:92,
-clips:100,
-knowledge:90,
-era:"Early",
-tags:["Founder","Legend"],
-abilities:["One Bite","Emergency Meeting"]
-},
-
-{
-name:"Big Ev",
-role:"Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:87,
-comedy:87,
-sports:93,
-chaos:89,
-chemistry:87,
-clips:90,
-knowledge:93,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Boston Energy"]
-},
-
-{
-name:"Smitty",
-role:"Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:88,
-comedy:88,
-sports:94,
-chaos:84,
-chemistry:88,
-clips:89,
-knowledge:94,
-era:"Modern",
-tags:["Sports"],
-abilities:["Fantasy Sports"]
-},
-
-{
-name:"Mush",
-role:"Personality",
-city:"New York",
-shows:["Pick Em"],
-overall:89,
-comedy:92,
-sports:89,
-chaos:90,
-chemistry:91,
-clips:93,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Bad Pick"]
-},
-
-{
-name:"Billy Football",
-role:"Competitor",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:91,
-comedy:91,
-sports:94,
-chaos:95,
-chemistry:91,
-clips:96,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Football Guy"]
-},
-
-{
-name:"Francis Ellis",
-role:"Comedian",
-city:"New York",
-shows:["Comedy Content"],
-overall:90,
-comedy:98,
-sports:65,
-chaos:84,
-chemistry:89,
-clips:93,
-knowledge:77,
-era:"Modern",
-tags:["Comedy","Writer"],
-abilities:["Stand Up","Story Time"]
-},
-
-{
-name:"Rone",
-role:"Comedian",
-city:"Chicago",
-shows:["The Yak"],
-overall:96,
-comedy:98,
-sports:81,
-chaos:86,
-chemistry:98,
-clips:98,
-knowledge:88,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Freestyle"]
-},
-
-{
-name:"Marty Mush",
-role:"Personality",
-city:"New York",
-shows:["Pick Em"],
-overall:89,
-comedy:92,
-sports:89,
-chaos:90,
-chemistry:91,
-clips:93,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Bad Pick"]
-},
-
-{
-name:"Breezy",
-role:"Personality",
-city:"New York",
-shows:["Office Content"],
-overall:81,
-comedy:82,
-sports:70,
-chaos:77,
-chemistry:83,
-clips:80,
-knowledge:68,
-era:"Modern",
-tags:["Wildcard"],
-abilities:["Office Lore"]
-},
-
-{
-name:"Megan",
-role:"Personality",
-city:"New York",
-shows:["Office Content"],
-overall:82,
-comedy:80,
-sports:65,
-chaos:73,
-chemistry:84,
-clips:78,
-knowledge:72,
-era:"Modern",
-tags:["Wildcard"],
-abilities:["Office Lore"]
-},
-
-{
-name:"Jack Mac",
-role:"Sports Personality",
-city:"Chicago",
-shows:["Sports Content"],
-overall:87,
-comedy:84,
-sports:93,
-chaos:80,
-chemistry:84,
-clips:85,
-knowledge:95,
-era:"Modern",
-tags:["Sports"],
-abilities:["Film Study"]
-},
-
-{
-name:"Marty Mush",
-role:"Sports Personality",
-city:"New York",
-shows:["Pick Em"],
-overall:89,
-comedy:92,
-sports:89,
-chaos:90,
-chemistry:91,
-clips:93,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Bad Pick"]
-},
-
-/* MORE WILDCARDS */
-
-{
-name:"Sas",
-role:"Writer",
-city:"Chicago",
-shows:["The Yak"],
-overall:92,
-comedy:96,
-sports:74,
-chaos:83,
-chemistry:94,
-clips:96,
-knowledge:79,
-era:"Modern",
-tags:["Comedy","Writer"],
-abilities:["One Liner"]
-},
-
-{
-name:"Kate",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:93,
-comedy:94,
-sports:79,
-chaos:91,
-chemistry:96,
-clips:94,
-knowledge:82,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Unexpected Answer"]
-},
-
-{
-name:"Nate",
-role:"Producer",
-city:"New York",
-shows:["Talk Shows"],
-overall:83,
-comedy:82,
-sports:70,
-chaos:79,
-chemistry:88,
-clips:80,
-knowledge:73,
-era:"Modern",
-tags:["Producer"],
-abilities:["Keeps It Moving"]
-},
-
-{
-name:"Rico Bosco",
-role:"Competitor",
-city:"New York",
-shows:["Pick Em"],
-overall:93,
-comedy:87,
-sports:98,
-chaos:96,
-chemistry:89,
-clips:99,
-knowledge:97,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Suspension Risk"]
-},
-
-{
-name:"Brandon Walker",
-role:"Host",
-city:"Chicago",
-shows:["Pick Em"],
-overall:94,
-comedy:93,
-sports:98,
-chaos:92,
-chemistry:96,
-clips:98,
-knowledge:99,
-era:"Modern",
-tags:["Sports","Host"],
-abilities:["Southern Rant"]
-},
-
-{
-name:"TJ Hitchings",
-role:"Producer",
-city:"Chicago",
-shows:["The Yak"],
-overall:96,
-comedy:88,
-sports:74,
-chaos:90,
-chemistry:98,
-clips:95,
-knowledge:88,
-era:"Modern",
-tags:["Producer","Yak"],
-abilities:["Wheel Master"]
-},
-
-{
-name:"Mintzy",
-role:"Chaos Agent",
-city:"Chicago",
-shows:["Pick Em"],
-overall:89,
-comedy:94,
-sports:78,
-chaos:100,
-chemistry:87,
-clips:100,
-knowledge:72,
-era:"Modern",
-tags:["Chaos","Wildcard"],
-abilities:["The Ankle"]
-},
-
-{
-name:"Jerry",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:90,
-comedy:94,
-sports:72,
-chaos:98,
-chemistry:85,
-clips:100,
-knowledge:68,
-era:"Modern",
-tags:["Chaos","Wildcard"],
-abilities:["Random Appearance"]
-},
-
-{
-name:"WSD",
-role:"Sports Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:88,
-comedy:90,
-sports:95,
-chaos:89,
-chemistry:90,
-clips:91,
-knowledge:96,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Accidental Injury"]
-},
-
-{
-name:"Frank The Tank",
-role:"Chaos Agent",
-city:"Chicago",
-shows:["The Yak"],
-overall:91,
-comedy:94,
-sports:94,
-chaos:98,
-chemistry:87,
-clips:98,
-knowledge:93,
-era:"Modern",
-tags:["Chicago","Chaos"],
-abilities:["Historical Rant"]
-},
-
-{
-name:"Caleb Pressley",
-role:"Interviewer",
-city:"Chicago",
-shows:["Sundae Conversation"],
-overall:95,
-comedy:96,
-sports:84,
-chaos:89,
-chemistry:94,
-clips:97,
-knowledge:82,
-era:"Modern",
-tags:["Interview","Comedy"],
-abilities:["Awkward Question"]
-},
-
-{
-name:"Mark Titus",
-role:"Sports Host",
-city:"Chicago",
-shows:["Sports Talk"],
-overall:94,
-comedy:91,
-sports:100,
-chaos:79,
-chemistry:91,
-clips:91,
-knowledge:100,
-era:"Modern",
-tags:["Sports","Basketball"],
-abilities:["Rant"]
-},
-
-{
-name:"KFC",
-role:"Host",
-city:"New York",
-shows:["KFC Radio"],
-overall:93,
-comedy:95,
-sports:82,
-chaos:85,
-chemistry:92,
-clips:94,
-knowledge:85,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["Story Time"]
-},
-
-{
-name:"Feits",
-role:"Host",
-city:"New York",
-shows:["KFC Radio"],
-overall:92,
-comedy:94,
-sports:83,
-chaos:88,
-chemistry:94,
-clips:94,
-knowledge:82,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["Bit Machine"]
-},
-
-{
-name:"Kelly Keegs",
-role:"Host",
-city:"New York",
-shows:["Chicks in the Office"],
-overall:91,
-comedy:88,
-sports:72,
-chaos:76,
-chemistry:92,
-clips:88,
-knowledge:82,
-era:"Modern",
-tags:["Talk","Entertainment"],
-abilities:["Pop Culture"]
-},
-
-{
-name:"Smitty",
-role:"Sports Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:88,
-comedy:88,
-sports:94,
-chaos:84,
-chemistry:88,
-clips:89,
-knowledge:94,
-era:"Modern",
-tags:["Sports"],
-abilities:["Fantasy Sports"]
-},
-
-{
-name:"Big Ev",
-role:"Sports Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:87,
-comedy:87,
-sports:93,
-chaos:89,
-chemistry:87,
-clips:90,
-knowledge:93,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Boston Energy"]
-},
-
-{
-name:"Glenny Balls",
-role:"Personality",
-city:"New York",
-shows:["Food Content"],
-overall:88,
-comedy:89,
-sports:83,
-chaos:87,
-chemistry:91,
-clips:91,
-knowledge:80,
-era:"Modern",
-tags:["Food","Comedy"],
-abilities:["Food Review"]
-},
-
-{
-name:"Tommy Smokes",
-role:"Sports Personality",
-city:"New York",
-shows:["Pick Em"],
-overall:87,
-comedy:89,
-sports:90,
-chaos:88,
-chemistry:88,
-clips:90,
-knowledge:87,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Confidently Wrong"]
-},
-
-{
-name:"Frankie Borrelli",
-role:"Sports Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:86,
-comedy:85,
-sports:90,
-chaos:87,
-chemistry:87,
-clips:86,
-knowledge:91,
-era:"Modern",
-tags:["Sports"],
-abilities:["Football Opinion"]
-},
-
-{
-name:"Chaps",
-role:"Host",
-city:"Other",
-shows:["Military Content"],
-overall:89,
-comedy:86,
-sports:85,
-chaos:80,
-chemistry:90,
-clips:86,
-knowledge:91,
-era:"Modern",
-tags:["Military","Host"],
-abilities:["Leadership"]
-},
-
-{
-name:"Riggs",
-role:"Golf Host",
-city:"Other",
-shows:["Fore Play"],
-overall:90,
-comedy:82,
-sports:94,
-chaos:74,
-chemistry:90,
-clips:86,
-knowledge:94,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Guy"]
-},
-
-{
-name:"Trent",
-role:"Golf Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:89,
-comedy:87,
-sports:91,
-chaos:79,
-chemistry:91,
-clips:88,
-knowledge:89,
-era:"Modern",
-tags:["Golf","Comedy"],
-abilities:["Golf Trip"]
-},
-
-{
-name:"Frankie",
-role:"Golf Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:87,
-comedy:86,
-sports:88,
-chaos:85,
-chemistry:87,
-clips:87,
-knowledge:85,
-era:"Modern",
-tags:["Golf","Comedy"],
-abilities:["Golf Guy"]
-},
-
-{
-name:"Lurch",
-role:"Golf Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:85,
-comedy:81,
-sports:88,
-chaos:83,
-chemistry:85,
-clips:82,
-knowledge:88,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Trip"]
-},
-
-{
-name:"KenJac",
-role:"Trivia Competitor",
-city:"New York",
-shows:["The Dozen"],
-overall:94,
-comedy:84,
-sports:92,
-chaos:70,
-chemistry:90,
-clips:82,
-knowledge:100,
-era:"Modern",
-tags:["Trivia","Knowledge"],
-abilities:["Final Answer"]
-},
-
-{
-name:"Megan Makin Money",
-role:"Trivia Competitor",
-city:"New York",
-shows:["The Dozen"],
-overall:91,
-comedy:82,
-sports:87,
-chaos:67,
-chemistry:87,
-clips:80,
-knowledge:99,
-era:"Modern",
-tags:["Trivia","Knowledge"],
-abilities:["Trivia Machine"]
-},
-
-{
-name:"Francis Ellis",
-role:"Comedian",
-city:"New York",
-shows:["Comedy Content"],
-overall:90,
-comedy:98,
-sports:65,
-chaos:84,
-chemistry:89,
-clips:93,
-knowledge:77,
-era:"Modern",
-tags:["Comedy","Writer"],
-abilities:["Story Time"]
-},
-
-{
-name:"Nate",
-role:"Producer",
-city:"New York",
-shows:["Talk Shows"],
-overall:83,
-comedy:82,
-sports:70,
-chaos:79,
-chemistry:88,
-clips:80,
-knowledge:73,
-era:"Modern",
-tags:["Producer"],
-abilities:["Keeps It Moving"]
-},
-
-{
-name:"Sully",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:82,
-comedy:85,
-sports:77,
-chaos:85,
-chemistry:84,
-clips:82,
-knowledge:76,
-era:"Modern",
-tags:["Wildcard"],
-abilities:["Office Lore"]
-},
-
-{
-name:"Breezy",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:81,
-comedy:82,
-sports:70,
-chaos:77,
-chemistry:83,
-clips:80,
-knowledge:68,
-era:"Modern",
-tags:["Wildcard"],
-abilities:["Office Lore"]
-},
-
-{
-name:"Max Homa",
-role:"Athlete",
-city:"Other",
-shows:["Golf Content"],
-overall:93,
-comedy:88,
-sports:97,
-chaos:72,
-chemistry:90,
-clips:89,
-knowledge:91,
-era:"Modern",
-tags:["Golf","Athlete"],
-abilities:["Professional Athlete"]
-},
-
-{
-name:"Jake Marsh",
-role:"Sports Host",
-city:"Chicago",
-shows:["Pardon My Take","The Dozen"],
-overall:94,
-comedy:82,
-sports:99,
-chaos:69,
-chemistry:93,
-clips:84,
-knowledge:100,
-era:"Modern",
-tags:["Sports","Knowledge"],
-abilities:["Stat Machine"]
-},
-
-{
-name:"Billy Football",
-role:"Competitor",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:91,
-comedy:91,
-sports:94,
-chaos:95,
-chemistry:91,
-clips:96,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Football Guy"]
-},
-
-{
-name:"Dan Katz",
-role:"Host",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:98,
-comedy:96,
-sports:97,
-chaos:88,
-chemistry:99,
-clips:99,
-knowledge:93,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Emergency Podcast"]
-},
-
-{
-name:"PFT Commenter",
-role:"Host",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:98,
-comedy:99,
-sports:91,
-chaos:94,
-chemistry:98,
-clips:100,
-knowledge:90,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Fake Expert"]
-},
-
-{
-name:"Dave Portnoy",
-role:"Founder",
-city:"New York",
-shows:["Rundown","One Bite"],
-overall:99,
-comedy:94,
-sports:91,
-chaos:100,
-chemistry:92,
-clips:100,
-knowledge:87,
-era:"Early",
-tags:["Founder","Legend"],
-abilities:["Emergency Meeting"]
-},
-
-{
-name:"Kirk Minihane",
-role:"Host",
-city:"New York",
-shows:["The Kirk Minihane Show"],
-overall:95,
-comedy:95,
-sports:79,
-chaos:97,
-chemistry:85,
-clips:98,
-knowledge:89,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["No Filter"]
-},
-
-{
-name:"Marty Mush",
-role:"Personality",
-city:"New York",
-shows:["Pick Em"],
-overall:89,
-comedy:92,
-sports:89,
-chaos:90,
-chemistry:91,
-clips:93,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Bad Pick"]
-},
-
-{
-name:"Rico Bosco",
-role:"Competitor",
-city:"New York",
-shows:["Pick Em"],
-overall:93,
-comedy:87,
-sports:98,
-chaos:96,
-chemistry:89,
-clips:99,
-knowledge:97,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Suspension Risk"]
-},
-
-{
-name:"Nick Turani",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:96,
-comedy:99,
-sports:82,
-chaos:92,
-chemistry:100,
-clips:100,
-knowledge:81,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Random Story"]
-},
-
-{
-name:"KB",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak","Macrodosing"],
-overall:97,
-comedy:100,
-sports:76,
-chaos:96,
-chemistry:99,
-clips:100,
-knowledge:92,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Historical Reference"]
-},
-
-{
-name:"Rone",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:96,
-comedy:98,
-sports:81,
-chaos:86,
-chemistry:98,
-clips:98,
-knowledge:88,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Freestyle"]
-},
-
-{
-name:"Kate",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:93,
-comedy:94,
-sports:79,
-chaos:91,
-chemistry:96,
-clips:94,
-knowledge:82,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Unexpected Answer"]
-},
-
-{
-name:"Sas",
-role:"Writer",
-city:"Chicago",
-shows:["The Yak"],
-overall:92,
-comedy:96,
-sports:74,
-chaos:83,
-chemistry:94,
-clips:96,
-knowledge:79,
-era:"Modern",
-tags:["Comedy","Writer"],
-abilities:["One Liner"]
-},
-
-{
-name:"Frank The Tank",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:91,
-comedy:94,
-sports:94,
-chaos:98,
-chemistry:87,
-clips:98,
-knowledge:93,
-era:"Modern",
-tags:["Chicago","Chaos"],
-abilities:["Historical Rant"]
-},
-
-{
-name:"WSD",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:88,
-comedy:90,
-sports:95,
-chaos:89,
-chemistry:90,
-clips:91,
-knowledge:96,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Accidental Injury"]
-},
-
-{
-name:"Nicky Smokes",
-role:"Chaos Agent",
-city:"Chicago",
-shows:["The Yak"],
-overall:90,
-comedy:91,
-sports:70,
-chaos:99,
-chemistry:88,
-clips:99,
-knowledge:68,
-era:"Modern",
-tags:["Chaos","Wildcard"],
-abilities:["Bad Decision"]
-},
-
-{
-name:"Jerry",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:90,
-comedy:94,
-sports:72,
-chaos:98,
-chemistry:85,
-clips:100,
-knowledge:68,
-era:"Modern",
-tags:["Chaos","Wildcard"],
-abilities:["Random Appearance"]
-},
-
-{
-name:"Tommy Smokes",
-role:"Personality",
-city:"New York",
-shows:["Pick Em"],
-overall:87,
-comedy:89,
-sports:90,
-chaos:88,
-chemistry:88,
-clips:90,
-knowledge:87,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Confidently Wrong"]
-},
-
-{
-name:"Glenny Balls",
-role:"Personality",
-city:"New York",
-shows:["Food Content"],
-overall:88,
-comedy:89,
-sports:83,
-chaos:87,
-chemistry:91,
-clips:91,
-knowledge:80,
-era:"Modern",
-tags:["Food","Comedy"],
-abilities:["Food Review"]
-},
-
-{
-name:"KFC",
-role:"Host",
-city:"New York",
-shows:["KFC Radio"],
-overall:93,
-comedy:95,
-sports:82,
-chaos:85,
-chemistry:92,
-clips:94,
-knowledge:85,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["Story Time"]
-},
-
-{
-name:"Feits",
-role:"Host",
-city:"New York",
-shows:["KFC Radio"],
-overall:92,
-comedy:94,
-sports:83,
-chaos:88,
-chemistry:94,
-clips:94,
-knowledge:82,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["Bit Machine"]
-},
-
-{
-name:"Kelly Keegs",
-role:"Host",
-city:"New York",
-shows:["Chicks in the Office"],
-overall:91,
-comedy:88,
-sports:72,
-chaos:76,
-chemistry:92,
-clips:88,
-knowledge:82,
-era:"Modern",
-tags:["Talk","Entertainment"],
-abilities:["Pop Culture"]
-},
-
-{
-name:"Riggs",
-role:"Host",
-city:"Other",
-shows:["Fore Play"],
-overall:90,
-comedy:82,
-sports:94,
-chaos:74,
-chemistry:90,
-clips:86,
-knowledge:94,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Guy"]
-},
-
-{
-name:"Trent",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:89,
-comedy:87,
-sports:91,
-chaos:79,
-chemistry:91,
-clips:88,
-knowledge:89,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Trip"]
-},
-
-{
-name:"Frankie",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:87,
-comedy:86,
-sports:88,
-chaos:85,
-chemistry:87,
-clips:87,
-knowledge:85,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Guy"]
-},
-
-{
-name:"Lurch",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:85,
-comedy:81,
-sports:88,
-chaos:83,
-chemistry:85,
-clips:82,
-knowledge:88,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Trip"]
-},
-
-{
-name:"Chaps",
-role:"Host",
-city:"Other",
-shows:["Military Content"],
-overall:89,
-comedy:86,
-sports:85,
-chaos:80,
-chemistry:90,
-clips:86,
-knowledge:91,
-era:"Modern",
-tags:["Military"],
-abilities:["Leadership"]
-},
-
-{
-name:"Francis Ellis",
-role:"Comedian",
-city:"New York",
-shows:["Comedy Content"],
-overall:90,
-comedy:98,
-sports:65,
-chaos:84,
-chemistry:89,
-clips:93,
-knowledge:77,
-era:"Modern",
-tags:["Comedy"],
-abilities:["Story Time"]
-},
-
-{
-name:"Mark Titus",
-role:"Sports Host",
-city:"Chicago",
-shows:["Sports Talk"],
-overall:94,
-comedy:91,
-sports:100,
-chaos:79,
-chemistry:91,
-clips:91,
-knowledge:100,
-era:"Modern",
-tags:["Sports","Basketball"],
-abilities:["Rant"]
-},
-
-{
-name:"Max Homa",
-role:"Athlete",
-city:"Other",
-shows:["Golf Content"],
-overall:93,
-comedy:88,
-sports:97,
-chaos:72,
-chemistry:90,
-clips:89,
-knowledge:91,
-era:"Modern",
-tags:["Golf","Athlete"],
-abilities:["Professional Athlete"]
-},
-
-{
-name:"Sully",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:82,
-comedy:85,
-sports:77,
-chaos:85,
-chemistry:84,
-clips:82,
-knowledge:76,
-era:"Modern",
-tags:["Wildcard"],
-abilities:["Office Lore"]
-},
-
-{
-name:"Breezy",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:81,
-comedy:82,
-sports:70,
-chaos:77,
-chemistry:83,
-clips:80,
-knowledge:68,
-era:"Modern",
-tags:["Wildcard"],
-abilities:["Office Lore"]
-},
-
-{
-name:"Big Ev",
-role:"Sports Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:87,
-comedy:87,
-sports:93,
-chaos:89,
-chemistry:87,
-clips:90,
-knowledge:93,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Boston Energy"]
-},
-
-{
-name:"Steven Cheah",
-role:"Sports Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:88,
-comedy:84,
-sports:93,
-chaos:86,
-chemistry:89,
-clips:87,
-knowledge:94,
-era:"Modern",
-tags:["Sports","Football"],
-abilities:["Steelers Take"]
-},
-
-{
-name:"Megan Makin Money",
-role:"Trivia Competitor",
-city:"New York",
-shows:["The Dozen"],
-overall:91,
-comedy:82,
-sports:87,
-chaos:67,
-chemistry:87,
-clips:80,
-knowledge:99,
-era:"Modern",
-tags:["Trivia","Knowledge"],
-abilities:["Trivia Machine"]
-},
-
-{
-name:"KenJac",
-role:"Trivia Competitor",
-city:"New York",
-shows:["The Dozen"],
-overall:94,
-comedy:84,
-sports:92,
-chaos:70,
-chemistry:90,
-clips:82,
-knowledge:100,
-era:"Modern",
-tags:["Trivia","Knowledge"],
-abilities:["Final Answer"]
-},
-
-{
-name:"Jake Marsh",
-role:"Sports Host",
-city:"Chicago",
-shows:["Pardon My Take","The Dozen"],
-overall:94,
-comedy:82,
-sports:99,
-chaos:69,
-chemistry:93,
-clips:84,
-knowledge:100,
-era:"Modern",
-tags:["Sports","Knowledge"],
-abilities:["Stat Machine"]
-},
-
-{
-name:"Billy Football",
-role:"Competitor",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:91,
-comedy:91,
-sports:94,
-chaos:95,
-chemistry:91,
-clips:96,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Football Guy"]
-},
-
-{
-name:"Smitty",
-role:"Sports Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:88,
-comedy:88,
-sports:94,
-chaos:84,
-chemistry:88,
-clips:89,
-knowledge:94,
-era:"Modern",
-tags:["Sports"],
-abilities:["Fantasy Sports"]
-},
-
-{
-name:"Jack Mac",
-role:"Sports Personality",
-city:"Chicago",
-shows:["Sports Content"],
-overall:87,
-comedy:84,
-sports:93,
-chaos:80,
-chemistry:84,
-clips:85,
-knowledge:95,
-era:"Modern",
-tags:["Sports"],
-abilities:["Film Study"]
-},
-
-{
-name:"Marty Mush",
-role:"Sports Personality",
-city:"New York",
-shows:["Pick Em"],
-overall:89,
-comedy:92,
-sports:89,
-chaos:90,
-chemistry:91,
-clips:93,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Bad Pick"]
-},
-
-{
-name:"Rico Bosco",
-role:"Competitor",
-city:"New York",
-shows:["Pick Em"],
-overall:93,
-comedy:87,
-sports:98,
-chaos:96,
-chemistry:89,
-clips:99,
-knowledge:97,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Suspension Risk"]
-},
-
-{
-name:"Nick Turani",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:96,
-comedy:99,
-sports:82,
-chaos:92,
-chemistry:100,
-clips:100,
-knowledge:81,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Random Story"]
-},
-
-{
-name:"KB",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak","Macrodosing"],
-overall:97,
-comedy:100,
-sports:76,
-chaos:96,
-chemistry:99,
-clips:100,
-knowledge:92,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Historical Reference"]
-},
-
-{
-name:"Rone",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:96,
-comedy:98,
-sports:81,
-chaos:86,
-chemistry:98,
-clips:98,
-knowledge:88,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Freestyle"]
-},
-
-{
-name:"Kate",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:93,
-comedy:94,
-sports:79,
-chaos:91,
-chemistry:96,
-clips:94,
-knowledge:82,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Unexpected Answer"]
-},
-
-{
-name:"Sas",
-role:"Writer",
-city:"Chicago",
-shows:["The Yak"],
-overall:92,
-comedy:96,
-sports:74,
-chaos:83,
-chemistry:94,
-clips:96,
-knowledge:79,
-era:"Modern",
-tags:["Comedy","Writer"],
-abilities:["One Liner"]
-},
-
-{
-name:"Frank The Tank",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:91,
-comedy:94,
-sports:94,
-chaos:98,
-chemistry:87,
-clips:98,
-knowledge:93,
-era:"Modern",
-tags:["Chicago","Chaos"],
-abilities:["Historical Rant"]
-},
-
-{
-name:"WSD",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:88,
-comedy:90,
-sports:95,
-chaos:89,
-chemistry:90,
-clips:91,
-knowledge:96,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Accidental Injury"]
-},
-
-{
-name:"Nicky Smokes",
-role:"Chaos Agent",
-city:"Chicago",
-shows:["The Yak"],
-overall:90,
-comedy:91,
-sports:70,
-chaos:99,
-chemistry:88,
-clips:99,
-knowledge:68,
-era:"Modern",
-tags:["Chaos","Wildcard"],
-abilities:["Bad Decision"]
-},
-
-{
-name:"Jerry",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:90,
-comedy:94,
-sports:72,
-chaos:98,
-chemistry:85,
-clips:100,
-knowledge:68,
-era:"Modern",
-tags:["Chaos","Wildcard"],
-abilities:["Random Appearance"]
-},
-
-{
-name:"Tommy Smokes",
-role:"Personality",
-city:"New York",
-shows:["Pick Em"],
-overall:87,
-comedy:89,
-sports:90,
-chaos:88,
-chemistry:88,
-clips:90,
-knowledge:87,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Confidently Wrong"]
-},
-
-{
-name:"Glenny Balls",
-role:"Personality",
-city:"New York",
-shows:["Food Content"],
-overall:88,
-comedy:89,
-sports:83,
-chaos:87,
-chemistry:91,
-clips:91,
-knowledge:80,
-era:"Modern",
-tags:["Food","Comedy"],
-abilities:["Food Review"]
-},
-
-{
-name:"KFC",
-role:"Host",
-city:"New York",
-shows:["KFC Radio"],
-overall:93,
-comedy:95,
-sports:82,
-chaos:85,
-chemistry:92,
-clips:94,
-knowledge:85,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["Story Time"]
-},
-
-{
-name:"Feits",
-role:"Host",
-city:"New York",
-shows:["KFC Radio"],
-overall:92,
-comedy:94,
-sports:83,
-chaos:88,
-chemistry:94,
-clips:94,
-knowledge:82,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["Bit Machine"]
-},
-
-{
-name:"Kelly Keegs",
-role:"Host",
-city:"New York",
-shows:["Chicks in the Office"],
-overall:91,
-comedy:88,
-sports:72,
-chaos:76,
-chemistry:92,
-clips:88,
-knowledge:82,
-era:"Modern",
-tags:["Talk","Entertainment"],
-abilities:["Pop Culture"]
-},
-
-{
-name:"Riggs",
-role:"Host",
-city:"Other",
-shows:["Fore Play"],
-overall:90,
-comedy:82,
-sports:94,
-chaos:74,
-chemistry:90,
-clips:86,
-knowledge:94,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Guy"]
-},
-
-{
-name:"Trent",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:89,
-comedy:87,
-sports:91,
-chaos:79,
-chemistry:91,
-clips:88,
-knowledge:89,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Trip"]
-},
-
-{
-name:"Frankie",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:87,
-comedy:86,
-sports:88,
-chaos:85,
-chemistry:87,
-clips:87,
-knowledge:85,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Guy"]
-},
-
-{
-name:"Lurch",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:85,
-comedy:81,
-sports:88,
-chaos:83,
-chemistry:85,
-clips:82,
-knowledge:88,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Trip"]
-},
-
-{
-name:"Chaps",
-role:"Host",
-city:"Other",
-shows:["Military Content"],
-overall:89,
-comedy:86,
-sports:85,
-chaos:80,
-chemistry:90,
-clips:86,
-knowledge:91,
-era:"Modern",
-tags:["Military"],
-abilities:["Leadership"]
-},
-
-{
-name:"Francis Ellis",
-role:"Comedian",
-city:"New York",
-shows:["Comedy Content"],
-overall:90,
-comedy:98,
-sports:65,
-chaos:84,
-chemistry:89,
-clips:93,
-knowledge:77,
-era:"Modern",
-tags:["Comedy"],
-abilities:["Story Time"]
-},
-
-{
-name:"Mark Titus",
-role:"Sports Host",
-city:"Chicago",
-shows:["Sports Talk"],
-overall:94,
-comedy:91,
-sports:100,
-chaos:79,
-chemistry:91,
-clips:91,
-knowledge:100,
-era:"Modern",
-tags:["Sports","Basketball"],
-abilities:["Rant"]
-},
-
-{
-name:"Max Homa",
-role:"Athlete",
-city:"Other",
-shows:["Golf Content"],
-overall:93,
-comedy:88,
-sports:97,
-chaos:72,
-chemistry:90,
-clips:89,
-knowledge:91,
-era:"Modern",
-tags:["Golf","Athlete"],
-abilities:["Professional Athlete"]
-},
-
-{
-name:"Sully",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:82,
-comedy:85,
-sports:77,
-chaos:85,
-chemistry:84,
-clips:82,
-knowledge:76,
-era:"Modern",
-tags:["Wildcard"],
-abilities:["Office Lore"]
-},
-
-{
-name:"Breezy",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:81,
-comedy:82,
-sports:70,
-chaos:77,
-chemistry:83,
-clips:80,
-knowledge:68,
-era:"Modern",
-tags:["Wildcard"],
-abilities:["Office Lore"]
-},
-
-{
-name:"Big Ev",
-role:"Sports Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:87,
-comedy:87,
-sports:93,
-chaos:89,
-chemistry:87,
-clips:90,
-knowledge:93,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Boston Energy"]
-},
-
-{
-name:"Steven Cheah",
-role:"Sports Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:88,
-comedy:84,
-sports:93,
-chaos:86,
-chemistry:89,
-clips:87,
-knowledge:94,
-era:"Modern",
-tags:["Sports","Football"],
-abilities:["Steelers Take"]
-},
-
-{
-name:"Megan Makin Money",
-role:"Trivia Competitor",
-city:"New York",
-shows:["The Dozen"],
-overall:91,
-comedy:82,
-sports:87,
-chaos:67,
-chemistry:87,
-clips:80,
-knowledge:99,
-era:"Modern",
-tags:["Trivia","Knowledge"],
-abilities:["Trivia Machine"]
-},
-
-{
-name:"KenJac",
-role:"Trivia Competitor",
-city:"New York",
-shows:["The Dozen"],
-overall:94,
-comedy:84,
-sports:92,
-chaos:70,
-chemistry:90,
-clips:82,
-knowledge:100,
-era:"Modern",
-tags:["Trivia","Knowledge"],
-abilities:["Final Answer"]
-},
-
-{
-name:"Jake Marsh",
-role:"Sports Host",
-city:"Chicago",
-shows:["Pardon My Take","The Dozen"],
-overall:94,
-comedy:82,
-sports:99,
-chaos:69,
-chemistry:93,
-clips:84,
-knowledge:100,
-era:"Modern",
-tags:["Sports","Knowledge"],
-abilities:["Stat Machine"]
-},
-
-{
-name:"Billy Football",
-role:"Competitor",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:91,
-comedy:91,
-sports:94,
-chaos:95,
-chemistry:91,
-clips:96,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Football Guy"]
-},
-
-{
-name:"Dan Katz",
-role:"Host",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:98,
-comedy:96,
-sports:97,
-chaos:88,
-chemistry:99,
-clips:99,
-knowledge:93,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Emergency Podcast"]
-},
-
-{
-name:"PFT Commenter",
-role:"Host",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:98,
-comedy:99,
-sports:91,
-chaos:94,
-chemistry:98,
-clips:100,
-knowledge:90,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Fake Expert"]
-},
-
-{
-name:"Dave Portnoy",
-role:"Founder",
-city:"New York",
-shows:["Rundown","One Bite"],
-overall:99,
-comedy:94,
-sports:91,
-chaos:100,
-chemistry:92,
-clips:100,
-knowledge:87,
-era:"Early",
-tags:["Founder","Legend"],
-abilities:["Emergency Meeting"]
-},
-
-{
-name:"Kirk Minihane",
-role:"Host",
-city:"New York",
-shows:["The Kirk Minihane Show"],
-overall:95,
-comedy:95,
-sports:79,
-chaos:97,
-chemistry:85,
-clips:98,
-knowledge:89,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["No Filter"]
-},
-
-{
-name:"Marty Mush",
-role:"Personality",
-city:"New York",
-shows:["Pick Em"],
-overall:89,
-comedy:92,
-sports:89,
-chaos:90,
-chemistry:91,
-clips:93,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Bad Pick"]
-},
-
-{
-name:"Rico Bosco",
-role:"Competitor",
-city:"New York",
-shows:["Pick Em"],
-overall:93,
-comedy:87,
-sports:98,
-chaos:96,
-chemistry:89,
-clips:99,
-knowledge:97,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Suspension Risk"]
-},
-
-{
-name:"Nick Turani",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:96,
-comedy:99,
-sports:82,
-chaos:92,
-chemistry:100,
-clips:100,
-knowledge:81,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Random Story"]
-},
-
-{
-name:"KB",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak","Macrodosing"],
-overall:97,
-comedy:100,
-sports:76,
-chaos:96,
-chemistry:99,
-clips:100,
-knowledge:92,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Historical Reference"]
-},
-
-{
-name:"Rone",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:96,
-comedy:98,
-sports:81,
-chaos:86,
-chemistry:98,
-clips:98,
-knowledge:88,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Freestyle"]
-},
-
-{
-name:"Kate",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:93,
-comedy:94,
-sports:79,
-chaos:91,
-chemistry:96,
-clips:94,
-knowledge:82,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Unexpected Answer"]
-},
-
-{
-name:"Sas",
-role:"Writer",
-city:"Chicago",
-shows:["The Yak"],
-overall:92,
-comedy:96,
-sports:74,
-chaos:83,
-chemistry:94,
-clips:96,
-knowledge:79,
-era:"Modern",
-tags:["Comedy","Writer"],
-abilities:["One Liner"]
-},
-
-{
-name:"Frank The Tank",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:91,
-comedy:94,
-sports:94,
-chaos:98,
-chemistry:87,
-clips:98,
-knowledge:93,
-era:"Modern",
-tags:["Chicago","Chaos"],
-abilities:["Historical Rant"]
-},
-
-{
-name:"WSD",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:88,
-comedy:90,
-sports:95,
-chaos:89,
-chemistry:90,
-clips:91,
-knowledge:96,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Accidental Injury"]
-},
-
-{
-name:"Nicky Smokes",
-role:"Chaos Agent",
-city:"Chicago",
-shows:["The Yak"],
-overall:90,
-comedy:91,
-sports:70,
-chaos:99,
-chemistry:88,
-clips:99,
-knowledge:68,
-era:"Modern",
-tags:["Chaos","Wildcard"],
-abilities:["Bad Decision"]
-},
-
-{
-name:"Jerry",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:90,
-comedy:94,
-sports:72,
-chaos:98,
-chemistry:85,
-clips:100,
-knowledge:68,
-era:"Modern",
-tags:["Chaos","Wildcard"],
-abilities:["Random Appearance"]
-},
-
-{
-name:"Tommy Smokes",
-role:"Personality",
-city:"New York",
-shows:["Pick Em"],
-overall:87,
-comedy:89,
-sports:90,
-chaos:88,
-chemistry:88,
-clips:90,
-knowledge:87,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Confidently Wrong"]
-},
-
-{
-name:"Glenny Balls",
-role:"Personality",
-city:"New York",
-shows:["Food Content"],
-overall:88,
-comedy:89,
-sports:83,
-chaos:87,
-chemistry:91,
-clips:91,
-knowledge:80,
-era:"Modern",
-tags:["Food","Comedy"],
-abilities:["Food Review"]
-},
-
-{
-name:"KFC",
-role:"Host",
-city:"New York",
-shows:["KFC Radio"],
-overall:93,
-comedy:95,
-sports:82,
-chaos:85,
-chemistry:92,
-clips:94,
-knowledge:85,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["Story Time"]
-},
-
-{
-name:"Feits",
-role:"Host",
-city:"New York",
-shows:["KFC Radio"],
-overall:92,
-comedy:94,
-sports:83,
-chaos:88,
-chemistry:94,
-clips:94,
-knowledge:82,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["Bit Machine"]
-},
-
-{
-name:"Kelly Keegs",
-role:"Host",
-city:"New York",
-shows:["Chicks in the Office"],
-overall:91,
-comedy:88,
-sports:72,
-chaos:76,
-chemistry:92,
-clips:88,
-knowledge:82,
-era:"Modern",
-tags:["Talk","Entertainment"],
-abilities:["Pop Culture"]
-},
-
-{
-name:"Riggs",
-role:"Host",
-city:"Other",
-shows:["Fore Play"],
-overall:90,
-comedy:82,
-sports:94,
-chaos:74,
-chemistry:90,
-clips:86,
-knowledge:94,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Guy"]
-},
-
-{
-name:"Trent",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:89,
-comedy:87,
-sports:91,
-chaos:79,
-chemistry:91,
-clips:88,
-knowledge:89,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Trip"]
-},
-
-{
-name:"Frankie",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:87,
-comedy:86,
-sports:88,
-chaos:85,
-chemistry:87,
-clips:87,
-knowledge:85,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Guy"]
-},
-
-{
-name:"Lurch",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:85,
-comedy:81,
-sports:88,
-chaos:83,
-chemistry:85,
-clips:82,
-knowledge:88,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Trip"]
-},
-
-{
-name:"Chaps",
-role:"Host",
-city:"Other",
-shows:["Military Content"],
-overall:89,
-comedy:86,
-sports:85,
-chaos:80,
-chemistry:90,
-clips:86,
-knowledge:91,
-era:"Modern",
-tags:["Military"],
-abilities:["Leadership"]
-},
-
-{
-name:"Francis Ellis",
-role:"Comedian",
-city:"New York",
-shows:["Comedy Content"],
-overall:90,
-comedy:98,
-sports:65,
-chaos:84,
-chemistry:89,
-clips:93,
-knowledge:77,
-era:"Modern",
-tags:["Comedy"],
-abilities:["Story Time"]
-},
-
-{
-name:"Mark Titus",
-role:"Sports Host",
-city:"Chicago",
-shows:["Sports Talk"],
-overall:94,
-comedy:91,
-sports:100,
-chaos:79,
-chemistry:91,
-clips:91,
-knowledge:100,
-era:"Modern",
-tags:["Sports","Basketball"],
-abilities:["Rant"]
-},
-
-{
-name:"Max Homa",
-role:"Athlete",
-city:"Other",
-shows:["Golf Content"],
-overall:93,
-comedy:88,
-sports:97,
-chaos:72,
-chemistry:90,
-clips:89,
-knowledge:91,
-era:"Modern",
-tags:["Golf","Athlete"],
-abilities:["Professional Athlete"]
-},
-
-{
-name:"Sully",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:82,
-comedy:85,
-sports:77,
-chaos:85,
-chemistry:84,
-clips:82,
-knowledge:76,
-era:"Modern",
-tags:["Wildcard"],
-abilities:["Office Lore"]
-},
-
-{
-name:"Breezy",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:81,
-comedy:82,
-sports:70,
-chaos:77,
-chemistry:83,
-clips:80,
-knowledge:68,
-era:"Modern",
-tags:["Wildcard"],
-abilities:["Office Lore"]
-},
-
-{
-name:"Big Ev",
-role:"Sports Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:87,
-comedy:87,
-sports:93,
-chaos:89,
-chemistry:87,
-clips:90,
-knowledge:93,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Boston Energy"]
-},
-
-{
-name:"Steven Cheah",
-role:"Sports Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:88,
-comedy:84,
-sports:93,
-chaos:86,
-chemistry:89,
-clips:87,
-knowledge:94,
-era:"Modern",
-tags:["Sports","Football"],
-abilities:["Steelers Take"]
-},
-
-{
-name:"Megan Makin Money",
-role:"Trivia Competitor",
-city:"New York",
-shows:["The Dozen"],
-overall:91,
-comedy:82,
-sports:87,
-chaos:67,
-chemistry:87,
-clips:80,
-knowledge:99,
-era:"Modern",
-tags:["Trivia","Knowledge"],
-abilities:["Trivia Machine"]
-},
-
-{
-name:"KenJac",
-role:"Trivia Competitor",
-city:"New York",
-shows:["The Dozen"],
-overall:94,
-comedy:84,
-sports:92,
-chaos:70,
-chemistry:90,
-clips:82,
-knowledge:100,
-era:"Modern",
-tags:["Trivia","Knowledge"],
-abilities:["Final Answer"]
-},
-
-{
-name:"Jake Marsh",
-role:"Sports Host",
-city:"Chicago",
-shows:["Pardon My Take","The Dozen"],
-overall:94,
-comedy:82,
-sports:99,
-chaos:69,
-chemistry:93,
-clips:84,
-knowledge:100,
-era:"Modern",
-tags:["Sports","Knowledge"],
-abilities:["Stat Machine"]
-},
-
-{
-name:"Billy Football",
-role:"Competitor",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:91,
-comedy:91,
-sports:94,
-chaos:95,
-chemistry:91,
-clips:96,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Football Guy"]
-},
-
-{
-name:"Dan Katz",
-role:"Host",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:98,
-comedy:96,
-sports:97,
-chaos:88,
-chemistry:99,
-clips:99,
-knowledge:93,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Emergency Podcast"]
-},
-
-{
-name:"PFT Commenter",
-role:"Host",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:98,
-comedy:99,
-sports:91,
-chaos:94,
-chemistry:98,
-clips:100,
-knowledge:90,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Fake Expert"]
-},
-
-{
-name:"Dave Portnoy",
-role:"Founder",
-city:"New York",
-shows:["Rundown","One Bite"],
-overall:99,
-comedy:94,
-sports:91,
-chaos:100,
-chemistry:92,
-clips:100,
-knowledge:87,
-era:"Early",
-tags:["Founder","Legend"],
-abilities:["Emergency Meeting"]
-},
-
-{
-name:"Kirk Minihane",
-role:"Host",
-city:"New York",
-shows:["The Kirk Minihane Show"],
-overall:95,
-comedy:95,
-sports:79,
-chaos:97,
-chemistry:85,
-clips:98,
-knowledge:89,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["No Filter"]
-},
-
-{
-name:"Marty Mush",
-role:"Personality",
-city:"New York",
-shows:["Pick Em"],
-overall:89,
-comedy:92,
-sports:89,
-chaos:90,
-chemistry:91,
-clips:93,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Bad Pick"]
-},
-
-{
-name:"Rico Bosco",
-role:"Competitor",
-city:"New York",
-shows:["Pick Em"],
-overall:93,
-comedy:87,
-sports:98,
-chaos:96,
-chemistry:89,
-clips:99,
-knowledge:97,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Suspension Risk"]
-},
-
-{
-name:"Nick Turani",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:96,
-comedy:99,
-sports:82,
-chaos:92,
-chemistry:100,
-clips:100,
-knowledge:81,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Random Story"]
-},
-
-{
-name:"KB",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak","Macrodosing"],
-overall:97,
-comedy:100,
-sports:76,
-chaos:96,
-chemistry:99,
-clips:100,
-knowledge:92,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Historical Reference"]
-},
-
-{
-name:"Rone",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:96,
-comedy:98,
-sports:81,
-chaos:86,
-chemistry:98,
-clips:98,
-knowledge:88,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Freestyle"]
-},
-
-{
-name:"Kate",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:93,
-comedy:94,
-sports:79,
-chaos:91,
-chemistry:96,
-clips:94,
-knowledge:82,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Unexpected Answer"]
-},
-
-{
-name:"Sas",
-role:"Writer",
-city:"Chicago",
-shows:["The Yak"],
-overall:92,
-comedy:96,
-sports:74,
-chaos:83,
-chemistry:94,
-clips:96,
-knowledge:79,
-era:"Modern",
-tags:["Comedy","Writer"],
-abilities:["One Liner"]
-},
-
-{
-name:"Frank The Tank",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:91,
-comedy:94,
-sports:94,
-chaos:98,
-chemistry:87,
-clips:98,
-knowledge:93,
-era:"Modern",
-tags:["Chicago","Chaos"],
-abilities:["Historical Rant"]
-},
-
-{
-name:"WSD",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:88,
-comedy:90,
-sports:95,
-chaos:89,
-chemistry:90,
-clips:91,
-knowledge:96,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Accidental Injury"]
-},
-
-{
-name:"Nicky Smokes",
-role:"Chaos Agent",
-city:"Chicago",
-shows:["The Yak"],
-overall:90,
-comedy:91,
-sports:70,
-chaos:99,
-chemistry:88,
-clips:99,
-knowledge:68,
-era:"Modern",
-tags:["Chaos","Wildcard"],
-abilities:["Bad Decision"]
-},
-
-{
-name:"Jerry",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:90,
-comedy:94,
-sports:72,
-chaos:98,
-chemistry:85,
-clips:100,
-knowledge:68,
-era:"Modern",
-tags:["Chaos","Wildcard"],
-abilities:["Random Appearance"]
-},
-
-{
-name:"Tommy Smokes",
-role:"Personality",
-city:"New York",
-shows:["Pick Em"],
-overall:87,
-comedy:89,
-sports:90,
-chaos:88,
-chemistry:88,
-clips:90,
-knowledge:87,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Confidently Wrong"]
-},
-
-{
-name:"Glenny Balls",
-role:"Personality",
-city:"New York",
-shows:["Food Content"],
-overall:88,
-comedy:89,
-sports:83,
-chaos:87,
-chemistry:91,
-clips:91,
-knowledge:80,
-era:"Modern",
-tags:["Food","Comedy"],
-abilities:["Food Review"]
-},
-
-{
-name:"KFC",
-role:"Host",
-city:"New York",
-shows:["KFC Radio"],
-overall:93,
-comedy:95,
-sports:82,
-chaos:85,
-chemistry:92,
-clips:94,
-knowledge:85,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["Story Time"]
-},
-
-{
-name:"Feits",
-role:"Host",
-city:"New York",
-shows:["KFC Radio"],
-overall:92,
-comedy:94,
-sports:83,
-chaos:88,
-chemistry:94,
-clips:94,
-knowledge:82,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["Bit Machine"]
-},
-
-{
-name:"Kelly Keegs",
-role:"Host",
-city:"New York",
-shows:["Chicks in the Office"],
-overall:91,
-comedy:88,
-sports:72,
-chaos:76,
-chemistry:92,
-clips:88,
-knowledge:82,
-era:"Modern",
-tags:["Talk","Entertainment"],
-abilities:["Pop Culture"]
-},
-
-{
-name:"Riggs",
-role:"Host",
-city:"Other",
-shows:["Fore Play"],
-overall:90,
-comedy:82,
-sports:94,
-chaos:74,
-chemistry:90,
-clips:86,
-knowledge:94,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Guy"]
-},
-
-{
-name:"Trent",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:89,
-comedy:87,
-sports:91,
-chaos:79,
-chemistry:91,
-clips:88,
-knowledge:89,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Trip"]
-},
-
-{
-name:"Frankie",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:87,
-comedy:86,
-sports:88,
-chaos:85,
-chemistry:87,
-clips:87,
-knowledge:85,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Guy"]
-},
-
-{
-name:"Lurch",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:85,
-comedy:81,
-sports:88,
-chaos:83,
-chemistry:85,
-clips:82,
-knowledge:88,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Trip"]
-},
-
-{
-name:"Chaps",
-role:"Host",
-city:"Other",
-shows:["Military Content"],
-overall:89,
-comedy:86,
-sports:85,
-chaos:80,
-chemistry:90,
-clips:86,
-knowledge:91,
-era:"Modern",
-tags:["Military"],
-abilities:["Leadership"]
-},
-
-{
-name:"Francis Ellis",
-role:"Comedian",
-city:"New York",
-shows:["Comedy Content"],
-overall:90,
-comedy:98,
-sports:65,
-chaos:84,
-chemistry:89,
-clips:93,
-knowledge:77,
-era:"Modern",
-tags:["Comedy"],
-abilities:["Story Time"]
-},
-
-{
-name:"Mark Titus",
-role:"Sports Host",
-city:"Chicago",
-shows:["Sports Talk"],
-overall:94,
-comedy:91,
-sports:100,
-chaos:79,
-chemistry:91,
-clips:91,
-knowledge:100,
-era:"Modern",
-tags:["Sports","Basketball"],
-abilities:["Rant"]
-},
-
-{
-name:"Max Homa",
-role:"Athlete",
-city:"Other",
-shows:["Golf Content"],
-overall:93,
-comedy:88,
-sports:97,
-chaos:72,
-chemistry:90,
-clips:89,
-knowledge:91,
-era:"Modern",
-tags:["Golf","Athlete"],
-abilities:["Professional Athlete"]
-},
-
-{
-name:"Sully",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:82,
-comedy:85,
-sports:77,
-chaos:85,
-chemistry:84,
-clips:82,
-knowledge:76,
-era:"Modern",
-tags:["Wildcard"],
-abilities:["Office Lore"]
-},
-
-{
-name:"Breezy",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:81,
-comedy:82,
-sports:70,
-chaos:77,
-chemistry:83,
-clips:80,
-knowledge:68,
-era:"Modern",
-tags:["Wildcard"],
-abilities:["Office Lore"]
-},
-
-{
-name:"Big Ev",
-role:"Sports Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:87,
-comedy:87,
-sports:93,
-chaos:89,
-chemistry:87,
-clips:90,
-knowledge:93,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Boston Energy"]
-},
-
-{
-name:"Steven Cheah",
-role:"Sports Personality",
-city:"New York",
-shows:["Sports Content"],
-overall:88,
-comedy:84,
-sports:93,
-chaos:86,
-chemistry:89,
-clips:87,
-knowledge:94,
-era:"Modern",
-tags:["Sports","Football"],
-abilities:["Steelers Take"]
-},
-
-{
-name:"Megan Makin Money",
-role:"Trivia Competitor",
-city:"New York",
-shows:["The Dozen"],
-overall:91,
-comedy:82,
-sports:87,
-chaos:67,
-chemistry:87,
-clips:80,
-knowledge:99,
-era:"Modern",
-tags:["Trivia","Knowledge"],
-abilities:["Trivia Machine"]
-},
-
-{
-name:"KenJac",
-role:"Trivia Competitor",
-city:"New York",
-shows:["The Dozen"],
-overall:94,
-comedy:84,
-sports:92,
-chaos:70,
-chemistry:90,
-clips:82,
-knowledge:100,
-era:"Modern",
-tags:["Trivia","Knowledge"],
-abilities:["Final Answer"]
-},
-
-{
-name:"Jake Marsh",
-role:"Sports Host",
-city:"Chicago",
-shows:["Pardon My Take","The Dozen"],
-overall:94,
-comedy:82,
-sports:99,
-chaos:69,
-chemistry:93,
-clips:84,
-knowledge:100,
-era:"Modern",
-tags:["Sports","Knowledge"],
-abilities:["Stat Machine"]
-},
-
-{
-name:"Billy Football",
-role:"Competitor",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:91,
-comedy:91,
-sports:94,
-chaos:95,
-chemistry:91,
-clips:96,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Football Guy"]
-},
-
-{
-name:"Dan Katz",
-role:"Host",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:98,
-comedy:96,
-sports:97,
-chaos:88,
-chemistry:99,
-clips:99,
-knowledge:93,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Emergency Podcast"]
-},
-
-{
-name:"PFT Commenter",
-role:"Host",
-city:"Chicago",
-shows:["Pardon My Take"],
-overall:98,
-comedy:99,
-sports:91,
-chaos:94,
-chemistry:98,
-clips:100,
-knowledge:90,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Fake Expert"]
-},
-
-{
-name:"Dave Portnoy",
-role:"Founder",
-city:"New York",
-shows:["Rundown","One Bite"],
-overall:99,
-comedy:94,
-sports:91,
-chaos:100,
-chemistry:92,
-clips:100,
-knowledge:87,
-era:"Early",
-tags:["Founder","Legend"],
-abilities:["Emergency Meeting"]
-},
-
-{
-name:"Kirk Minihane",
-role:"Host",
-city:"New York",
-shows:["The Kirk Minihane Show"],
-overall:95,
-comedy:95,
-sports:79,
-chaos:97,
-chemistry:85,
-clips:98,
-knowledge:89,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["No Filter"]
-},
-
-{
-name:"Marty Mush",
-role:"Personality",
-city:"New York",
-shows:["Pick Em"],
-overall:89,
-comedy:92,
-sports:89,
-chaos:90,
-chemistry:91,
-clips:93,
-knowledge:88,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Bad Pick"]
-},
-
-{
-name:"Rico Bosco",
-role:"Competitor",
-city:"New York",
-shows:["Pick Em"],
-overall:93,
-comedy:87,
-sports:98,
-chaos:96,
-chemistry:89,
-clips:99,
-knowledge:97,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Suspension Risk"]
-},
-
-{
-name:"Nick Turani",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:96,
-comedy:99,
-sports:82,
-chaos:92,
-chemistry:100,
-clips:100,
-knowledge:81,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Random Story"]
-},
-
-{
-name:"KB",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak","Macrodosing"],
-overall:97,
-comedy:100,
-sports:76,
-chaos:96,
-chemistry:99,
-clips:100,
-knowledge:92,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Historical Reference"]
-},
-
-{
-name:"Rone",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:96,
-comedy:98,
-sports:81,
-chaos:86,
-chemistry:98,
-clips:98,
-knowledge:88,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Freestyle"]
-},
-
-{
-name:"Kate",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:93,
-comedy:94,
-sports:79,
-chaos:91,
-chemistry:96,
-clips:94,
-knowledge:82,
-era:"Modern",
-tags:["Comedy","Yak"],
-abilities:["Unexpected Answer"]
-},
-
-{
-name:"Sas",
-role:"Writer",
-city:"Chicago",
-shows:["The Yak"],
-overall:92,
-comedy:96,
-sports:74,
-chaos:83,
-chemistry:94,
-clips:96,
-knowledge:79,
-era:"Modern",
-tags:["Comedy","Writer"],
-abilities:["One Liner"]
-},
-
-{
-name:"Frank The Tank",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:91,
-comedy:94,
-sports:94,
-chaos:98,
-chemistry:87,
-clips:98,
-knowledge:93,
-era:"Modern",
-tags:["Chicago","Chaos"],
-abilities:["Historical Rant"]
-},
-
-{
-name:"WSD",
-role:"Personality",
-city:"Chicago",
-shows:["The Yak"],
-overall:88,
-comedy:90,
-sports:95,
-chaos:89,
-chemistry:90,
-clips:91,
-knowledge:96,
-era:"Modern",
-tags:["Sports","Chaos"],
-abilities:["Accidental Injury"]
-},
-
-{
-name:"Nicky Smokes",
-role:"Chaos Agent",
-city:"Chicago",
-shows:["The Yak"],
-overall:90,
-comedy:91,
-sports:70,
-chaos:99,
-chemistry:88,
-clips:99,
-knowledge:68,
-era:"Modern",
-tags:["Chaos","Wildcard"],
-abilities:["Bad Decision"]
-},
-
-{
-name:"Jerry",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:90,
-comedy:94,
-sports:72,
-chaos:98,
-chemistry:85,
-clips:100,
-knowledge:68,
-era:"Modern",
-tags:["Chaos","Wildcard"],
-abilities:["Random Appearance"]
-},
-
-{
-name:"Tommy Smokes",
-role:"Personality",
-city:"New York",
-shows:["Pick Em"],
-overall:87,
-comedy:89,
-sports:90,
-chaos:88,
-chemistry:88,
-clips:90,
-knowledge:87,
-era:"Modern",
-tags:["Sports","Comedy"],
-abilities:["Confidently Wrong"]
-},
-
-{
-name:"Glenny Balls",
-role:"Personality",
-city:"New York",
-shows:["Food Content"],
-overall:88,
-comedy:89,
-sports:83,
-chaos:87,
-chemistry:91,
-clips:91,
-knowledge:80,
-era:"Modern",
-tags:["Food","Comedy"],
-abilities:["Food Review"]
-},
-
-{
-name:"KFC",
-role:"Host",
-city:"New York",
-shows:["KFC Radio"],
-overall:93,
-comedy:95,
-sports:82,
-chaos:85,
-chemistry:92,
-clips:94,
-knowledge:85,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["Story Time"]
-},
-
-{
-name:"Feits",
-role:"Host",
-city:"New York",
-shows:["KFC Radio"],
-overall:92,
-comedy:94,
-sports:83,
-chaos:88,
-chemistry:94,
-clips:94,
-knowledge:82,
-era:"Modern",
-tags:["Comedy","Talk"],
-abilities:["Bit Machine"]
-},
-
-{
-name:"Kelly Keegs",
-role:"Host",
-city:"New York",
-shows:["Chicks in the Office"],
-overall:91,
-comedy:88,
-sports:72,
-chaos:76,
-chemistry:92,
-clips:88,
-knowledge:82,
-era:"Modern",
-tags:["Talk","Entertainment"],
-abilities:["Pop Culture"]
-},
-
-{
-name:"Riggs",
-role:"Host",
-city:"Other",
-shows:["Fore Play"],
-overall:90,
-comedy:82,
-sports:94,
-chaos:74,
-chemistry:90,
-clips:86,
-knowledge:94,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Guy"]
-},
-
-{
-name:"Trent",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:89,
-comedy:87,
-sports:91,
-chaos:79,
-chemistry:91,
-clips:88,
-knowledge:89,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Trip"]
-},
-
-{
-name:"Frankie",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:87,
-comedy:86,
-sports:88,
-chaos:85,
-chemistry:87,
-clips:87,
-knowledge:85,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Guy"]
-},
-
-{
-name:"Lurch",
-role:"Personality",
-city:"Other",
-shows:["Fore Play"],
-overall:85,
-comedy:81,
-sports:88,
-chaos:83,
-chemistry:85,
-clips:82,
-knowledge:88,
-era:"Modern",
-tags:["Golf"],
-abilities:["Golf Trip"]
-},
-
-{
-name:"Chaps",
-role:"Host",
-city:"Other",
-shows:["Military Content"],
-overall:89,
-comedy:86,
-sports:85,
-chaos:80,
-chemistry:90,
-clips:86,
-knowledge:91,
-era:"Modern",
-tags:["Military"],
-abilities:["Leadership"]
-},
-
-{
-name:"Francis Ellis",
-role:"Comedian",
-city:"New York",
-shows:["Comedy Content"],
-overall:90,
-comedy:98,
-sports:65,
-chaos:84,
-chemistry:89,
-clips:93,
-knowledge:77,
-era:"Modern",
-tags:["Comedy"],
-abilities:["Story Time"]
-},
-
-{
-name:"Mark Titus",
-role:"Sports Host",
-city:"Chicago",
-shows:["Sports Talk"],
-overall:94,
-comedy:91,
-sports:100,
-chaos:79,
-chemistry:91,
-clips:91,
-knowledge:100,
-era:"Modern",
-tags:["Sports","Basketball"],
-abilities:["Rant"]
-},
-
-{
-name:"Max Homa",
-role:"Athlete",
-city:"Other",
-shows:["Golf Content"],
-overall:93,
-comedy:88,
-sports:97,
-chaos:72,
-chemistry:90,
-clips:89,
-knowledge:91,
-era:"Modern",
-tags:["Golf","Athlete"],
-abilities:["Professional Athlete"]
-},
-
-{
-name:"Sully",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:82,
-comedy:85,
-sports:77,
-chaos:85,
-chemistry:84,
-clips:82,
-knowledge:76,
-era:"Modern",
-tags:["Wildcard"],
-abilities:["Office Lore"]
-},
-
-{
-name:"Breezy",
-role:"Wildcard",
-city:"New York",
-shows:["Office Content"],
-overall:81,
-comedy:82,
-sports:70,
-chaos:77,
-chemistry:83,
-clips:80,
-knowledge:68,
-era:"Modern",
-tags:["Wildcard"],
-abilities:["Office Lore"]
-}
+=========================================================
+    STOOLVERSE CONTENT DATABASE
+
+    THIS IS THE SECTION YOU WILL MOSTLY EDIT.
+
+    ADD PEOPLE HERE.
+    ADD MOMENTS HERE.
+    ADD SHOWS HERE.
+    ADD CONNECTIONS HERE.
+
+=========================================================
+========================================================= */
+
+
+const personalities = [
+
+    {
+        name: "Dave Portnoy",
+        aliases: ["El Pres", "Dave"],
+        role: "Founder / Personality",
+        image: "",
+        college: "University of Michigan",
+        hometown: "Swampscott, Massachusetts",
+        tags: ["Founder", "Business", "Sports", "Chaos"],
+        shows: ["One Bite", "The Dave Portnoy Show"],
+        bio: "Founder of Barstool Sports and one of the central figures in the Barstool universe.",
+        career: [
+            {
+                year: "2003",
+                title: "Barstool begins",
+                description: "The beginning of the Barstool Sports universe."
+            },
+            {
+                year: "Today",
+                title: "The Stoolverse expands",
+                description: "Continues to be connected to major Barstool events, shows and moments."
+            }
+        ],
+        funnyMoments: [
+            {
+                title: "One Bite Reviews",
+                description: "The pizza review universe becomes one of the most recognizable parts of Barstool.",
+                location: "Everywhere"
+            }
+        ],
+        connections: ["Big Cat", "PFT Commenter", "KFC", "Feits"]
+    },
+
+    {
+        name: "Big Cat",
+        aliases: ["Dan Katz"],
+        role: "Host / Personality",
+        image: "",
+        college: "University of Wisconsin",
+        hometown: "Chicago",
+        tags: ["Comedy", "Sports", "Host", "The Yak"],
+        shows: ["Pardon My Take", "The Yak"],
+        bio: "One of the central personalities in the Barstool universe.",
+        career: [
+            {
+                year: "Early Barstool",
+                title: "Becomes a major Barstool personality",
+                description: "Develops into one of the company's most recognizable voices."
+            }
+        ],
+        funnyMoments: [],
+        connections: ["PFT Commenter", "Nick Turani", "KB", "Brandon Walker"]
+    },
+
+    {
+        name: "PFT Commenter",
+        aliases: ["PFT"],
+        role: "Host / Comedy",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Comedy", "Football", "Host", "Pardon My Take"],
+        shows: ["Pardon My Take"],
+        bio: "Co-host of Pardon My Take and one of the most recognizable comedic sports personalities.",
+        career: [],
+        funnyMoments: [],
+        connections: ["Big Cat", "Jake Marsh", "Dave Portnoy"]
+    },
+
+    {
+        name: "Brandon Walker",
+        aliases: ["Brandon"],
+        role: "Personality / Sports",
+        image: "",
+        college: "",
+        hometown: "Mississippi",
+        tags: ["Sports", "Debate", "Comedy", "The Yak"],
+        shows: ["Mostly Sports", "The Yak", "The Dozen"],
+        bio: "Sports personality known for strong opinions, debates and a massive personality.",
+        career: [],
+        funnyMoments: [],
+        connections: ["Rico Bosco", "Big Cat", "Nick Turani", "TJ"]
+    },
+
+    {
+        name: "Rico Bosco",
+        aliases: ["Rico"],
+        role: "Sports Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Sports", "Debate", "Chaos", "College Sports"],
+        shows: ["The Dozen", "College Football Content"],
+        bio: "A highly recognizable sports personality known for strong opinions and intense debates.",
+        career: [],
+        funnyMoments: [],
+        connections: ["Brandon Walker", "Big Cat", "Frank the Tank"]
+    },
+
+    {
+        name: "Nick Turani",
+        aliases: ["Nick"],
+        role: "Comedy / Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Comedy", "The Yak", "Chaos"],
+        shows: ["The Yak"],
+        bio: "A major part of the chaotic comedy ecosystem.",
+        career: [],
+        funnyMoments: [],
+        connections: ["KB", "Brandon Walker", "TJ", "Rone"]
+    },
+
+    {
+        name: "KB",
+        aliases: ["KB No Swag"],
+        role: "Comedy / Writer",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Comedy", "Writing", "The Yak"],
+        shows: ["The Yak"],
+        bio: "Known for comedy, writing and unpredictable contributions.",
+        career: [],
+        funnyMoments: [],
+        connections: ["Nick Turani", "Rone", "Sas"]
+    },
+
+    {
+        name: "Rone",
+        aliases: ["Rone"],
+        role: "Comedy / Rapper",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Comedy", "Rap", "The Yak"],
+        shows: ["The Yak"],
+        bio: "Comedian, rapper and personality with a strong connection to the Chicago comedy universe.",
+        career: [],
+        funnyMoments: [],
+        connections: ["Nick Turani", "KB", "Sas"]
+    },
+
+    {
+        name: "Sas",
+        aliases: ["Sas"],
+        role: "Comedy / Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Comedy", "The Yak", "Young Guns"],
+        shows: ["The Yak"],
+        bio: "Comedy personality associated with the younger Barstool comedy ecosystem.",
+        career: [],
+        funnyMoments: [],
+        connections: ["Rone", "KB", "Nick Turani"]
+    },
+
+    {
+        name: "TJ",
+        aliases: ["TJ Hitchings"],
+        role: "Producer",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Producer", "The Yak", "Chaos"],
+        shows: ["The Yak"],
+        bio: "Producer and major behind-the-scenes personality.",
+        career: [],
+        funnyMoments: [],
+        connections: ["Nick Turani", "Brandon Walker", "Big Cat"]
+    },
+
+    {
+        name: "Mintzy",
+        aliases: ["Mintzy"],
+        role: "Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Chaos", "Baseball", "Unpredictable", "Travel"],
+        shows: [],
+        bio: "A highly unpredictable personality associated with baseball, chaos and memorable incidents.",
+        career: [],
+        funnyMoments: [
+            {
+                title: "The Arizona Incident",
+                description: "A memorable moment connected to Mintzy and the Arizona Barstool universe.",
+                location: "Arizona"
+            }
+        ],
+        connections: ["Brandon Walker", "TJ", "Big Cat"]
+    },
+
+    {
+        name: "Frank the Tank",
+        aliases: ["Frank"],
+        role: "Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Sports", "Chaos", "The Dozen"],
+        shows: ["The Dozen"],
+        bio: "One of the most recognizable personalities in the Barstool universe.",
+        career: [],
+        funnyMoments: [],
+        connections: ["Rico Bosco", "Brandon Walker", "Jeff D. Lowe"]
+    },
+
+    {
+        name: "Jeff D. Lowe",
+        aliases: ["Jeff"],
+        role: "Host / Trivia",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Trivia", "The Dozen", "Host"],
+        shows: ["The Dozen"],
+        bio: "Host and central figure of The Dozen trivia universe.",
+        career: [],
+        funnyMoments: [],
+        connections: ["Frank the Tank", "Brandon Walker", "Rico Bosco"]
+    },
+
+    {
+        name: "Dana Beers",
+        aliases: ["Dana"],
+        role: "Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Personality", "Comedy", "Travel"],
+        shows: [],
+        bio: "Personality associated with multiple Barstool projects and the broader Stoolverse.",
+        career: [],
+        funnyMoments: [],
+        connections: []
+    },
+
+    {
+        name: "Mike Katic",
+        aliases: ["Katic"],
+        role: "Personality",
+        image: "",
+        college: "Indiana University",
+        hometown: "",
+        tags: ["Sports", "Football", "Personality"],
+        shows: [],
+        bio: "Sports personality connected to the Barstool ecosystem.",
+        career: [],
+        funnyMoments: [],
+        connections: []
+    },
+
+    {
+        name: "Zac",
+        aliases: ["Zac"],
+        role: "Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Personality", "Comedy"],
+        shows: [],
+        bio: "A recognizable member of the wider Barstool personality ecosystem.",
+        career: [],
+        funnyMoments: [],
+        connections: []
+    },
+
+    {
+        name: "KFC",
+        aliases: ["Kevin Clancy"],
+        role: "Writer / Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Comedy", "Writing", "New York"],
+        shows: ["KFC Radio"],
+        bio: "One of the major personalities from Barstool's New York era.",
+        career: [],
+        funnyMoments: [],
+        connections: ["Feits", "Dave Portnoy"]
+    },
+
+    {
+        name: "Feits",
+        aliases: ["John Feitelberg"],
+        role: "Comedy / Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Comedy", "New York"],
+        shows: ["KFC Radio"],
+        bio: "Longtime Barstool personality and part of the KFC Radio universe.",
+        career: [],
+        funnyMoments: [],
+        connections: ["KFC", "Dave Portnoy"]
+    },
+
+    {
+        name: "Jake Marsh",
+        aliases: ["Jake"],
+        role: "Sports / Trivia",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Sports", "Trivia", "The Dozen"],
+        shows: ["The Dozen"],
+        bio: "Sports and trivia personality associated with multiple Barstool projects.",
+        career: [],
+        funnyMoments: [],
+        connections: ["Jeff D. Lowe", "PFT Commenter"]
+    },
+
+    {
+        name: "Large",
+        aliases: ["Large"],
+        role: "Sports / Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Sports", "Trivia", "New York"],
+        shows: ["The Dozen"],
+        bio: "Recognizable Barstool personality connected to sports and trivia content.",
+        career: [],
+        funnyMoments: [],
+        connections: ["Jeff D. Lowe"]
+    },
+
+    {
+        name: "Marty Mush",
+        aliases: ["Marty"],
+        role: "Sports / Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Sports", "Comedy", "New York"],
+        shows: [],
+        bio: "Sports personality with a recognizable place in the Barstool universe.",
+        career: [],
+        funnyMoments: [],
+        connections: []
+    },
+
+    {
+        name: "Billy Football",
+        aliases: ["Billy"],
+        role: "Sports / Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Football", "Chaos", "Comedy"],
+        shows: ["Pardon My Take"],
+        bio: "Formerly associated with Pardon My Take and the wider Barstool universe.",
+        career: [],
+        funnyMoments: [],
+        connections: ["Big Cat", "PFT Commenter"]
+    },
+
+    {
+        name: "Caleb Pressley",
+        aliases: ["Caleb"],
+        role: "Interviewer / Comedy",
+        image: "",
+        college: "University of North Carolina",
+        hometown: "",
+        tags: ["Comedy", "Interviews", "Sports"],
+        shows: [],
+        bio: "Interview personality known for a distinctive comedic style.",
+        career: [],
+        funnyMoments: [],
+        connections: []
+    },
+
+    {
+        name: "Francis Ellis",
+        aliases: ["Francis"],
+        role: "Comedy",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Comedy", "Writing", "New York"],
+        shows: [],
+        bio: "Comedian and writer associated with Barstool's comedy ecosystem.",
+        career: [],
+        funnyMoments: [],
+        connections: []
+    },
+
+    {
+        name: "Kate",
+        aliases: ["Kate"],
+        role: "Comedy / Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Comedy", "The Yak"],
+        shows: ["The Yak"],
+        bio: "Personality associated with the Chicago comedy ecosystem.",
+        career: [],
+        funnyMoments: [],
+        connections: ["Nick Turani", "KB"]
+    },
+
+    {
+        name: "Owen",
+        aliases: ["Owen"],
+        role: "Producer / Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Producer", "Comedy", "Chicago"],
+        shows: [],
+        bio: "Producer and personality connected to the Chicago Barstool ecosystem.",
+        career: [],
+        funnyMoments: [],
+        connections: []
+    },
+
+    {
+        name: "Chief",
+        aliases: ["Chief"],
+        role: "Sports / Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Sports", "Chicago", "Trivia"],
+        shows: [],
+        bio: "Chicago-associated personality connected to sports and Barstool content.",
+        career: [],
+        funnyMoments: [],
+        connections: []
+    },
+
+    {
+        name: "Nicky Smokes",
+        aliases: ["Nicky"],
+        role: "Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Chaos", "Comedy", "Personality"],
+        shows: [],
+        bio: "A chaotic personality associated with the newer Barstool ecosystem.",
+        career: [],
+        funnyMoments: [],
+        connections: []
+    },
+
+    {
+        name: "Tommy Smokes",
+        aliases: ["Tommy"],
+        role: "Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Comedy", "Chaos", "New York"],
+        shows: [],
+        bio: "Recognizable personality associated with Barstool's New York and comedy ecosystem.",
+        career: [],
+        funnyMoments: [],
+        connections: []
+    },
+
+    {
+        name: "Hank",
+        aliases: ["Hank"],
+        role: "Producer / Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Producer", "Sports", "Comedy"],
+        shows: ["Pardon My Take"],
+        bio: "Producer and personality associated with major Barstool content.",
+        career: [],
+        funnyMoments: [],
+        connections: ["Big Cat", "PFT Commenter"]
+    },
+
+    {
+        name: "Klemmer",
+        aliases: ["Klemmer"],
+        role: "Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Comedy", "Sports", "The Dozen"],
+        shows: ["The Dozen"],
+        bio: "Personality connected to the newer Barstool ecosystem and trivia universe.",
+        career: [],
+        funnyMoments: [],
+        connections: ["Jeff D. Lowe", "Frank the Tank"]
+    },
+
+    {
+        name: "Smitty",
+        aliases: ["Smitty"],
+        role: "Sports / Personality",
+        image: "",
+        college: "",
+        hometown: "",
+        tags: ["Sports", "Gaming", "Personality"],
+        shows: [],
+        bio: "Sports and gaming personality associated with the wider Barstool world.",
+        career: [],
+        funnyMoments: [],
+        connections: []
+    }
 
 ];
 
-/* =====================================================
-   SHOW FORMATS
-===================================================== */
-
-const formats = [
-{
-name:"Talk / Comedy",
-icon:"🎙️",
-description:"A personality-driven conversation show.",
-weights:["comedy","chemistry","clips","chaos"]
-},
-{
-name:"Sports Talk",
-icon:"🏈",
-description:"Debate, opinions, arguments, and sports knowledge.",
-weights:["sports","knowledge","chemistry","clips"]
-},
-{
-name:"Pick Em",
-icon:"🏆",
-description:"Predictions, arguments, confidence, and chaos.",
-weights:["sports","chaos","comedy","clips"]
-},
-{
-name:"Trivia / Game Show",
-icon:"🧠",
-description:"Knowledge, pressure, and entertainment.",
-weights:["knowledge","chemistry","comedy","clips"]
-},
-{
-name:"Cooking Competition",
-icon:"🍳",
-description:"Cooking, chaos, competition, and following directions.",
-weights:["comedy","chaos","chemistry","clips"]
-},
-{
-name:"Travel / Adventure",
-icon:"✈️",
-description:"Put personalities somewhere they absolutely should not be.",
-weights:["chaos","comedy","chemistry","clips"]
-},
-{
-name:"Documentary",
-icon:"🎥",
-description:"Long-form storytelling and personality.",
-weights:["knowledge","chemistry","comedy","clips"]
-},
-{
-name:"Custom",
-icon:"⚙️",
-description:"You decide what this thing is.",
-weights:["comedy","chaos","chemistry","clips"]
-}
-];
 
 /* =====================================================
-   GAME STATE
+    MAP DATA
 ===================================================== */
 
-let state = JSON.parse(localStorage.getItem("stoolDynastySave")) || {
-budget:50000000,
-shows:[],
-fans:0,
-hall:[],
-easterEggs:[],
-dailyAnswer:null
+const locations = {
+
+    newyork: {
+        name: "NEW YORK",
+        description: "One of the most important cities in Barstool history.",
+        people: ["Dave Portnoy", "KFC", "Feits", "Large", "Tommy Smokes"],
+        moments: [
+            "Early Barstool history",
+            "The New York office era",
+            "KFC Radio universe"
+        ]
+    },
+
+    chicago: {
+        name: "CHICAGO",
+        description: "A major center of the modern Barstool universe.",
+        people: ["Big Cat", "Brandon Walker", "Nick Turani", "KB", "Rone", "TJ"],
+        moments: [
+            "The Yak universe",
+            "Chicago office chaos",
+            "Major sports and comedy shows"
+        ]
+    },
+
+    philadelphia: {
+        name: "PHILADELPHIA",
+        description: "A major sports city with deep connections to Barstool personalities and content.",
+        people: ["Brandon Walker"],
+        moments: [
+            "Sports culture",
+            "Barstool events",
+            "Philadelphia personalities"
+        ]
+    },
+
+    arizona: {
+        name: "ARIZONA",
+        description: "A location connected to memorable Barstool chaos.",
+        people: ["Mintzy"],
+        moments: [
+            "The Mintzy Arizona incident"
+        ]
+    }
+
 };
 
-let selectedFormat = formats[0];
-let selectedCast = [];
-let wheelRotation = 0;
 
 /* =====================================================
-   BASIC FUNCTIONS
+    WEBSITE FUNCTIONS
 ===================================================== */
 
-function saveGame() {
-    localStorage.setItem("stoolDynastySave", JSON.stringify(state));
-    updateTopbar();
-}
+function showPage(pageId) {
 
-function updateTopbar() {
-    document.getElementById("budgetDisplay").textContent =
-        "$" + (state.budget / 1000000).toFixed(1) + "M";
-
-    document.getElementById("showDisplay").textContent =
-        state.shows.length;
-
-    document.getElementById("fanDisplay").textContent =
-        state.fans.toLocaleString();
-}
-
-function showPage(page) {
-
-    document.querySelectorAll(".nav-button").forEach(button => {
-        button.classList.remove("active");
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
     });
 
-    if(page === "dashboard") renderDashboard();
-    if(page === "dynasty") renderDynasty();
-    if(page === "builder") renderBuilder();
-    if(page === "wheel") renderWheel();
-    if(page === "whoami") renderWhoAmI();
-    if(page === "randomizer") renderRandomizer();
-    if(page === "players") renderPlayers();
-    if(page === "map") renderMap();
-    if(page === "medical") renderMedical();
-    if(page === "hall") renderHall();
-
-    window.scrollTo(0,0);
-}
-
-/* =====================================================
-   DASHBOARD
-===================================================== */
-
-function renderDashboard() {
-
-    document.getElementById("content").innerHTML = `
-
-    <h1 class="page-title">Build Your Empire.</h1>
-
-    <p class="page-subtitle">
-        Welcome to the Stool Universe. Build shows, create chaos, and discover things you probably weren't supposed to find.
-    </p>
-
-    <div class="dashboard-grid">
-
-        <div class="mode-card" onclick="showPage('dynasty')">
-            <div class="mode-icon">🏆</div>
-            <h3>Dynasty Mode</h3>
-            <p>Build your media empire from nothing.</p>
-        </div>
-
-        <div class="mode-card" onclick="showPage('builder')">
-            <div class="mode-icon">🎙️</div>
-            <h3>Show Builder</h3>
-            <p>Pick a format, pick a cast, and see what you created.</p>
-        </div>
-
-        <div class="mode-card" onclick="showPage('wheel')">
-            <div class="mode-icon">🎡</div>
-            <h3>Yak Wheel</h3>
-            <p>Spin the wheels and let the universe decide.</p>
-        </div>
-
-        <div class="mode-card" onclick="showPage('whoami')">
-            <div class="mode-icon">🧩</div>
-            <h3>Who Am I?</h3>
-            <p>Wordle-style personality guessing.</p>
-        </div>
-
-        <div class="mode-card" onclick="showPage('randomizer')">
-            <div class="mode-icon">🎲</div>
-            <h3>Randomizer</h3>
-            <p>Create completely unnecessary situations.</p>
-        </div>
-
-        <div class="mode-card" onclick="showPage('players')">
-            <div class="mode-icon">🃏</div>
-            <h3>Personalities</h3>
-            <p>Browse the entire Stool Universe.</p>
-        </div>
-
-    </div>
-
-    <div class="dashboard-bottom">
-
-        <div class="panel">
-            <div class="panel-title">📰 Universe News</div>
-
-            <div class="news-item">
-                🏥 Mintzy has suffered another mysterious setback.
-                <small>Medical Center • Just now</small>
-            </div>
-
-            <div class="news-item">
-                🎙️ The Yak has been rated the most chemically unstable show in the universe.
-                <small>Show Analytics • 2 hours ago</small>
-            </div>
-
-            <div class="news-item">
-                🎲 Someone has spun the Yak Wheel.
-                <small>Probably a mistake • 4 hours ago</small>
-            </div>
-
-            <div class="news-item">
-                🥚 There are still undiscovered Easter Eggs.
-                <small>Good luck.</small>
-            </div>
-        </div>
-
-        <div class="panel">
-            <div class="panel-title">📊 Your Dynasty</div>
-
-            <div class="detail-grid">
-
-                <div class="detail-stat">
-                    <span>BUDGET</span>
-                    $${(state.budget/1000000).toFixed(1)}M
-                </div>
-
-                <div class="detail-stat">
-                    <span>SHOWS</span>
-                    ${state.shows.length}
-                </div>
-
-                <div class="detail-stat">
-                    <span>FANS</span>
-                    ${state.fans.toLocaleString()}
-                </div>
-
-                <div class="detail-stat">
-                    <span>PERSONALITIES</span>
-                    ${players.length}+
-                </div>
-
-            </div>
-
-            <br>
-
-            <button class="primary-btn" onclick="showPage('builder')">
-                CREATE A SHOW
-            </button>
-
-        </div>
-
-    </div>
-
-    <br>
-
-    <h2 class="section-title">🗺️ Explore the Stool Universe</h2>
-
-    <div class="map">
-
-        <div class="map-title">STOOL UNIVERSE // LIVE MAP</div>
-
-        <div class="map-line" style="left:32%;top:39%;width:40%;transform:rotate(-7deg);"></div>
-        <div class="map-line" style="left:72%;top:35%;width:18%;transform:rotate(-25deg);"></div>
-        <div class="map-line" style="left:68%;top:50%;width:10%;transform:rotate(-45deg);"></div>
-
-        <div class="location chicago" onclick="openLocation('Chicago')">
-            <div class="location-dot"></div>
-            <div class="location-name">CHICAGO</div>
-            <div class="location-count">The Yak • PMT • ${players.filter(p=>p.city==="Chicago").length}+ personalities</div>
-        </div>
-
-        <div class="location new-york" onclick="openLocation('New York')">
-            <div class="location-dot"></div>
-            <div class="location-name">NEW YORK</div>
-            <div class="location-count">Sports • Comedy • Chaos</div>
-        </div>
-
-        <div class="location philly" onclick="openLocation('Philadelphia')">
-            <div class="location-dot"></div>
-            <div class="location-name">PHILLY</div>
-            <div class="location-count">???</div>
-        </div>
-
-        <div class="location boston" onclick="openLocation('Boston')">
-            <div class="location-dot"></div>
-            <div class="location-name">BOSTON</div>
-            <div class="location-count">Chaos Detected</div>
-        </div>
-
-        <div class="location las-vegas" onclick="openLocation('Las Vegas')">
-            <div class="location-dot"></div>
-            <div class="location-name">LAS VEGAS</div>
-            <div class="location-count">SECRET?</div>
-        </div>
-
-        <div class="location other" onclick="openLocation('The Unknown')">
-            <div class="location-dot"></div>
-            <div class="location-name">THE UNKNOWN</div>
-            <div class="location-count">???</div>
-        </div>
-
-    </div>
-
-    `;
-}
-
-/* =====================================================
-   DYNASTY MODE
-===================================================== */
-
-function renderDynasty() {
-
-    document.getElementById("content").innerHTML = `
-
-    <h1 class="page-title">🏆 Dynasty Mode</h1>
-
-    <p class="page-subtitle">
-        Build the greatest media empire in the Stool Universe.
-    </p>
-
-    <div class="panel">
-
-        <h2>YOUR EMPIRE</h2>
-
-        <br>
-
-        <div class="detail-grid">
-
-            <div class="detail-stat">
-                <span>AVAILABLE BUDGET</span>
-                $${(state.budget/1000000).toFixed(1)}M
-            </div>
-
-            <div class="detail-stat">
-                <span>ACTIVE SHOWS</span>
-                ${state.shows.length}
-            </div>
-
-            <div class="detail-stat">
-                <span>TOTAL FANS</span>
-                ${state.fans.toLocaleString()}
-            </div>
-
-            <div class="detail-stat">
-                <span>DYNASTY SCORE</span>
-                ${state.shows.length === 0 ? "0" : Math.min(99, 60 + state.shows.length * 5)}
-            </div>
-
-        </div>
-
-        <br>
-
-        <button class="primary-btn" onclick="showPage('builder')">
-            CREATE NEW SHOW
-        </button>
-
-    </div>
-
-    <br>
-
-    <h2 class="section-title">📺 YOUR SHOWS</h2>
-
-    <div class="player-grid">
-
-        ${
-            state.shows.length === 0
-            ?
-            `<div class="panel">
-                <h3>No shows yet.</h3>
-                <br>
-                <p style="color:#888;">
-                    Your empire currently consists of absolutely nothing.
-                </p>
-            </div>`
-            :
-            state.shows.map(show => `
-                <div class="panel">
-                    <h3>${show.name}</h3>
-                    <p style="color:#888;margin:8px 0;">${show.format}</p>
-                    <div class="result-score">${show.overall}</div>
-                    <p>OVR</p>
-                    <br>
-                    <p style="color:#aaa;">${show.description}</p>
-                </div>
-            `).join("")
-        }
-
-    </div>
-
-    <br>
-
-    <div class="panel">
-
-        <h2>🎲 RANDOM DYNASTY EVENT</h2>
-
-        <br>
-
-        <button class="primary-btn" onclick="dynastyEvent()">
-            GENERATE EVENT
-        </button>
-
-        <div id="dynastyEventResult"></div>
-
-    </div>
-
-    `;
-}
-
-function dynastyEvent() {
-
-    const events = [
-
-        {
-            text:"🚨 Mintzy has shown up to a show he was not booked for.",
-            effect:"Chaos +25 • Schedule Reliability -15 • Clip Potential +40"
-        },
-
-        {
-            text:"📈 One of your shows went viral overnight.",
-            effect:"Fans +250,000 • Budget +$1,000,000"
-        },
-
-        {
-            text:"🏥 A key personality has suffered an extremely preventable injury.",
-            effect:"Show Chemistry -10 • Medical Bills +$250,000"
-        },
-
-        {
-            text:"🎙️ Your producer has created a new show idea.",
-            effect:"You may have accidentally discovered the next biggest show in the universe."
-        },
-
-        {
-            text:"🔥 Two members of your roster have started a rivalry.",
-            effect:"Drama +40 • Clip Potential +30 • Chemistry -15"
-        },
-
-        {
-            text:"🧠 Your trivia team has discovered a completely useless piece of knowledge.",
-            effect:"Knowledge +1 • Nobody knows what to do with it."
-        }
-
-    ];
-
-    const event = events[Math.floor(Math.random()*events.length)];
-
-    if(event.text.includes("viral")) {
-        state.fans += 250000;
-        state.budget += 1000000;
-        saveGame();
-    }
-
-    document.getElementById("dynastyEventResult").innerHTML = `
-
-    <div class="result-box">
-
-        <h2>${event.text}</h2>
-
-        <p style="color:#aaa;margin-top:12px;">
-            ${event.effect}
-        </p>
-
-    </div>
-
-    `;
-
-}
-
-/* =====================================================
-   SHOW BUILDER
-===================================================== */
-
-function renderBuilder() {
-
-    selectedCast = [];
-
-    document.getElementById("content").innerHTML = `
-
-    <h1 class="page-title">🎙️ Show Builder</h1>
-
-    <p class="page-subtitle">
-        Choose a format. Build a cast. See what you have created.
-    </p>
-
-    <div class="builder-layout">
-
-        <div>
-
-            <div class="panel">
-
-                <h2 class="panel-title">1. Choose Your Format</h2>
-
-                <div class="format-grid">
-
-                    ${formats.map((format,index) => `
-
-                        <div class="format-card ${index===0 ? "selected" : ""}"
-                             onclick="selectFormat(${index}, this)">
-
-                            <strong>${format.icon} ${format.name}</strong>
-
-                            <small>${format.description}</small>
-
-                        </div>
-
-                    `).join("")}
-
-                </div>
-
-            </div>
-
-            <br>
-
-            <div class="panel">
-
-                <h2 class="panel-title">2. Your Cast</h2>
-
-                <div id="castSlots">
-
-                    <div class="cast-slot empty">
-                        No cast members selected.
-                    </div>
-
-                </div>
-
-                <br>
-
-                <button class="primary-btn" onclick="buildShow()">
-                    🚀 LAUNCH SHOW
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="panel">
-
-            <h2 class="panel-title">Choose Personalities</h2>
-
-            <input
-                class="search"
-                style="width:100%;margin-bottom:12px;"
-                placeholder="Search personalities..."
-                oninput="filterBuilderPeople(this.value)"
-            >
-
-            <div class="cast-list" id="builderPeople">
-
-                ${players.map((player,index)=>`
-
-                    <div class="cast-option" data-name="${player.name.toLowerCase()}">
-
-                        <div class="cast-option-info">
-
-                            <div class="mini-avatar">
-                                ${getInitials(player.name)}
-                            </div>
-
-                            <div>
-                                <strong>${player.name}</strong>
-
-                                <div style="color:#777;font-size:11px;">
-                                    ${player.role} • OVR ${player.overall}
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <button class="add-button"
-                            onclick="addToCast(${index})">
-                            ADD
-                        </button>
-
-                    </div>
-
-                `).join("")}
-
-            </div>
-
-        </div>
-
-    </div>
-
-    `;
-
-}
-
-function selectFormat(index, element) {
-
-    selectedFormat = formats[index];
-
-    document.querySelectorAll(".format-card")
-        .forEach(card => card.classList.remove("selected"));
-
-    element.classList.add("selected");
-
-}
-
-function filterBuilderPeople(query) {
-
-    const people = document.querySelectorAll(".cast-option");
-
-    people.forEach(person => {
-
-        const name = person.dataset.name;
-
-        person.style.display =
-            name.includes(query.toLowerCase())
-            ? "flex"
-            : "none";
-
+    document.getElementById(pageId).classList.add("active");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
     });
 
-}
-
-function addToCast(index) {
-
-    const player = players[index];
-
-    if(selectedCast.some(p => p.name === player.name)) {
-        return;
+    if (pageId === "people") {
+        renderPeople();
     }
-
-    if(selectedCast.length >= 8) {
-        alert("Maximum 8 people in a show.");
-        return;
-    }
-
-    selectedCast.push(player);
-
-    renderCastSlots();
-
 }
 
-function removeFromCast(index) {
 
-    selectedCast.splice(index,1);
-
-    renderCastSlots();
-
-}
-
-function renderCastSlots() {
-
-    const container = document.getElementById("castSlots");
-
-    if(selectedCast.length === 0) {
-
-        container.innerHTML = `
-            <div class="cast-slot empty">
-                No cast members selected.
-            </div>
-        `;
-
-        return;
-    }
-
-    container.innerHTML = selectedCast.map((player,index)=>`
-
-        <div class="cast-slot">
-
-            <div>
-
-                <div class="cast-slot-name">
-                    ${player.name}
-                </div>
-
-                <div class="cast-slot-role">
-                    ${player.role} • OVR ${player.overall}
-                </div>
-
-            </div>
-
-            <button class="danger-btn"
-                onclick="removeFromCast(${index})">
-                REMOVE
-            </button>
-
-        </div>
-
-    `).join("");
-
-}
-
-function buildShow() {
-
-    if(selectedCast.length < 2) {
-        alert("You need at least two people to create a show.");
-        return;
-    }
-
-    const weights = selectedFormat.weights;
-
-    let scores = {};
-
-    weights.forEach(stat => {
-
-        scores[stat] = Math.round(
-            selectedCast.reduce((sum,player)=>sum + player[stat],0)
-            / selectedCast.length
-        );
-
-    });
-
-    let chemistry = Math.round(
-        selectedCast.reduce((sum,player)=>sum + player.chemistry,0)
-        / selectedCast.length
-    );
-
-    let chaos = Math.round(
-        selectedCast.reduce((sum,player)=>sum + player.chaos,0)
-        / selectedCast.length
-    );
-
-    let overall = Math.round(
-        Object.values(scores).reduce((a,b)=>a+b,0)
-        / Object.values(scores).length
-    );
-
-    overall += Math.min(8, selectedCast.length);
-
-    overall = Math.min(99, overall);
-
-    const names = selectedCast.map(p=>p.name);
-
-    let showName = generateShowName();
-
-    let description = generateDescription(overall, chaos, chemistry);
-
-    const newShow = {
-        name:showName,
-        format:selectedFormat.name,
-        overall,
-        description,
-        cast:names
-    };
-
-    state.shows.push(newShow);
-
-    state.fans += overall * 1000;
-
-    state.budget += Math.round(overall * 25000);
-
-    saveGame();
-
-    document.getElementById("content").innerHTML += `
-
-    <div class="result-box">
-
-        <h2>🚨 SHOW LAUNCHED</h2>
-
-        <br>
-
-        <h1>${showName}</h1>
-
-        <p style="color:#aaa;margin-top:7px;">
-            ${selectedFormat.icon} ${selectedFormat.name}
-        </p>
-
-        <br>
-
-        <div class="result-score">${overall}</div>
-
-        <p>OVERALL SHOW RATING</p>
-
-        <br>
-
-        <div class="stat-row">
-
-            <div class="stat-header">
-                <span>CHEMISTRY</span>
-                <strong>${chemistry}</strong>
-            </div>
-
-            <div class="stat-bar">
-                <div class="stat-fill" style="width:${chemistry}%"></div>
-            </div>
-
-        </div>
-
-        <div class="stat-row">
-
-            <div class="stat-header">
-                <span>CHAOS</span>
-                <strong>${chaos}</strong>
-            </div>
-
-            <div class="stat-bar">
-                <div class="stat-fill" style="width:${chaos}%"></div>
-            </div>
-
-        </div>
-
-        <br>
-
-        <h3>CAST</h3>
-
-        <p style="color:#bbb;margin-top:8px;">
-            ${names.join(" • ")}
-        </p>
-
-        <br>
-
-        <p style="font-size:16px;color:#ddd;">
-            "${description}"
-        </p>
-
-        <br>
-
-        <button class="secondary-btn"
-            onclick="showPage('dynasty')">
-            VIEW IN DYNASTY
-        </button>
-
-    </div>
-
-    `;
-
-}
-
-/* =====================================================
-   SHOW GENERATOR
-===================================================== */
-
-function generateShowName() {
-
-    const first = [
-        "The",
-        "The New",
-        "The Unnecessary",
-        "The Daily",
-        "The Completely Unplanned",
-        "The Stool",
-        "The Content"
-    ];
-
-    const second = [
-        "Rundown",
-        "Room",
-        "Machine",
-        "Experiment",
-        "Show",
-        "Club",
-        "Factory",
-        "Department",
-        "Hour",
-        "Situation",
-        "Problem",
-        "Universe"
-    ];
-
-    return first[Math.floor(Math.random()*first.length)]
-        + " "
-        + second[Math.floor(Math.random()*second.length)];
-
-}
-
-function generateDescription(overall, chaos, chemistry) {
-
-    if(chaos >= 95) {
-        return "An alarmingly unstable lineup that somehow produces elite content.";
-    }
-
-    if(chemistry >= 95) {
-        return "The personalities have accidentally created a perfect content ecosystem.";
-    }
-
-    if(overall >= 95) {
-        return "A generational lineup with enough talent to become the flagship of the entire universe.";
-    }
-
-    if(overall >= 88) {
-        return "A very good show with a non-zero chance of completely losing control.";
-    }
-
-    return "There is definitely something here. The question is whether anyone knows what it is.";
-
-}
-
-/* =====================================================
-   YAK WHEEL
-===================================================== */
-
-function renderWheel() {
-
-    document.getElementById("content").innerHTML = `
-
-    <h1 class="page-title">🎡 Yak Wheel</h1>
-
-    <p class="page-subtitle">
-        Spin the wheel. Accept your fate.
-    </p>
-
-    <div class="wheel-layout">
-
-        <div class="panel">
-
-            <div class="wheel" id="wheel">
-                <div class="wheel-center">
-                    SPIN
-                </div>
-            </div>
-
-            <button
-                class="primary-btn"
-                style="display:block;margin:0 auto;"
-                onclick="spinWheel()">
-
-                SPIN THE WHEEL
-
-            </button>
-
-            <div class="wheel-result" id="wheelResult">
-                Awaiting disaster...
-            </div>
-
-        </div>
-
-        <div class="panel">
-
-            <h2 class="panel-title">🎲 Current Categories</h2>
-
-            <div class="wheel-control">
-                <label>Who</label>
-                <span>Random Personality</span>
-            </div>
-
-            <br>
-
-            <div class="wheel-control">
-                <label>Challenge</label>
-                <span>Random Challenge</span>
-            </div>
-
-            <br>
-
-            <div class="wheel-control">
-                <label>Location</label>
-                <span>Random Location</span>
-            </div>
-
-            <br>
-
-            <div class="wheel-control">
-                <label>Potential Result</label>
-                <span>Probably bad</span>
-            </div>
-
-        </div>
-
-    </div>
-
-    `;
-
-}
-
-function spinWheel() {
-
-    const wheel = document.getElementById("wheel");
-
-    wheelRotation += 1440 + Math.floor(Math.random()*720);
-
-    wheel.style.transform = `rotate(${wheelRotation}deg)`;
-
-    setTimeout(()=>{
-
-        const person =
-            players[Math.floor(Math.random()*players.length)];
-
-        const challenges = [
-            "Cook a five-course meal",
-            "Host a live sports debate",
-            "Play trivia against a team of geniuses",
-            "Plan a road trip",
-            "Run a company for 24 hours",
-            "Make a viral video",
-            "Play a sport they have never played",
-            "Defend an indefensible opinion",
-            "Create a new podcast",
-            "Organize an office competition",
-            "Pick every game on the schedule",
-            "Survive a day with no phone"
-        ];
-
-        const locations = [
-            "Chicago",
-            "New York",
-            "Las Vegas",
-            "A random airport",
-            "The office",
-            "A golf course",
-            "A college campus",
-            "A completely unknown city"
-        ];
-
-        const challenge =
-            challenges[Math.floor(Math.random()*challenges.length)];
-
-        const location =
-            locations[Math.floor(Math.random()*locations.length)];
-
-        document.getElementById("wheelResult").innerHTML = `
-
-            <div style="font-size:17px;color:#aaa;">
-                ${person.name}
-            </div>
-
-            <div style="margin-top:10px;">
-                ${challenge}
-            </div>
-
-            <div style="font-size:14px;color:#888;margin-top:8px;">
-                Location: ${location}
-            </div>
-
-        `;
-
-    },3000);
-
-}
-
-/* =====================================================
-   WHO AM I / WORDLE STYLE
-===================================================== */
-
-let whoAnswer = null;
-let whoGuesses = [];
-
-function renderWhoAmI() {
-
-    if(!whoAnswer) {
-        whoAnswer = players[Math.floor(Math.random()*players.length)];
-    }
-
-    document.getElementById("content").innerHTML = `
-
-    <h1 class="page-title">🧩 Who Am I?</h1>
-
-    <p class="page-subtitle">
-        Guess the personality. Green is exact. Yellow means you're close.
-    </p>
-
-    <div class="panel">
-
-        <input
-            class="guess-input"
-            id="guessInput"
-            list="playerNames"
-            placeholder="Type a personality name..."
-        >
-
-        <datalist id="playerNames">
-            ${players.map(p=>`<option value="${p.name}">`).join("")}
-        </datalist>
-
-        <button class="primary-btn" onclick="makeGuess()">
-            GUESS
-        </button>
-
-        <div id="guessArea"></div>
-
-    </div>
-
-    `;
-
-    renderGuesses();
-
-}
-
-function makeGuess() {
-
-    const input = document.getElementById("guessInput");
-
-    const value = input.value.trim().toLowerCase();
-
-    const guess = players.find(
-        p => p.name.toLowerCase() === value
-    );
-
-    if(!guess) {
-        alert("That person is not in the database yet.");
-        return;
-    }
-
-    if(whoGuesses.some(g=>g.name === guess.name)) {
-        alert("You already guessed them.");
-        return;
-    }
-
-    whoGuesses.push(guess);
-
-    renderGuesses();
-
-    if(guess.name === whoAnswer.name) {
-
-        setTimeout(()=>{
-
-            document.getElementById("guessArea").innerHTML += `
-
-                <div class="result-box">
-
-                    <h2>🟩 YOU GOT IT</h2>
-
-                    <br>
-
-                    <h1>${whoAnswer.name}</h1>
-
-                    <p style="color:#aaa;margin-top:8px;">
-                        It took you ${whoGuesses.length} guesses.
-                    </p>
-
-                    <br>
-
-                    <button class="primary-btn"
-                        onclick="newWhoGame()">
-
-                        PLAY AGAIN
-
-                    </button>
-
-                </div>
-
-            `;
-
-        },200);
-
-    }
-
-}
-
-function renderGuesses() {
-
-    const area = document.getElementById("guessArea");
-
-    if(!area) return;
-
-    if(whoGuesses.length === 0) {
-
-        area.innerHTML = `
-            <p style="color:#666;margin-top:20px;">
-                Your guesses will appear here.
-            </p>
-        `;
-
-        return;
-
-    }
-
-    area.innerHTML = `
-
-    <table class="guess-table">
-
-        <thead>
-
-            <tr>
-
-                <th>Person</th>
-                <th>Role</th>
-                <th>City</th>
-                <th>Era</th>
-                <th>OVR</th>
-                <th>Comedy</th>
-                <th>Sports</th>
-                <th>Chaos</th>
-
-            </tr>
-
-        </thead>
-
-        <tbody>
-
-            ${whoGuesses.map(guess=>`
-
-                <tr>
-
-                    <td class="guess-name">
-                        ${guess.name}
-                    </td>
-
-                    <td class="${compare(guess.role,whoAnswer.role)}">
-                        ${guess.role}
-                    </td>
-
-                    <td class="${compare(guess.city,whoAnswer.city)}">
-                        ${guess.city}
-                    </td>
-
-                    <td class="${compare(guess.era,whoAnswer.era)}">
-                        ${guess.era}
-                    </td>
-
-                    <td class="${numberClass(guess.overall,whoAnswer.overall)}">
-                        ${guess.overall}
-                    </td>
-
-                    <td class="${numberClass(guess.comedy,whoAnswer.comedy)}">
-                        ${guess.comedy}
-                    </td>
-
-                    <td class="${numberClass(guess.sports,whoAnswer.sports)}">
-                        ${guess.sports}
-                    </td>
-
-                    <td class="${numberClass(guess.chaos,whoAnswer.chaos)}">
-                        ${guess.chaos}
-                    </td>
-
-                </tr>
-
-            `).join("")}
-
-        </tbody>
-
-    </table>
-
-    `;
-
-}
-
-function compare(a,b) {
-
-    if(a === b) return "green";
-
-    return "gray";
-
-}
-
-function numberClass(a,b) {
-
-    if(a === b) return "green";
-
-    if(Math.abs(a-b) <= 8) return "yellow";
-
-    return "gray";
-
-}
-
-function newWhoGame() {
-
-    whoAnswer = players[Math.floor(Math.random()*players.length)];
-
-    whoGuesses = [];
-
-    renderWhoAmI();
-
-}
-
-/* =====================================================
-   RANDOMIZER
-===================================================== */
-
-function renderRandomizer() {
-
-    document.getElementById("content").innerHTML = `
-
-    <h1 class="page-title">🎲 Randomizer</h1>
-
-    <p class="page-subtitle">
-        Generate a situation that should probably never happen.
-    </p>
-
-    <div class="panel">
-
-        <button class="primary-btn" onclick="generateRandomSituation()">
-            GENERATE SITUATION
-        </button>
-
-        <div class="random-result" id="randomResult">
-
-            <h2>Nothing has happened yet.</h2>
-
-            <p>
-                This is probably for the best.
-            </p>
-
-        </div>
-
-    </div>
-
-    `;
-
-}
-
-function generateRandomSituation() {
-
-    const a =
-        players[Math.floor(Math.random()*players.length)];
-
-    const b =
-        players[Math.floor(Math.random()*players.length)];
-
-    const situations = [
-
-        `${a.name} and ${b.name} have been tasked with starting a new sports show.`,
-
-        `${a.name} and ${b.name} are trapped in an airport with no phones.`,
-
-        `${a.name} has been put in charge of the entire company for 24 hours.`,
-
-        `${a.name} and ${b.name} must cook dinner for 100 people.`,
-
-        `${a.name} has been asked to host a trivia show despite knowing nothing about the subject.`,
-
-        `${a.name} and ${b.name} have been sent on a road trip with no itinerary.`,
-
-        `${a.name} has accidentally created a new show and it is now the company's biggest hit.`,
-
-        `${a.name} has challenged ${b.name} to a completely unnecessary competition.`
-
-    ];
-
-    const result =
-        situations[Math.floor(Math.random()*situations.length)];
-
-    document.getElementById("randomResult").innerHTML = `
-
-        <h2>🚨 RANDOM EVENT</h2>
-
-        <p>${result}</p>
-
-        <br>
-
-        <p style="color:#777;">
-            Predicted chaos level:
-            <strong style="color:#ff5555;">
-                ${Math.floor(Math.random()*41)+60}/100
-            </strong>
-        </p>
-
-    `;
-
-}
-
-/* =====================================================
-   PLAYER DATABASE
-===================================================== */
-
-function renderPlayers() {
-
-    document.getElementById("content").innerHTML = `
-
-    <h1 class="page-title">🃏 Personalities</h1>
-
-    <p class="page-subtitle">
-        The database currently contains ${players.length} personalities.
-    </p>
-
-    <div class="toolbar">
-
-        <input
-            class="search"
-            placeholder="Search name..."
-            oninput="filterPlayers()"
-            id="playerSearch"
-        >
-
-        <select
-            class="filter"
-            id="cityFilter"
-            onchange="filterPlayers()">
-
-            <option value="all">All Cities</option>
-            <option value="Chicago">Chicago</option>
-            <option value="New York">New York</option>
-            <option value="Other">Other</option>
-
-        </select>
-
-        <select
-            class="filter"
-            id="roleFilter"
-            onchange="filterPlayers()">
-
-            <option value="all">All Roles</option>
-            <option value="Host">Host</option>
-            <option value="Personality">Personality</option>
-            <option value="Competitor">Competitor</option>
-            <option value="Producer">Producer</option>
-            <option value="Wildcard">Wildcard</option>
-            <option value="Athlete">Athlete</option>
-
-        </select>
-
-    </div>
-
-    <div class="player-grid" id="playerGrid">
-
-        ${playerCards(players)}
-
-    </div>
-
-    `;
-
-}
-
-function playerCards(list) {
-
-    return list.map((player,index)=>`
-
-        <div class="player-card"
-             onclick="openPlayer(${players.indexOf(player)})">
-
-            <div class="player-image">
-                ${getInitials(player.name)}
-            </div>
-
-            <div class="player-info">
-
-                <div class="player-name">
-                    ${player.name}
-                </div>
-
-                <div class="player-role">
-                    ${player.role}
-                </div>
-
-                <div class="player-bottom">
-
-                    <div>
-                        <div class="ovr">${player.overall}</div>
-                        <div class="ovr-label">OVR</div>
-                    </div>
-
-                    <div style="text-align:right;">
-                        <div style="color:#aaa;font-size:11px;">
-                            ${player.city}
-                        </div>
-
-                        <div style="color:#777;font-size:10px;">
-                            ${player.era}
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="tags">
-
-                    ${player.tags.slice(0,3)
-                        .map(tag=>`<span class="tag">${tag}</span>`)
-                        .join("")}
-
-                </div>
-
-            </div>
-
-        </div>
-
-    `).join("");
-
-}
-
-function filterPlayers() {
-
-    const search =
-        document.getElementById("playerSearch").value.toLowerCase();
-
-    const city =
-        document.getElementById("cityFilter").value;
-
-    const role =
-        document.getElementById("roleFilter").value;
-
-    const filtered = players.filter(player => {
-
-        const matchesSearch =
-            player.name.toLowerCase().includes(search);
-
-        const matchesCity =
-            city === "all" || player.city === city;
-
-        const matchesRole =
-            role === "all" || player.role.includes(role);
-
-        return matchesSearch && matchesCity && matchesRole;
-
-    });
-
-    document.getElementById("playerGrid").innerHTML =
-        playerCards(filtered);
-
-}
-
-function getInitials(name) {
+function initials(name) {
 
     return name
         .split(" ")
-        .map(word=>word[0])
+        .map(word => word[0])
         .join("")
-        .slice(0,3)
+        .slice(0, 2)
         .toUpperCase();
 
 }
 
-/* =====================================================
-   MAP
-===================================================== */
 
-function renderMap() {
+function personCard(person) {
 
-    document.getElementById("content").innerHTML = `
+    return `
+        <div class="card person-card" onclick="openProfile('${person.name}')">
 
-    <h1 class="page-title">🗺️ Stool Universe</h1>
+            <div class="person-photo">
 
-    <p class="page-subtitle">
-        Explore locations, personalities, shows, and secrets.
-    </p>
+                ${
+                    person.image
+                    ? `<img src="${person.image}" alt="${person.name}">`
+                    : `<div class="photo-placeholder">${initials(person.name)}</div>`
+                }
 
-    <div class="map">
+            </div>
 
-        <div class="map-title">
-            STOOL UNIVERSE // INTERACTIVE MAP
+            <div class="role">${person.role}</div>
+
+            <h3>${person.name}</h3>
+
+            <div style="color:var(--muted);font-size:13px;">
+                ${person.bio || ""}
+            </div>
+
+            <div class="tags">
+
+                ${
+                    person.tags
+                    .slice(0, 4)
+                    .map(tag => `<span class="tag">${tag}</span>`)
+                    .join("")
+                }
+
+            </div>
+
         </div>
-
-        <div class="map-line" style="left:32%;top:39%;width:40%;transform:rotate(-7deg);"></div>
-        <div class="map-line" style="left:72%;top:35%;width:18%;transform:rotate(-25deg);"></div>
-        <div class="map-line" style="left:68%;top:50%;width:10%;transform:rotate(-45deg);"></div>
-
-        <div class="location chicago" onclick="openLocation('Chicago')">
-            <div class="location-dot"></div>
-            <div class="location-name">CHICAGO</div>
-            <div class="location-count">${players.filter(p=>p.city==="Chicago").length} personalities</div>
-        </div>
-
-        <div class="location new-york" onclick="openLocation('New York')">
-            <div class="location-dot"></div>
-            <div class="location-name">NEW YORK</div>
-            <div class="location-count">${players.filter(p=>p.city==="New York").length} personalities</div>
-        </div>
-
-        <div class="location philly" onclick="openLocation('Philadelphia')">
-            <div class="location-dot"></div>
-            <div class="location-name">PHILLY</div>
-            <div class="location-count">???</div>
-        </div>
-
-        <div class="location boston" onclick="openLocation('Boston')">
-            <div class="location-dot"></div>
-            <div class="location-name">BOSTON</div>
-            <div class="location-count">???</div>
-        </div>
-
-        <div class="location las-vegas" onclick="openLocation('Las Vegas')">
-            <div class="location-dot"></div>
-            <div class="location-name">LAS VEGAS</div>
-            <div class="location-count">SECRET LOCATION</div>
-        </div>
-
-        <div class="location other" onclick="openLocation('The Unknown')">
-            <div class="location-dot"></div>
-            <div class="location-name">THE UNKNOWN</div>
-            <div class="location-count">???</div>
-        </div>
-
-    </div>
-
     `;
 
 }
 
-function openLocation(location) {
 
-    const locationPlayers =
-        players.filter(p=>p.city===location);
+function renderFeatured() {
 
-    let text = "";
+    const featured = personalities.slice(0, 8);
 
-    if(locationPlayers.length > 0) {
+    document.getElementById("featuredPeople").innerHTML =
+        featured.map(personCard).join("");
 
-        text = `
+}
 
-        <p style="color:#aaa;margin-bottom:15px;">
-            ${locationPlayers.length} personalities connected to this location.
-        </p>
 
-        <div class="tags">
+function renderPeople() {
 
-            ${locationPlayers
-                .slice(0,20)
-                .map(p=>`<span class="tag">${p.name}</span>`)
-                .join("")}
+    const search =
+        document
+        .getElementById("personSearch")
+        .value
+        .toLowerCase();
 
-        </div>
+    const filtered = personalities.filter(person => {
 
-        `;
+        const searchable = [
 
-    } else {
+            person.name,
+            ...(person.aliases || []),
+            person.role,
+            person.college,
+            person.hometown,
+            ...(person.tags || []),
+            ...(person.shows || [])
 
-        text = `
+        ]
+        .join(" ")
+        .toLowerCase();
 
-        <p style="color:#aaa;">
-            This location is either undiscovered, classified, or completely made up.
-        </p>
+        return searchable.includes(search);
 
-        <br>
+    });
 
-        <p style="color:#777;">
-            There may be an Easter Egg here.
-        </p>
+    document.getElementById("peopleGrid").innerHTML =
 
-        `;
+        filtered.length
+        ? filtered.map(personCard).join("")
+        : `<div class="empty">No personalities found.</div>`;
 
-    }
+}
 
-    document.getElementById("modalContent").innerHTML = `
 
-        <div class="modal-top">
+function openProfile(name) {
+
+    const person =
+        personalities.find(p => p.name === name);
+
+    if (!person) return;
+
+    const career = person.career || [];
+    const funny = person.funnyMoments || [];
+
+    document.getElementById("profileContent").innerHTML = `
+
+        <div class="profile-header">
+
+            <div class="profile-photo">
+
+                ${
+                    person.image
+                    ? `<img src="${person.image}" alt="${person.name}">`
+                    : `<div class="photo-placeholder">${initials(person.name)}</div>`
+                }
+
+            </div>
 
             <div>
-                <h2>📍 ${location}</h2>
-                <p style="color:#777;margin-top:5px;">
-                    STOOL UNIVERSE LOCATION
-                </p>
-            </div>
 
-            <button class="close" onclick="closeModal()">×</button>
+                <div class="profile-subtitle">
+                    ${person.role}
+                </div>
 
-        </div>
+                <h1 class="profile-name">
+                    ${person.name}
+                </h1>
 
-        ${text}
-
-    `;
-
-    document.getElementById("modal").style.display = "flex";
-
-}
-
-/* =====================================================
-   MEDICAL CENTER
-===================================================== */
-
-function renderMedical() {
-
-    const injuries = [
-
-        {
-            person:"Mintzy",
-            injury:"Ankle",
-            severity:"LEGENDARY",
-            description:"A historic injury with a level of cultural significance far beyond its medical importance."
-        },
-
-        {
-            person:"WSD",
-            injury:"Unknown",
-            severity:"QUESTIONABLE",
-            description:"The injury occurred during an activity that should not have caused an injury."
-        },
-
-        {
-            person:"Brandon Walker",
-            injury:"Back / Various",
-            severity:"VETERAN",
-            description:"The body has seen things. The takes remain strong."
-        },
-
-        {
-            person:"Rico Bosco",
-            injury:"Emotional",
-            severity:"DAY-TO-DAY",
-            description:"Status is dependent on the results of the latest Pick Em."
-        },
-
-        {
-            person:"Frank The Tank",
-            injury:"Chicago",
-            severity:"CHRONIC",
-            description:"Not technically an injury, but somehow still listed on the report."
-        },
-
-        {
-            person:"Jerry",
-            injury:"Unknown",
-            severity:"MYSTERIOUS",
-            description:"Nobody knows what happened. Jerry may not know what happened."
-        }
-
-    ];
-
-    document.getElementById("content").innerHTML = `
-
-    <h1 class="page-title">🏥 Barstool Medical Center</h1>
-
-    <p class="page-subtitle">
-        The injury report has become unnecessarily complicated.
-    </p>
-
-    <div class="injury-grid">
-
-        ${injuries.map(injury=>`
-
-            <div class="injury-card">
-
-                <h3>${injury.person}</h3>
-
-                <p>
-                    <strong>${injury.injury}</strong>
+                <p style="color:#bbb;line-height:1.7;">
+                    ${person.bio || ""}
                 </p>
 
-                <p style="margin-top:10px;">
-                    ${injury.description}
-                </p>
+                <div class="tags">
 
-                <span class="injury-badge">
-                    ${injury.severity}
-                </span>
+                    ${
+                        person.tags
+                        .map(tag => `<span class="tag">${tag}</span>`)
+                        .join("")
+                    }
 
-            </div>
+                </div>
 
-        `).join("")}
+                <div class="info-grid">
 
-    </div>
+                    <div class="info-box">
+                        <label>College</label>
+                        ${person.college || "Unknown"}
+                    </div>
 
-    <br>
+                    <div class="info-box">
+                        <label>Hometown</label>
+                        ${person.hometown || "Unknown"}
+                    </div>
 
-    <div class="panel">
+                    <div class="info-box">
+                        <label>Shows</label>
+                        ${(person.shows || []).join(", ") || "None listed"}
+                    </div>
 
-        <h2>🩺 OPERATING ROOM</h2>
+                </div>
 
-        <p style="color:#888;margin:10px 0 18px;">
-            Select a patient. Perform a completely unnecessary procedure.
-        </p>
-
-        <select class="filter" id="operationPatient">
-
-            ${players.slice(0,20)
-                .map(p=>`<option>${p.name}</option>`)
-                .join("")}
-
-        </select>
-
-        <br><br>
-
-        <button class="primary-btn" onclick="performOperation()">
-            PERFORM OPERATION
-        </button>
-
-        <div id="operationResult"></div>
-
-    </div>
-
-    `;
-
-}
-
-function performOperation() {
-
-    const patient =
-        document.getElementById("operationPatient").value;
-
-    const results = [
-
-        "SUCCESS. The patient is somehow worse but technically alive.",
-
-        "SUCCESS. +5 Toughness. -10 Medical Knowledge.",
-
-        "FAILURE. The wrong body part was operated on.",
-
-        "SUCCESS. The injury has been upgraded to legendary status.",
-
-        "PROCEDURE COMPLETE. Nobody knows what was actually done.",
-
-        "THE OPERATION HAS CREATED A NEW EASTER EGG."
-
-    ];
-
-    const result =
-        results[Math.floor(Math.random()*results.length)];
-
-    document.getElementById("operationResult").innerHTML = `
-
-        <div class="result-box">
-
-            <h2>${patient}</h2>
-
-            <p style="margin-top:10px;color:#bbb;">
-                ${result}
-            </p>
-
-        </div>
-
-    `;
-
-}
-
-/* =====================================================
-   HALL OF FAME
-===================================================== */
-
-function renderHall() {
-
-    document.getElementById("content").innerHTML = `
-
-    <h1 class="page-title">🏆 Hall of Fame</h1>
-
-    <p class="page-subtitle">
-        The greatest achievements in your Stool Dynasty.
-    </p>
-
-    <div class="panel">
-
-        <h2>YOUR DYNASTY RECORD</h2>
-
-        <br>
-
-        <div class="detail-grid">
-
-            <div class="detail-stat">
-                <span>SHOWS CREATED</span>
-                ${state.shows.length}
-            </div>
-
-            <div class="detail-stat">
-                <span>BEST SHOW</span>
-                ${
-                    state.shows.length
-                    ?
-                    Math.max(...state.shows.map(s=>s.overall))
-                    :
-                    "N/A"
-                }
-            </div>
-
-            <div class="detail-stat">
-                <span>TOTAL FANS</span>
-                ${state.fans.toLocaleString()}
-            </div>
-
-            <div class="detail-stat">
-                <span>SECRET DISCOVERIES</span>
-                ${state.easterEggs.length}
             </div>
 
         </div>
 
-    </div>
 
-    <br>
+        <div class="section-title">
+            <h2>Career Timeline</h2>
+        </div>
 
-    <h2 class="section-title">📺 Greatest Shows</h2>
+        <div class="timeline">
 
-    <div class="player-grid">
+            ${
+                career.length
+                ? career.map(item => `
 
-        ${
-            state.shows.length === 0
-            ?
-            `<div class="panel">
-                Nothing here yet.
-            </div>`
-            :
-            state.shows
-                .sort((a,b)=>b.overall-a.overall)
-                .map(show=>`
+                    <div class="timeline-item">
 
-                    <div class="panel">
-
-                        <h2>${show.name}</h2>
-
-                        <p style="color:#888;margin:8px 0;">
-                            ${show.format}
-                        </p>
-
-                        <div class="result-score">
-                            ${show.overall}
+                        <div class="timeline-year">
+                            ${item.year}
                         </div>
 
-                        <p>OVR</p>
+                        <h3>
+                            ${item.title}
+                        </h3>
+
+                        <p style="color:#aaa;">
+                            ${item.description}
+                        </p>
 
                     </div>
 
-                `)
-                .join("")
+                `).join("")
+                : `<div class="empty">More moments coming soon.</div>`
+            }
+
+        </div>
+
+
+        <div class="section-title">
+            <h2>Funny / Iconic Moments</h2>
+        </div>
+
+        ${
+            funny.length
+            ? funny.map(moment => `
+
+                <div class="moment">
+
+                    <h3>
+                        ${moment.title}
+                    </h3>
+
+                    <p>
+                        ${moment.description}
+                    </p>
+
+                    <div class="moment-meta">
+                        📍 ${moment.location || "Unknown"}
+                    </div>
+
+                </div>
+
+            `).join("")
+            : `<div class="empty">No moments added yet.</div>`
         }
 
-    </div>
+
+        <div class="section-title">
+            <h2>Connections</h2>
+        </div>
+
+        <div class="grid">
+
+            ${
+                (person.connections || []).map(connection => {
+
+                    const connected =
+                        personalities.find(p => p.name === connection);
+
+                    return connected
+                    ? personCard(connected)
+                    : "";
+
+                }).join("")
+
+            }
+
+        </div>
 
     `;
 
+    showPage("profile");
+
 }
 
+
+function randomPerson() {
+
+    const random =
+        personalities[
+            Math.floor(Math.random() * personalities.length)
+        ];
+
+    openProfile(random.name);
+
+}
+
+
 /* =====================================================
-   PLAYER MODAL
+    SHOW BUILDER
 ===================================================== */
 
-function openPlayer(index) {
+let selectedCast = [];
 
-    const player = players[index];
 
-    document.getElementById("modalContent").innerHTML = `
+function showCastSuggestions() {
 
-        <div class="modal-top">
+    const query =
+        document
+        .getElementById("castSearch")
+        .value
+        .toLowerCase();
 
-            <div>
+    if (!query) {
 
-                <h2>${player.name}</h2>
+        document.getElementById("castSuggestions").innerHTML = "";
 
-                <p style="color:#888;margin-top:5px;">
-                    ${player.role} • ${player.city}
-                </p>
+        return;
+
+    }
+
+    const matches =
+        personalities
+        .filter(person => {
+
+            return person.name
+                .toLowerCase()
+                .includes(query);
+
+        })
+        .slice(0, 8);
+
+    document.getElementById("castSuggestions").innerHTML =
+
+        matches.map(person => `
+
+            <button
+                class="secondary-btn"
+                style="margin:5px 5px 0 0;"
+                onclick="addCast('${person.name}')">
+
+                ${person.name}
+
+            </button>
+
+        `).join("");
+
+}
+
+
+function addCast(name) {
+
+    if (!selectedCast.includes(name)) {
+
+        selectedCast.push(name);
+
+    }
+
+    document
+    .getElementById("castSearch")
+    .value = "";
+
+    document
+    .getElementById("castSuggestions")
+    .innerHTML = "";
+
+    renderCast();
+
+}
+
+
+function removeCast(name) {
+
+    selectedCast =
+        selectedCast.filter(person => person !== name);
+
+    renderCast();
+
+}
+
+
+function renderCast() {
+
+    document.getElementById("selectedCast").innerHTML =
+
+        selectedCast.map(name => `
+
+            <div class="cast-person">
+
+                ${name}
+
+                <button
+                    onclick="removeCast('${name}')">
+
+                    ✕
+
+                </button>
 
             </div>
 
-            <button class="close" onclick="closeModal()">×</button>
+        `).join("");
 
+}
+
+
+function generateShow() {
+
+    const name =
+        document
+        .getElementById("showName")
+        .value
+        || "Untitled Show";
+
+    const format =
+        document
+        .getElementById("showFormat")
+        .value;
+
+    const result =
+        document
+        .getElementById("showResult");
+
+    if (selectedCast.length === 0) {
+
+        result.innerHTML = `
+            <h2>YOU NEED A CAST.</h2>
+            <p>Unless this is a very experimental podcast.</p>
+        `;
+
+        result.classList.add("show");
+
+        return;
+
+    }
+
+    const chaosPeople =
+        selectedCast.filter(name => {
+
+            const person =
+                personalities.find(p => p.name === name);
+
+            return person &&
+                person.tags.includes("Chaos");
+
+        }).length;
+
+    const comedyPeople =
+        selectedCast.filter(name => {
+
+            const person =
+                personalities.find(p => p.name === name);
+
+            return person &&
+                person.tags.includes("Comedy");
+
+        }).length;
+
+    const sportsPeople =
+        selectedCast.filter(name => {
+
+            const person =
+                personalities.find(p => p.name === name);
+
+            return person &&
+                person.tags.includes("Sports");
+
+        }).length;
+
+
+    let description = "";
+
+    if (chaosPeople >= 2) {
+
+        description =
+        "This show has an extremely high chance of completely losing control.";
+
+    } else if (comedyPeople >= 2) {
+
+        description =
+        "The chemistry is built around jokes, personalities and people trying to derail the conversation.";
+
+    } else if (sportsPeople >= 2) {
+
+        description =
+        "This show would probably begin with sports and eventually turn into an argument about something completely different.";
+
+    } else {
+
+        description =
+        "A completely unpredictable combination that could either be brilliant or an absolute disaster.";
+
+    }
+
+
+    const reactions = [
+
+        "STOOLIES WOULD ABSOLUTELY WATCH THIS",
+
+        "THIS WOULD BE A DISASTER — WHICH IS WHY PEOPLE WOULD WATCH",
+
+        "SOMEHOW THIS ACTUALLY MAKES SENSE",
+
+        "THIS SHOW WOULD HAVE ONE INCREDIBLE CLIP EVERY WEEK",
+
+        "THE CASTING DEPARTMENT NEEDS TO EXPLAIN THEMSELVES"
+
+    ];
+
+
+    const reaction =
+        reactions[
+            Math.floor(Math.random() * reactions.length)
+        ];
+
+
+    result.innerHTML = `
+
+        <div class="kicker">
+            YOUR SHOW
         </div>
 
-        <div style="font-size:60px;font-weight:900;color:var(--red);">
-            ${player.overall}
-        </div>
+        <h2>
+            ${name}
+        </h2>
 
-        <p style="color:#777;">
-            OVERALL RATING
+        <p style="color:var(--muted);">
+            Format: ${format}
         </p>
 
-        <br>
+        <h3>
+            CAST
+        </h3>
 
-        <div class="detail-grid">
-
-            <div class="detail-stat">
-                <span>COMEDY</span>
-                ${player.comedy}
-            </div>
-
-            <div class="detail-stat">
-                <span>SPORTS</span>
-                ${player.sports}
-            </div>
-
-            <div class="detail-stat">
-                <span>CHAOS</span>
-                ${player.chaos}
-            </div>
-
-            <div class="detail-stat">
-                <span>CHEMISTRY</span>
-                ${player.chemistry}
-            </div>
-
-            <div class="detail-stat">
-                <span>CLIP POTENTIAL</span>
-                ${player.clips}
-            </div>
-
-            <div class="detail-stat">
-                <span>KNOWLEDGE</span>
-                ${player.knowledge}
-            </div>
-
-        </div>
-
-        <br>
-
-        <h3>🎯 ABILITIES</h3>
-
-        <div class="tags">
-
-            ${player.abilities
-                .map(a=>`<span class="tag">${a}</span>`)
-                .join("")}
-
-        </div>
-
-        <br>
-
-        <h3>📺 SHOWS</h3>
-
-        <p style="color:#aaa;margin-top:8px;">
-            ${player.shows.join(" • ")}
+        <p>
+            ${selectedCast.join(" • ")}
         </p>
+
+        <h3>
+            WHAT THIS SHOW WOULD BE LIKE
+        </h3>
+
+        <p style="color:#bbb;line-height:1.6;">
+            ${description}
+        </p>
+
+        <div class="reaction">
+            ${reaction}
+        </div>
 
     `;
 
-    document.getElementById("modal").style.display = "flex";
+    result.classList.add("show");
 
 }
 
-function closeModal() {
-
-    document.getElementById("modal").style.display = "none";
-
-}
 
 /* =====================================================
-   START
+    MAP
 ===================================================== */
 
-updateTopbar();
+function showLocation(locationId) {
 
-renderDashboard();
+    const location =
+        locations[locationId];
+
+    const box =
+        document
+        .getElementById("locationInfo");
+
+    box.innerHTML = `
+
+        <div class="kicker">
+            STOOLVERSE LOCATION
+        </div>
+
+        <h2>
+            ${location.name}
+        </h2>
+
+        <p style="color:#bbb;">
+            ${location.description}
+        </p>
+
+        <h3>
+            People Connected
+        </h3>
+
+        <p>
+            ${location.people.join(" • ")}
+        </p>
+
+        <h3>
+            Moments
+        </h3>
+
+        <ul>
+
+            ${
+                location.moments
+                .map(moment => `<li>${moment}</li>`)
+                .join("")
+            }
+
+        </ul>
+
+    `;
+
+    box.classList.add("show");
+
+}
+
+
+/* =====================================================
+    START WEBSITE
+===================================================== */
+
+renderFeatured();
+
+renderPeople();
 
 </script>
 
