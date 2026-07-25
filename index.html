@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Stool Dynasty</title>
+
+<style>
+body {
+    background:#111;
+    color:white;
+    font-family:Arial, Helvetica, sans-serif;
+    margin:0;
+}
+
+header {
+    background:#d71920;
+    padding:25px;
+    text-align:center;
+    font-size:40px;
+    font-weight:bold;
+}
+
+.container {
+    padding:25px;
+}
+
+button {
+    background:#d71920;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    margin:5px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover {
+    background:#ff3138;
+}
+
+.card {
+    display:inline-block;
+    background:#222;
+    border:2px solid #444;
+    border-radius:15px;
+    width:220px;
+    margin:10px;
+    padding:15px;
+    text-align:center;
+}
+
+.card h2 {
+    color:#ff4444;
+}
+
+.stat {
+    text-align:left;
+    margin:8px;
+}
+
+.panel {
+    background:#1b1b1b;
+    border-radius:15px;
+    padding:20px;
+    margin-top:20px;
+}
+
+select {
+    padding:10px;
+    margin:10px;
+    background:#222;
+    color:white;
+    border-radius:5px;
+}
+
+.rating {
+    font-size:45px;
+    color:#00ff88;
+}
+
+.hidden {
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+🏆 STOOL DYNASTY 🏆
+</header>
+
+<div class="container">
+
+<h2>Build Your Barstool Empire</h2>
+
+<button onclick="showRoster()">Player Cards</button>
+<button onclick="showBuilder()">Build A Show</button>
+<button onclick="saveGame()">Save Franchise</button>
+
+
+<div id="content"></div>
+
+
+</div>
+
+
+<script>
+
+const players = [
+
+{
+name:"Big Cat",
+role:"Captain",
+overall:96,
+chaos:85,
+comedy:95,
+chemistry:98
+},
+
+{
+name:"Nick Turani",
+role:"Comedian",
+overall:95,
+chaos:90,
+comedy:99,
+chemistry:95
+},
+
+{
+name:"KB",
+role:"Wildcard",
+overall:94,
+chaos:98,
+comedy:99,
+chemistry:90
+},
+
+{
+name:"Brandon Walker",
+role:"Debate Machine",
+overall:91,
+chaos:80,
+comedy:92,
+chemistry:94
+},
+
+{
+name:"Mark Titus",
+role:"Analyst",
+overall:90,
+chaos:70,
+comedy:91,
+chemistry:92
+},
+
+{
+name:"TJ Hitchings",
+role:"Producer",
+overall:96,
+chaos:88,
+comedy:82,
+chemistry:97
+},
+
+{
+name:"Eddie",
+role:"Office Glue Guy",
+overall:88,
+chaos:75,
+comedy:85,
+chemistry:90
+},
+
+{
+name:"White Sox Dave",
+role:"Chaos Agent",
+overall:89,
+chaos:100,
+comedy:90,
+chemistry:80
+},
+
+{
+name:"Mintzy",
+role:"Legendary Wildcard",
+overall:87,
+chaos:100,
+comedy:85,
+chemistry:88
+},
+
+{
+name:"Chef Donny",
+role:"Food Guy",
+overall:86,
+chaos:75,
+comedy:80,
+chemistry:90
+},
+
+{
+name:"Jersey Jerry",
+role:"Wildcard",
+overall:85,
+chaos:95,
+comedy:88,
+chemistry:82
+},
+
+{
+name:"Tate",
+role:"Rising Star",
+overall:84,
+chaos:75,
+comedy:85,
+chemistry:86
+}
+
+];
+
+
+function showRoster(){
+
+let html="<div class='panel'><h1>Player Cards</h1>";
+
+players.forEach(p=>{
+
+html+=`
+
+<div class="card">
+
+<h2>${p.name}</h2>
+
+<h3>${p.role}</h3>
+
+<div class="rating">${p.overall}</div>
+
+<div class="stat">
+Comedy ⭐ ${p.comedy}
+</div>
+
+<div class="stat">
+Chaos 🔥 ${p.chaos}
+</div>
+
+<div class="stat">
+Chemistry 🤝 ${p.chemistry}
+</div>
+
+</div>
+
+`;
+
+});
+
+html+="</div>";
+
+document.getElementById("content").innerHTML=html;
+
+}
+
+
+
+function showBuilder(){
+
+let html=`
+
+<div class="panel">
+
+<h1>🎥 Build A Show</h1>
+
+<p>Select your dream lineup</p>
+
+
+Host:
+<select id="host">
+${options()}
+</select>
+
+
+Co Host:
+<select id="cohost">
+${options()}
+</select>
+
+
+Producer:
+<select id="producer">
+${options()}
+</select>
+
+
+<button onclick="createShow()">
+Create Show
+</button>
+
+
+<div id="result"></div>
+
+
+</div>
+
+`;
+
+document.getElementById("content").innerHTML=html;
+
+}
+
+
+function options(){
+
+let text="";
+
+players.forEach(p=>{
+text+=`<option>${p.name}</option>`;
+});
+
+return text;
+
+}
+
+
+function createShow(){
+
+let people=[
+
+document.getElementById("host").value,
+document.getElementById("cohost").value,
+document.getElementById("producer").value
+
+];
+
+
+let selected=players.filter(p=>people.includes(p.name));
+
+
+let score=0;
+
+selected.forEach(p=>{
+score+=p.overall;
+});
+
+score=Math.round(score/selected.length);
+
+
+document.getElementById("result").innerHTML=
+
+`
+
+<h2>Your Show:</h2>
+
+<h1>${people.join(" + ")}</h1>
+
+<div class="rating">
+${score} OVR
+</div>
+
+<p>
+Chemistry: ${score+2}<br>
+Chaos: ${score+5}<br>
+Clip Potential: ${score+3}
+</p>
+
+<h2>
+${score>90 ? "🔥 Instant Classic" : "👍 Solid Content"}
+</h2>
+
+`;
+
+}
+
+
+
+function saveGame(){
+
+localStorage.setItem(
+"stoolDynasty",
+JSON.stringify(players)
+);
+
+alert("Franchise saved!");
+
+}
+
+
+showRoster();
+
+</script>
+
+
+</body>
+</html>
