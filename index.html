@@ -3,175 +3,294 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>STOOLVERSE — The Barstool Database</title>
+<title>STOOLVERSE — The Ultimate Barstool Database</title>
 
 <style>
+
 :root{
     --red:#e3262e;
-    --red2:#ff4b52;
-    --black:#080808;
-    --dark:#101010;
-    --panel:#171717;
-    --panel2:#202020;
-    --line:#2d2d2d;
-    --gray:#909090;
+    --red-light:#ff525a;
+    --black:#070707;
+    --dark:#0d0d0d;
+    --panel:#151515;
+    --panel2:#1d1d1d;
+    --panel3:#252525;
+    --line:#303030;
+    --muted:#8d8d8d;
     --white:#f5f5f5;
+    --gold:#d6a928;
+    --green:#38b873;
 }
 
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
 
 body{
     margin:0;
     background:
-    radial-gradient(circle at 90% 0%,rgba(227,38,46,.12),transparent 28%),
-    var(--black);
+        radial-gradient(circle at 100% 0%,rgba(227,38,46,.12),transparent 25%),
+        radial-gradient(circle at 0% 100%,rgba(227,38,46,.05),transparent 25%),
+        var(--black);
     color:var(--white);
     font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh;
 }
 
-button,input,select{font:inherit}
-button{cursor:pointer}
+button,
+input,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+button:active{
+    transform:scale(.98);
+}
 
 .header{
     position:sticky;
     top:0;
-    z-index:100;
-    background:rgba(8,8,8,.96);
+    z-index:1000;
+    background:rgba(7,7,7,.96);
     border-bottom:1px solid var(--line);
-    backdrop-filter:blur(12px);
+    backdrop-filter:blur(15px);
 }
 
 .nav{
-    max-width:1600px;
+    max-width:1800px;
     margin:auto;
-    padding:16px 26px;
+    min-height:72px;
+    padding:12px 25px;
     display:flex;
     align-items:center;
-    gap:24px;
+    gap:25px;
 }
 
 .logo{
-    font-size:28px;
+    font-size:29px;
     font-weight:1000;
     letter-spacing:-2px;
     cursor:pointer;
     white-space:nowrap;
 }
 
-.logo span{color:var(--red)}
+.logo span{
+    color:var(--red);
+}
 
 .nav-links{
     display:flex;
     flex-wrap:wrap;
-    gap:5px;
+    gap:4px;
 }
 
 .nav-links button{
     border:0;
     background:transparent;
-    color:#999;
+    color:#8c8c8c;
     padding:9px 11px;
-    border-radius:6px;
-    font-weight:800;
+    border-radius:5px;
+    font-weight:900;
+    font-size:12px;
 }
 
 .nav-links button:hover,
 .nav-links button.active{
+    color:white;
     background:var(--red);
-    color:#fff;
 }
 
-.search{
+.global-search{
     margin-left:auto;
-    width:260px;
+    width:280px;
 }
 
-.search input{
+.global-search input{
     width:100%;
-    padding:11px 13px;
-    border:1px solid #333;
-    border-radius:7px;
     background:#171717;
-    color:#fff;
+    border:1px solid #363636;
+    color:white;
+    padding:11px 13px;
+    border-radius:6px;
     outline:none;
 }
 
-.search input:focus{border-color:var(--red)}
+.global-search input:focus{
+    border-color:var(--red);
+}
 
 .page{
-    max-width:1600px;
+    max-width:1800px;
     margin:auto;
-    padding:34px 26px 80px;
+    padding:35px 25px 100px;
 }
 
 .hero{
-    min-height:410px;
-    padding:58px;
+    min-height:500px;
+    padding:65px;
     border:1px solid var(--line);
     border-radius:15px;
-    overflow:hidden;
     position:relative;
+    overflow:hidden;
     background:
-    linear-gradient(110deg,rgba(227,38,46,.28),transparent 55%),
-    linear-gradient(135deg,#1d1d1d,#090909);
+        linear-gradient(115deg,rgba(227,38,46,.35),transparent 55%),
+        linear-gradient(135deg,#202020,#080808);
+}
+
+.hero:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:45px 45px;
+    opacity:.45;
 }
 
 .hero:after{
     content:"STOOLVERSE";
     position:absolute;
-    right:-30px;
-    bottom:-45px;
-    font-size:140px;
-    font-weight:1000;
+    right:-40px;
+    bottom:-60px;
     color:rgba(255,255,255,.025);
+    font-size:150px;
+    font-weight:1000;
+    letter-spacing:-10px;
 }
 
-.hero-content{position:relative;z-index:1;max-width:900px}
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:950px;
+}
 
 .kicker{
-    color:var(--red2);
-    font-size:12px;
+    color:var(--red-light);
+    font-size:11px;
     font-weight:1000;
-    letter-spacing:2px;
     text-transform:uppercase;
-    margin-bottom:14px;
+    letter-spacing:2px;
+    margin-bottom:15px;
 }
 
 h1{
-    margin:0 0 24px;
-    font-size:clamp(48px,7vw,94px);
-    line-height:.88;
-    letter-spacing:-6px;
+    margin:0 0 25px;
+    font-size:clamp(55px,8vw,115px);
+    line-height:.84;
+    letter-spacing:-8px;
 }
 
 h2{
-    font-size:32px;
     margin:0 0 18px;
+    font-size:38px;
+    letter-spacing:-2px;
 }
 
-h3{margin:0 0 10px}
+h3{
+    margin:0 0 10px;
+}
 
-.red{color:var(--red)}
+.red{
+    color:var(--red);
+}
 
 .hero p{
+    max-width:850px;
     color:#aaa;
-    font-size:18px;
-    line-height:1.6;
-    max-width:750px;
+    font-size:19px;
+    line-height:1.65;
 }
 
-.section{margin-top:42px}
+.button-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:28px;
+}
+
+.primary-btn,
+.secondary-btn,
+.gold-btn{
+    border-radius:6px;
+    padding:12px 17px;
+    font-weight:1000;
+    border:0;
+}
+
+.primary-btn{
+    background:var(--red);
+    color:white;
+}
+
+.primary-btn:hover{
+    background:var(--red-light);
+}
+
+.secondary-btn{
+    background:#242424;
+    border:1px solid #3b3b3b;
+    color:white;
+}
+
+.secondary-btn:hover{
+    border-color:var(--red);
+}
+
+.gold-btn{
+    background:var(--gold);
+    color:#111;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:12px;
+    margin-top:25px;
+}
+
+.stat{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:20px;
+    border-radius:8px;
+}
+
+.stat-number{
+    color:var(--red);
+    font-size:34px;
+    font-weight:1000;
+}
+
+.stat-label{
+    color:#777;
+    font-size:10px;
+    font-weight:1000;
+    margin-top:5px;
+}
+
+.section{
+    margin-top:48px;
+}
 
 .section-header{
     display:flex;
-    justify-content:space-between;
     align-items:end;
+    justify-content:space-between;
     gap:20px;
-    margin-bottom:18px;
+    margin-bottom:20px;
 }
 
 .section-header p{
-    color:#888;
+    color:#777;
     margin:0;
 }
 
@@ -184,16 +303,16 @@ h3{margin:0 0 10px}
 .card{
     background:var(--panel);
     border:1px solid var(--line);
-    border-radius:10px;
+    border-radius:9px;
     overflow:hidden;
     transition:.2s;
     cursor:pointer;
 }
 
 .card:hover{
-    transform:translateY(-4px);
+    transform:translateY(-5px);
     border-color:var(--red);
-    box-shadow:0 12px 35px rgba(0,0,0,.4);
+    box-shadow:0 15px 40px rgba(0,0,0,.45);
 }
 
 .card-image{
@@ -201,65 +320,47 @@ h3{margin:0 0 10px}
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:43px;
+    font-size:42px;
     font-weight:1000;
     background:
-    linear-gradient(135deg,rgba(227,38,46,.55),transparent),
-    linear-gradient(135deg,#292929,#0d0d0d);
+        linear-gradient(135deg,rgba(227,38,46,.55),transparent),
+        linear-gradient(135deg,#292929,#0c0c0c);
 }
 
-.card-body{padding:16px}
+.card-body{
+    padding:16px;
+}
 
-.card-body h3{font-size:19px}
+.card-body h3{
+    font-size:19px;
+}
 
 .card-body p{
     color:#888;
     font-size:13px;
     line-height:1.5;
-    margin:6px 0 0;
 }
 
 .tag{
     display:inline-block;
-    background:#292929;
-    color:#bbb;
     padding:5px 8px;
     border-radius:4px;
+    background:#292929;
+    color:#aaa;
     font-size:10px;
-    font-weight:900;
+    font-weight:1000;
     text-transform:uppercase;
-    margin:4px 4px 0 0;
+    margin:3px 3px 0 0;
 }
 
 .tag.red-tag{
-    color:#ff6269;
-    background:rgba(227,38,46,.18);
+    color:#ff6870;
+    background:rgba(227,38,46,.15);
 }
 
-.stats{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:12px;
-    margin-top:28px;
-}
-
-.stat{
-    padding:20px;
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:9px;
-}
-
-.stat-number{
-    font-size:31px;
-    font-weight:1000;
-    color:var(--red);
-}
-
-.stat-label{
-    color:#888;
-    font-size:11px;
-    margin-top:5px;
+.tag.gold-tag{
+    color:#e6be45;
+    background:rgba(214,169,40,.14);
 }
 
 .controls{
@@ -272,32 +373,15 @@ h3{margin:0 0 10px}
 .controls input,
 .controls select{
     background:var(--panel);
-    color:#fff;
+    color:white;
     border:1px solid var(--line);
-    padding:11px;
+    padding:11px 12px;
     border-radius:6px;
     outline:none;
 }
 
-.primary-btn,
-.secondary-btn{
-    padding:11px 16px;
-    border-radius:6px;
-    font-weight:900;
-}
-
-.primary-btn{
-    background:var(--red);
-    color:#fff;
-    border:0;
-}
-
-.primary-btn:hover{background:#ff3038}
-
-.secondary-btn{
-    background:#242424;
-    color:#fff;
-    border:1px solid #3a3a3a;
+.controls input{
+    min-width:300px;
 }
 
 .profile{
@@ -307,53 +391,57 @@ h3{margin:0 0 10px}
     overflow:hidden;
 }
 
-.profile-top{
-    min-height:285px;
-    padding:35px;
+.profile-header{
+    min-height:310px;
+    padding:38px;
     display:flex;
     align-items:end;
+    gap:25px;
     background:
-    linear-gradient(120deg,rgba(227,38,46,.4),transparent 60%),
-    linear-gradient(135deg,#242424,#090909);
+        linear-gradient(120deg,rgba(227,38,46,.42),transparent 60%),
+        linear-gradient(135deg,#242424,#090909);
 }
 
-.profile-avatar{
-    width:150px;
-    height:150px;
-    margin-right:25px;
+.avatar{
+    width:155px;
+    height:155px;
+    flex-shrink:0;
     border-radius:10px;
     border:3px solid var(--red);
+    background:#2d2d2d;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:#2d2d2d;
-    font-size:48px;
+    font-size:46px;
     font-weight:1000;
 }
 
 .profile-name{
-    font-size:50px;
+    font-size:55px;
+    line-height:.9;
+    letter-spacing:-4px;
     font-weight:1000;
-    letter-spacing:-3px;
 }
 
 .profile-subtitle{
     color:#aaa;
-    margin-top:8px;
+    margin-top:12px;
 }
 
-.profile-body{padding:28px}
+.profile-body{
+    padding:30px;
+}
 
 .info-grid{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(4,1fr);
     gap:12px;
-    margin:20px 0;
+    margin:22px 0;
 }
 
 .info-box{
     background:#202020;
-    border:1px solid #2c2c2c;
+    border:1px solid #303030;
     border-radius:7px;
     padding:15px;
 }
@@ -364,53 +452,56 @@ h3{margin:0 0 10px}
     font-size:10px;
     font-weight:1000;
     text-transform:uppercase;
-    margin-bottom:6px;
+    margin-bottom:7px;
 }
 
-.info-box strong{font-size:15px}
+.info-box strong{
+    font-size:15px;
+}
 
 .timeline{
     border-left:2px solid var(--red);
-    padding-left:22px;
+    padding-left:24px;
 }
 
 .timeline-item{
     position:relative;
-    margin-bottom:24px;
+    margin-bottom:25px;
 }
 
 .timeline-item:before{
     content:"";
+    position:absolute;
     width:10px;
     height:10px;
-    background:var(--red);
     border-radius:50%;
-    position:absolute;
-    left:-28px;
-    top:4px;
+    background:var(--red);
+    left:-30px;
+    top:3px;
 }
 
 .timeline-year{
-    color:var(--red2);
+    color:var(--red-light);
     font-weight:1000;
     font-size:13px;
 }
 
 .timeline-text{
-    color:#bbb;
-    margin-top:4px;
+    color:#aaa;
+    margin-top:5px;
+    line-height:1.5;
 }
 
 .map{
-    height:580px;
-    border:1px solid var(--line);
-    border-radius:12px;
+    height:650px;
     position:relative;
     overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:12px;
     background:
-    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),
-    #101010;
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),
+        #111;
     background-size:45px 45px;
 }
 
@@ -418,39 +509,41 @@ h3{margin:0 0 10px}
     content:"";
     position:absolute;
     inset:0;
-    background:radial-gradient(circle at 50% 50%,rgba(227,38,46,.1),transparent 52%);
+    background:
+        radial-gradient(circle at 50% 50%,rgba(227,38,46,.15),transparent 50%);
 }
 
 .map-location{
     position:absolute;
     transform:translate(-50%,-50%);
-    cursor:pointer;
     z-index:2;
+    cursor:pointer;
+    text-align:center;
 }
 
 .map-dot{
-    width:18px;
-    height:18px;
+    width:20px;
+    height:20px;
     border-radius:50%;
-    background:var(--red);
     border:3px solid white;
-    box-shadow:0 0 20px rgba(227,38,46,.8);
+    background:var(--red);
+    box-shadow:0 0 25px rgba(227,38,46,.9);
+    margin:auto;
 }
 
 .map-label{
+    margin-top:8px;
     white-space:nowrap;
     background:#111;
     border:1px solid #444;
-    padding:6px 8px;
+    padding:6px 9px;
     border-radius:5px;
     font-size:11px;
-    margin-top:6px;
-    transform:translateX(-30%);
 }
 
-.sandbox{
+.sandbox-layout{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:350px 1fr;
     gap:20px;
 }
 
@@ -461,120 +554,199 @@ h3{margin:0 0 10px}
     padding:22px;
 }
 
-.person-select{
+.cast-list{
+    max-height:630px;
+    overflow-y:auto;
+}
+
+.cast-person{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    background:#222;
-    border:1px solid #333;
-    padding:11px;
-    margin-bottom:8px;
+    gap:10px;
+    padding:10px;
+    margin-bottom:7px;
+    background:#202020;
+    border:1px solid #303030;
     border-radius:6px;
 }
 
-.person-select button{
+.cast-person button{
     background:var(--red);
     color:white;
     border:0;
+    padding:5px 9px;
     border-radius:4px;
-    padding:5px 8px;
     font-weight:1000;
 }
 
 .show-preview{
-    min-height:390px;
-    padding:25px;
-    border:1px solid #292929;
-    border-radius:8px;
+    min-height:620px;
+    padding:28px;
+    border:1px solid #303030;
+    border-radius:9px;
     background:
-    linear-gradient(135deg,rgba(227,38,46,.25),transparent),
-    #0d0d0d;
+        linear-gradient(135deg,rgba(227,38,46,.25),transparent),
+        #0c0c0c;
 }
 
 .role{
-    border-left:3px solid var(--red);
-    background:#1a1a1a;
-    padding:11px 14px;
+    padding:14px;
     margin:10px 0;
+    border-left:3px solid var(--red);
+    background:#1b1b1b;
+}
+
+.role strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.role span{
+    color:#aaa;
+    font-size:13px;
 }
 
 .trivia-box{
-    max-width:900px;
-    padding:30px;
-    background:var(--panel);
+    max-width:1000px;
+    padding:35px;
     border:1px solid var(--line);
-    border-radius:10px;
+    border-radius:12px;
+    background:var(--panel);
 }
 
 .question{
-    font-size:24px;
-    font-weight:900;
-    margin-bottom:20px;
+    font-size:28px;
+    font-weight:1000;
+    margin-bottom:25px;
 }
 
 .answers{
     display:grid;
+    grid-template-columns:1fr 1fr;
     gap:10px;
 }
 
 .answer{
     text-align:left;
-    padding:14px;
     background:#242424;
-    color:#fff;
-    border:1px solid #383838;
+    color:white;
+    border:1px solid #3a3a3a;
     border-radius:6px;
+    padding:16px;
 }
 
-.answer:hover{border-color:var(--red)}
+.answer:hover{
+    border-color:var(--red);
+}
+
+.lore-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:16px;
+}
 
 .lore-card{
-    padding:20px;
+    padding:23px;
+    border:1px solid #4c2020;
     border-radius:10px;
-    border:1px solid #492020;
-    background:linear-gradient(135deg,#211010,#171717);
+    background:
+        linear-gradient(135deg,#251010,#161616);
 }
 
-.lore-card h3{color:#ff4b53}
+.lore-card h3{
+    color:#ff5a61;
+}
+
+.leaderboard{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.leader-row{
+    display:grid;
+    grid-template-columns:60px 1fr 150px;
+    align-items:center;
+    padding:16px 20px;
+    border-bottom:1px solid #292929;
+}
+
+.leader-row:last-child{
+    border-bottom:0;
+}
+
+.rank{
+    color:var(--red);
+    font-size:23px;
+    font-weight:1000;
+}
+
+.score{
+    color:#aaa;
+    text-align:right;
+}
+
+.achievement{
+    padding:18px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:8px;
+}
+
+.achievement.unlocked{
+    border-color:var(--gold);
+    background:linear-gradient(135deg,rgba(214,169,40,.15),#151515);
+}
+
+.achievement-icon{
+    font-size:28px;
+    margin-bottom:10px;
+}
 
 .modal{
     display:none;
     position:fixed;
     inset:0;
-    z-index:500;
+    z-index:3000;
+    padding:20px;
     align-items:center;
     justify-content:center;
-    padding:20px;
-    background:rgba(0,0,0,.8);
+    background:rgba(0,0,0,.83);
 }
 
-.modal.active{display:flex}
+.modal.active{
+    display:flex;
+}
 
 .modal-content{
     position:relative;
     width:100%;
-    max-width:1000px;
-    max-height:92vh;
+    max-width:1150px;
+    max-height:94vh;
     overflow-y:auto;
-    padding:28px;
-    border-radius:12px;
+    padding:30px;
     border:1px solid #444;
+    border-radius:12px;
     background:#151515;
 }
 
 .close{
     position:absolute;
-    top:12px;
+    top:10px;
     right:18px;
-    font-size:27px;
     color:#888;
+    font-size:30px;
     cursor:pointer;
 }
 
-.close:hover{color:white}
+.close:hover{
+    color:white;
+}
 
 .empty{
-    padding:30px;
+    padding:35px;
     text-align:center;
     color:#777;
     border:1px dashed #333;
@@ -582,298 +754,1148 @@ h3{margin:0 0 10px}
 }
 
 .footer{
-    margin-top:70px;
-    padding-top:25px;
-    border-top:1px solid var(--line);
-    color:#666;
     text-align:center;
+    color:#555;
+    border-top:1px solid var(--line);
+    margin-top:75px;
+    padding-top:25px;
     font-size:12px;
 }
 
-.secret{
+.secret-button{
     position:fixed;
-    bottom:2px;
     right:2px;
-    width:30px;
-    height:30px;
+    bottom:2px;
+    width:28px;
+    height:28px;
     opacity:.01;
     cursor:pointer;
 }
 
-@media(max-width:1000px){
-    .nav{flex-wrap:wrap}
-    .search{
-        order:3;
-        width:100%;
-        margin-left:0;
+@media(max-width:1100px){
+
+    .stats{
+        grid-template-columns:repeat(3,1fr);
     }
-    .stats{grid-template-columns:repeat(3,1fr)}
-    .sandbox{grid-template-columns:1fr}
+
+    .sandbox-layout{
+        grid-template-columns:1fr;
+    }
+
+    .global-search{
+        width:220px;
+    }
+
 }
 
-@media(max-width:700px){
-    .stats,.info-grid{grid-template-columns:1fr 1fr}
-    .profile-top{
+@media(max-width:750px){
+
+    .nav{
+        flex-wrap:wrap;
+    }
+
+    .global-search{
+        order:3;
+        width:100%;
+    }
+
+    .hero{
+        padding:35px 24px;
+    }
+
+    .profile-header{
         flex-direction:column;
         align-items:flex-start;
     }
-    .profile-avatar{
-        margin:0 0 20px;
+
+    .profile-name{
+        font-size:40px;
     }
+
+    .info-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .answers{
+        grid-template-columns:1fr;
+    }
+
 }
 
 @media(max-width:500px){
-    .page{padding:20px 14px 50px}
-    .hero{padding:30px 22px}
-    h1{font-size:50px}
-    .stats,.info-grid{grid-template-columns:1fr}
-    .profile-name{font-size:36px}
+
+    .page{
+        padding:20px 14px 60px;
+    }
+
+    h1{
+        font-size:53px;
+    }
+
+    .stats,
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .controls input{
+        min-width:100%;
+    }
+
 }
+
 </style>
 </head>
 
 <body>
 
 <header class="header">
+
 <nav class="nav">
 
-<div class="logo" onclick="logoSecret()">STOOL<span>VERSE</span></div>
-
-<div class="nav-links">
-<button onclick="showPage('people')" id="nav-people">People</button>
-<button onclick="showPage('shows')" id="nav-shows">Shows</button>
-<button onclick="showPage('teams')" id="nav-teams">Teams</button>
-<button onclick="showPage('map')" id="nav-map">Map</button>
-<button onclick="showPage('trivia')" id="nav-trivia">Trivia</button>
-<button onclick="showPage('sandbox')" id="nav-sandbox">Sandbox</button>
-<button onclick="showPage('lore')" id="nav-lore">Lore</button>
+<div class="logo" onclick="logoClick()">
+STOOL<span>VERSE</span>
 </div>
 
-<div class="search">
-<input id="globalSearch" placeholder="Search the Stoolverse..." oninput="globalSearch(this.value)">
+<div class="nav-links">
+
+<button onclick="showPage('home')">Home</button>
+<button onclick="showPage('people')">People</button>
+<button onclick="showPage('shows')">Shows</button>
+<button onclick="showPage('teams')">Teams</button>
+<button onclick="showPage('timeline')">Timeline</button>
+<button onclick="showPage('map')">Map</button>
+<button onclick="showPage('sandbox')">Sandbox</button>
+<button onclick="showPage('trivia')">Trivia</button>
+<button onclick="showPage('lore')">Lore</button>
+<button onclick="showPage('hall')">Hall of Fame</button>
+
+</div>
+
+<div class="global-search">
+
+<input
+id="globalSearch"
+placeholder="Search the entire Stoolverse..."
+oninput="globalSearch(this.value)"
+>
+
 </div>
 
 </nav>
+
 </header>
 
 <main class="page" id="app"></main>
 
 <div class="modal" id="modal">
+
 <div class="modal-content">
+
 <div class="close" onclick="closeModal()">×</div>
+
 <div id="modalContent"></div>
-</div>
+
 </div>
 
-<div class="secret" onclick="secretClick()"></div>
+</div>
+
+<div class="secret-button" onclick="secretButton()"></div>
 
 <script>
 
-/* =========================================================
-   STOOLVERSE PEOPLE DATABASE
-   100+ PEOPLE
-========================================================= */
-
-const people = [
-
-/* FOUNDERS / LEADERSHIP */
-
-person("dave","Dave Portnoy","DP","Founder","Founder","University of Michigan","Swampscott, Massachusetts","Founder / Owner","2003","Founder of Barstool Sports and central figure in its history.",["Founder","Owner","One Bite"],["The Dave Portnoy Show","One Bite Pizza Reviews"],["Barstool Leadership"],["Big Cat","KFC","Erika Ayers"],["Founded Barstool Sports","Built One Bite Pizza Reviews","Returned to a central ownership role"],[["2003","Barstool Sports begins as a sports newspaper."],["2010s","Barstool expands into digital media."],["2020s","Portnoy becomes increasingly involved in the company's future."]]),
-
-person("erika","Erika Ayers","EA","Executive / Former CEO","Leadership","University of Massachusetts Amherst","United States","Former Executive","2016","Executive who became a major part of Barstool's corporate history.",["Leadership","Management"],[],["Barstool Leadership"],["Dave Portnoy"],["Led Barstool during a major period of expansion"],[["2016+","Becomes a major executive figure in Barstool's corporate era."]]),
-
-person("bigcat","Big Cat","BC","Personality / Host","Personality","University of Wisconsin","Chicago area","Active","2000s","One of the central personalities in the Barstool universe.",["The Yak","Pardon My Take","Host"],["Pardon My Take","The Yak","The Rundown"],["The Yak","Pardon My Take"],["PFT Commenter","KB","Nick","Brandon Walker","Dave Portnoy"],["Built Pardon My Take","Became a central Yak personality","One of the most connected people in the company"],[["2000s","Becomes a major Barstool personality."],["2016","Pardon My Take launches."],["2020s","Becomes a central figure in The Yak."]]),
-
-person("kfc","KFC","KFC","Personality / Host","Personality","Syracuse University","New York","Active","2000s","One of the earliest major Barstool personalities.",["KFC Radio","Original","Podcasting"],["KFC Radio"],["Barstool Originals"],["Dave Portnoy"],["Built a long-running podcast career","Became one of Barstool's foundational personalities"],[["2000s","Joins the early Barstool ecosystem."],["2010s+","Continues as one of the company's longest-running personalities."]]),
-
-person("pft","PFT Commenter","PFT","Personality / Host","Personality","University of Missouri","United States","Active","2016","Co-host of Pardon My Take.",["Pardon My Take","NFL","Comedy"],["Pardon My Take"],["Pardon My Take"],["Big Cat"],["Helped launch Pardon My Take","Built a distinctive sports-comedy character"],[["2016","Pardon My Take launches."],["2017+","The show becomes one of the biggest sports podcasts."]]),
-
-/* YAK / COMEDY */
-
-person("kb","KB","KB","Writer / Personality","Personality","Information to be verified","United States","Active","2010s","Writer and personality associated with the newer generation of Barstool content.",["The Yak","Writer","Comedy"],["The Yak"],["The Yak"],["Nick","Big Cat","Brandon Walker"],["Became an important Yak personality","Built a distinctive comedic identity"],[["2010s","Begins working within the Barstool ecosystem."],["2020s","Becomes an important member of The Yak."]]),
-
-person("nick","Nick","N","Personality","Personality","Information to be verified","United States","Active","2010s","Major personality associated with The Yak.",["The Yak","Comedy"],["The Yak"],["The Yak"],["KB","Big Cat"],["Became a major part of the Yak dynamic"],[["2010s+","Becomes part of the Barstool personality ecosystem."]]),
-
-person("brandon","Brandon Walker","BW","Personality / Host","Personality","Mississippi State University","Mississippi","Active","2010s","Sports personality and host.",["Sports","College Football","The Yak"],["The Yak","Pick Em"],["The Yak"],["Big Cat","KB","Nick"],["Built a major sports-media identity","Became part of the Yak ecosystem"],[["2010s","Joins the Barstool ecosystem."],["2020s","Becomes a major sports voice."]]),
-
-person("mikey","Mikey Bets","MB","Recurring Personality","Niche Personality","Information to be verified","Information to be verified","Recurring","2020s","Recognizable niche personality connected to the broader Barstool and Yak universe.",["Mikey Bets","Recurring Character","Lore"],["The Yak"],["Yak Universe"],["Green Greg","Red Bets"],["Became part of recurring Barstool lore","Connected to the Bets / Green Greg universe"],[["2020s","Becomes a recognizable recurring character."]]),
-
-person("greengreg","Green Greg","GG","Recurring Personality","Niche Personality","Information to be verified","Information to be verified","Recurring","2020s","Niche personality whose importance comes from recurring appearances and specific moments.",["Green Greg","Recurring Character","Lore"],["The Yak"],["Yak Universe"],["Mikey Bets","Red Bets"],["Became part of recurring Yak lore"],[["2020s","Becomes a recognizable recurring character."]]),
-
-person("ethan","Ethan Kamps","EK","Recurring Personality","Niche Personality","Information to be verified","Information to be verified","Recurring","2020s","Lesser-known Barstool-connected personality included because the database is intended to go deep.",["Ethan Kamps","Niche Personality","Lore"],[],[],[],[],[]),
-
-person("redbets","Red Bets","RB","Recurring Personality","Niche Personality","Information to be verified","Information to be verified","Recurring","2020s","Recurring figure connected to the Bets and Yak lore.",["Red Bets","Bets Lore","Recurring Character"],["The Yak"],["Yak Universe"],["Mikey Bets","Green Greg"],[],[]),
-
-/* MAJOR PERSONALITIES */
-
-person("rico","Rico Bosco","RB","Personality / Sports","Personality","Information to be verified","United States","Active","2010s","Sports personality known for strong opinions and memorable appearances.",["College Sports","Sports","Personality"],["Pick Em","Barstool Sportsbook Content"],["Sports Personalities"],["Brandon Walker","Big Cat"],["Became a major sports personality"],[["2010s+","Becomes a recognizable Barstool sports personality."]]),
-
-person("frank","Frank the Tank","FT","Personality","Personality","Information to be verified","New Jersey","Active / Recurring","2010s","One of Barstool's most recognizable recurring personalities.",["Frank the Tank","New Jersey","Recurring"],["The Frank the Tank Show","Various Barstool Content"],["New York / Jersey Universe"],["Dave Portnoy"],["Became one of the company's most recognizable recurring characters"],[["2010s+","Becomes a major recurring Barstool character."]]),
-
-person("dan","Dan Katz","DK","Writer / Personality","Personality","Information to be verified","Chicago","Active","2000s","The real name of Big Cat and one of the central figures in Barstool history.",["Big Cat","Pardon My Take","The Yak"],["Pardon My Take","The Yak"],["The Yak","Pardon My Take"],["PFT Commenter","Dave Portnoy"],[],[]),
-
-person("kate","Kate","K","Personality","Personality","Information to be verified","United States","Active","2020s","Personality associated with the modern Barstool ecosystem.",["Personality","Comedy"],["Various Barstool Shows"],[],[],[],[]),
-
-person("marty","Marty Mush","MM","Personality","Personality","Information to be verified","United States","Active","2010s","Personality associated with Barstool sports and entertainment content.",["Sports","Comedy"],["Various Barstool Shows"],[],["Brandon Walker"],[],[]),
-
-person("smitty","Smitty","SM","Personality / Gamer","Personality","Information to be verified","United States","Active","2010s","Longtime Barstool personality associated with gaming and content.",["Gaming","Sports"],["Gaming Content","Various Shows"],[],[],[],[]),
-
-person("feits","Feits","F","Personality","Personality","Information to be verified","United States","Active","2010s","Personality associated with KFC Radio and Barstool comedy content.",["KFC Radio","Comedy"],["KFC Radio"],["KFC Radio"],["KFC"],[],[]),
-
-person("meatball","Meatball Ron","MR","Personality","Personality","Information to be verified","United States","Active / Recurring","2020s","Recurring personality associated with the broader Barstool ecosystem.",["Recurring","Personality"],["Various Content"],[],[],[],[]),
-
-person("chaps","Chaps","C","Personality / Veteran","Personality","Information to be verified","United States","Former / Recurring","2010s","Barstool personality and veteran associated with military and sports content.",["Veteran","Sports"],["Barstool Content"],[],[],[],[]),
-
-person("gaz","Gaz","G","Personality","Personality","Information to be verified","United States","Active","2010s","Barstool personality associated with sports and entertainment content.",["Sports","Personality"],["Various Content"],[],[],[],[]),
-
-person("pat","Pat McAfee","PM","Host / Media Personality","Connected Personality","Information to be verified","United States","Connected","2010s","Major sports-media personality connected to the wider Barstool sports-media universe.",["Sports","NFL","Media"],[],[],[],[],[]),
-
-/* FORMER / EARLY / WRITERS */
-
-person("keegs","Kelly Keegs","KK","Personality / Writer","Personality","Information to be verified","United States","Former / Connected","2010s","Writer and personality associated with Barstool.",["Writer","Personality"],["Various Barstool Content"],[],[],[],[]),
-
-person("nate","Nate","N","Writer / Personality","Personality","Information to be verified","United States","Former / Connected","2010s","Writer and personality connected to Barstool's content universe.",["Writer","Personality"],["Various Content"],[],[],[],[]),
-
-person("kirk","Kirk Minihane","KM","Host / Personality","Personality","Information to be verified","Massachusetts","Former / Connected","2010s","Host and personality with a significant place in Barstool history.",["Podcast","Radio","Personality"],["The Kirk Minihane Show"],["Kirk Minihane Show"],[],[],[]),
-
-person("bri","Brianna Chickenfry","BCF","Personality / Host","Personality","Information to be verified","United States","Former / Connected","2020s","Major modern Barstool personality and host.",["Podcast","Personality","Modern Era"],["PlanBri Uncut","Various Content"],[],[],[],[]),
-
-person("alex","Alex Cooper","AC","Former Personality / Host","Former Personality","Information to be verified","United States","Former","2010s","Former Barstool personality who became a major podcast host.",["Podcast","Former Barstool"],["Call Her Daddy"],[],[],[],[]),
-
-person("josh","Josh Richards","JR","Personality / Creator","Connected Personality","Information to be verified","Canada","Connected","2020s","Creator and personality connected to the modern Barstool media universe.",["Creator","Podcast"],["BFFs"],["BFFs"],[],[],[]),
-
-person("davey","Dave Portnoy Jr. / Davey Day Trader","DDT","Personality / Character","Niche Personality","Information to be verified","United States","Recurring","2020s","A major example of Barstool's ability to create characters and recurring content arcs.",["Character","Lore"],["Davey Day Trader"],[],[],[],[]),
-
-/* SPORTS / GAMBLING / CONTENT */
-
-person("big_ev","Big Ev","BE","Personality","Personality","Information to be verified","United States","Active","2020s","Sports personality associated with Barstool's modern content ecosystem.",["Sports","Modern Era"],["Various Sports Content"],[],[],[],[]),
-
-person("glenny","Glenny Balls","GB","Personality","Personality","Information to be verified","United States","Active","2010s","Personality known for food, sports, and entertainment content.",["Food","Sports","Comedy"],["Various Content"],[],[],[],[]),
-
-person("trysta","Trysta Krick","TK","Sports Personality","Personality","Information to be verified","United States","Active / Connected","2020s","Sports personality associated with modern Barstool content.",["Sports","Basketball"],["Various Sports Content"],[],[],[],[]),
-
-person("jack","Jack Mac","JM","Sports Personality","Personality","Information to be verified","United States","Active","2020s","Sports personality associated with Barstool's modern content.",["Sports","College Sports"],["Various Sports Content"],[],[],[],[]),
-
-person("caroline","Caroline Darney","CD","Sports Personality","Personality","Information to be verified","United States","Connected","2020s","Sports writer and personality associated with Barstool content.",["Sports","Writing"],["Various Sports Content"],[],[],[],[]),
-
-person("billy","Billy Football","BF","Personality","Personality","Information to be verified","United States","Former / Connected","2010s","Personality associated with sports and entertainment content.",["Sports","Comedy"],["Pardon My Take Universe","Various Content"],[],["Big Cat","PFT Commenter"],[],[]),
-
-person("tyler","Tyler O'Day","TO","Personality","Personality","Information to be verified","United States","Connected","2020s","Barstool-connected personality.",["Personality"],["Various Content"],[],[],[],[]),
-
-person("nicktur","Nick Turani","NT","Personality","Personality","Information to be verified","United States","Active / Connected","2020s","Personality associated with Barstool content.",["Sports","Personality"],["Various Content"],[],[],[],[]),
-
-person("will","Will Compton","WC","Host / Athlete","Connected Personality","University of Nebraska","United States","Connected","2020s","Former NFL player and media personality connected to Barstool's sports universe.",["NFL","Sports","Podcast"],["Bussin' With The Boys"],["Bussin' With The Boys"],[],[],[]),
-
-person("taylor","Taylor Lewan","TL","Host / Athlete","Connected Personality","University of Michigan","United States","Connected","2020s","Former NFL player and media personality connected to the sports-media ecosystem.",["NFL","Sports","Podcast"],["Bussin' With The Boys"],["Bussin' With The Boys"],[],[],[]),
-
-/* MORE PERSONALITIES */
-
-person("michael","Michael Rapaport","MRP","Personality / Actor","Connected Personality","Information to be verified","United States","Connected","2010s","Actor and personality connected to Barstool sports content.",["Sports","Comedy","Actor"],["Various Content"],[],[],[],[]),
-
-person("jared","Jared Carrabis","JC","Baseball Personality","Personality","Information to be verified","United States","Former / Connected","2010s","Baseball personality and writer associated with Barstool history.",["Baseball","Writing"],["Baseball Content"],[],[],[],[]),
-
-person("barstoolchicago","Coley","C","Writer / Personality","Personality","Information to be verified","United States","Former / Connected","2010s","Writer and personality associated with Barstool's Chicago and sports eras.",["Sports","Writing"],["Various Content"],[],[],[],[]),
-
-person("trill","Trill Withers","TW","Host / Personality","Personality","Information to be verified","United States","Former / Connected","2010s","Podcast personality and host connected to Barstool history.",["Podcast","Comedy"],["The Trill Withers Show"],[],[],[],[]),
-
-person("shea","Shea Serrano","SS","Writer","Connected Personality","Information to be verified","United States","Former / Connected","2010s","Writer and personality connected to the sports-media universe.",["Writing","Sports"],["Various Content"],[],[],[],[]),
-
-person("casey","Casey Smith","CS","Personality","Personality","Information to be verified","United States","Connected","2020s","Barstool-connected personality.",["Personality"],["Various Content"],[],[],[],[]),
-
-person("jackie","Jackie","J","Personality","Personality","Information to be verified","United States","Connected","2020s","Barstool-connected personality.",["Personality"],["Various Content"],[],[],[],[]),
-
-person("emily","Emily Ratajkowski","ER","Guest / Connected Personality","Connected Personality","Information to be verified","United States","Guest / Connected","2020s","Connected to Barstool media through appearances and broader media relationships.",["Guest","Media"],["Various Content"],[],[],[],[]),
-
-person("nicky","Nicky Smokes","NS","Personality","Niche Personality","Information to be verified","United States","Connected","2020s","Niche personality associated with Barstool's modern creator ecosystem.",["Niche","Creator"],["Various Content"],[],[],[],[]),
-
-person("glenny2","Glenny Balls","GB","Personality","Personality","Information to be verified","United States","Active","2010s","Food and sports personality associated with Barstool.",["Food","Sports"],["Various Content"],[],[],[],[]),
-
-person("mush","Marty Mush","MM","Personality","Personality","Information to be verified","United States","Active","2010s","Sports and entertainment personality.",["Sports","Comedy"],["Various Content"],[],[],[],[]),
-
-person("johnrich","John Rich","JR","Personality","Connected Personality","Information to be verified","United States","Connected","2020s","Connected personality within Barstool's broader media universe.",["Media","Personality"],["Various Content"],[],[],[],[]),
-
-person("jake","Jake Marsh","JM","Play-by-Play / Personality","Personality","Information to be verified","United States","Active","2020s","Sports personality and play-by-play voice.",["Sports","Play-by-Play"],["College Basketball Content","Various Content"],[],[],[],[]),
-
-person("henry","Henry Lockwood","HL","Personality","Niche Personality","Information to be verified","United States","Connected","2020s","Niche Barstool-connected personality.",["Niche","Personality"],["Various Content"],[],[],[],[]),
-
-person("matt","Matt Cahill","MC","Personality","Niche Personality","Information to be verified","United States","Connected","2020s","Barstool-connected personality.",["Niche","Personality"],["Various Content"],[],[],[],[]),
-
-person("nickp","Nick Pags","NP","Personality","Personality","Information to be verified","United States","Connected","2020s","Barstool-connected personality.",["Personality"],["Various Content"],[],[],[],[]),
-
-person("matthew","Matthew Kaplan","MK","Executive / Producer","Behind The Scenes","Information to be verified","United States","Connected","2020s","Behind-the-scenes personality associated with Barstool's content operation.",["Producer","Behind The Scenes"],["Various Content"],[],[],[],[]),
-
-person("chris","Chris Klemmer","CK","Personality","Personality","Information to be verified","United States","Connected","2020s","Personality associated with modern Barstool content.",["Personality"],["Various Content"],[],[],[],[]),
-
-person("robbie","Robbie Fox","RF","Writer / Personality","Personality","Information to be verified","United States","Former / Connected","2010s","Writer and personality associated with Barstool sports content.",["Sports","Writing"],["Various Content"],[],[],[],[]),
-
-person("mike","Mike Grinnell","MG","Personality","Personality","Information to be verified","United States","Connected","2020s","Sports personality connected to Barstool content.",["Sports","Personality"],["Various Content"],[],[],[],[]),
-
-person("john","John Feitelberg","JF","Writer / Personality","Personality","Information to be verified","United States","Active","2000s","KFC Radio personality and longtime Barstool writer.",["KFC Radio","Comedy","Writing"],["KFC Radio"],["KFC Radio"],["KFC"],[],[]),
-
-person("dave2","Dave Williams","DW","Personality","Niche Personality","Information to be verified","United States","Connected","2020s","Niche Barstool-connected personality.",["Niche","Personality"],["Various Content"],[],[],[],[]),
-
-person("dan2","Dan Greenberg","DG","Writer / Personality","Personality","Information to be verified","United States","Connected","2020s","Writer and personality associated with Barstool sports content.",["Sports","Writing"],["Various Content"],[],[],[],[]),
-
-person("sam","Sam Riggs","SR","Personality","Niche Personality","Information to be verified","United States","Connected","2020s","Niche Barstool-connected personality.",["Niche","Personality"],["Various Content"],[],[],[],[]),
-
-person("marty2","Marty Mush","MM","Personality","Personality","Information to be verified","United States","Active","2010s","Sports and comedy personality.",["Sports","Comedy"],["Various Content"],[],[],[],[]),
-
-person("rachel","Rachel Bush","RB","Personality / Creator","Connected Personality","Information to be verified","United States","Connected","2020s","Creator and personality connected to the wider sports-media world.",["Sports","Creator"],["Various Content"],[],[],[],[]),
-
-person("kate2","Kate Scott","KS","Sports Personality","Connected Personality","Information to be verified","United States","Connected","2020s","Sports-media personality connected to the broader Barstool ecosystem.",["Sports","Media"],["Various Content"],[],[],[],[]),
-
-person("matthew2","Matthew Reif","MR","Creator","Connected Personality","Information to be verified","United States","Connected","2020s","Creator connected to the modern media ecosystem.",["Creator","Comedy"],["Various Content"],[],[],[],[]),
-
-person("jake2","Jake Marsh","JM","Play-by-Play","Personality","Information to be verified","United States","Active","2020s","Sports broadcaster and Barstool personality.",["Sports","Broadcasting"],["Various Sports Content"],[],[],[],[]),
-
-person("willie","Willie Colon","WC","Sports Personality","Connected Personality","Information to be verified","United States","Connected","2020s","Sports personality connected to Barstool content.",["Sports","NFL"],["Various Content"],[],[],[],[]),
-
-person("daniel","Daniel Katz","DK","Personality","Personality","Information to be verified","United States","Active","2000s","Big Cat's real-name entry in the database.",["Big Cat","Pardon My Take"],["Pardon My Take","The Yak"],["The Yak","Pardon My Take"],["PFT Commenter"],[],[]),
-
-/* ADDITIONAL DEEP-DIVE / NICHE PLACEHOLDERS */
-
-person("person101","Barstool Personality 101","101","Personality","Niche Personality","Information to be verified","Information to be verified","Connected","Various","Additional database slot reserved for a verified Barstool-connected personality.",["Niche"],["Various Content"],[],[],[],[]),
-
-person("person102","Barstool Personality 102","102","Personality","Niche Personality","Information to be verified","Information to be verified","Connected","Various","Additional database slot reserved for a verified Barstool-connected personality.",["Niche"],["Various Content"],[],[],[],[]),
-
-person("person103","Barstool Personality 103","103","Personality","Niche Personality","Information to be verified","Information to be verified","Connected","Various","Additional database slot reserved for a verified Barstool-connected personality.",["Niche"],["Various Content"],[],[],[],[]),
-
-person("person104","Barstool Personality 104","104","Personality","Niche Personality","Information to be verified","Information to be verified","Connected","Various","Additional database slot reserved for a verified Barstool-connected personality.",["Niche"],["Various Content"],[],[],[],[]),
-
-person("person105","Barstool Personality 105","105","Personality","Niche Personality","Information to be verified","Information to be verified","Connected","Various","Additional database slot reserved for a verified Barstool-connected personality.",["Niche"],["Various Content"],[],[],[],[])
+/* ============================================================
+   STOOLVERSE DATABASE ENGINE
+============================================================ */
+
+function makePerson(
+    id,
+    name,
+    initials,
+    role,
+    category,
+    school,
+    hometown,
+    status,
+    joined,
+    description,
+    tags=[],
+    shows=[],
+    teams=[],
+    connections=[],
+    moments=[],
+    timeline=[]
+){
+
+    return{
+        id,
+        name,
+        initials,
+        role,
+        category,
+        school,
+        hometown,
+        status,
+        joined,
+        description,
+        tags,
+        shows,
+        teams,
+        connections,
+        moments,
+        timeline
+    };
+
+}
+
+/* ============================================================
+   PEOPLE DATABASE
+============================================================ */
+
+const people=[
+
+makePerson(
+"dave",
+"Dave Portnoy",
+"DP",
+"Founder / Owner",
+"Founder",
+"University of Michigan",
+"Swampscott, Massachusetts",
+"Active",
+"2003",
+"Founder of Barstool Sports and one of the central figures in the entire Barstool story.",
+["Founder","Owner","One Bite","History"],
+["One Bite Pizza Reviews","The Dave Portnoy Show","The Rundown"],
+["Early Barstool","Barstool Leadership"],
+["Big Cat","KFC","Erika Ayers"],
+["Founded Barstool Sports","Created One Bite Pizza Reviews","Became one of the most important figures in the company's history"],
+[
+["2003","Barstool Sports begins as a sports newspaper."],
+["2010s","Barstool expands from newspaper into a digital media company."],
+["2020s","Portnoy becomes increasingly central to the company's ownership and future."]
+]
+),
+
+makePerson(
+"bigcat",
+"Big Cat",
+"BC",
+"Personality / Host",
+"Personality",
+"University of Wisconsin",
+"Chicago, Illinois",
+"Active",
+"2000s",
+"One of the most important personalities in the Barstool universe and a central figure in multiple shows.",
+["The Yak","Pardon My Take","Comedy","Sports"],
+["The Yak","Pardon My Take","The Rundown"],
+["The Yak","Pardon My Take"],
+["PFT Commenter","KB","Nick","Brandon Walker","Dave Portnoy"],
+["Built Pardon My Take","Became a central Yak personality","Helped define the personality-driven Barstool style"],
+[
+["2000s","Becomes one of Barstool's early major personalities."],
+["2016","Pardon My Take launches."],
+["2020s","Becomes a central figure in The Yak."]
+]
+),
+
+makePerson(
+"pft",
+"PFT Commenter",
+"PFT",
+"Personality / Host",
+"Personality",
+"University of Missouri",
+"United States",
+"Active",
+"2016",
+"Co-host of Pardon My Take and one of the most distinctive sports-comedy personalities in the company.",
+["Pardon My Take","NFL","Comedy"],
+["Pardon My Take"],
+["Pardon My Take"],
+["Big Cat","Billy Football"],
+["Helped launch Pardon My Take","Built a distinctive sports-comedy character"],
+[
+["2016","Pardon My Take launches."],
+["2017+","The show becomes one of the largest sports-comedy podcasts."]
+]
+),
+
+makePerson(
+"kfc",
+"KFC",
+"KFC",
+"Personality / Host",
+"Personality",
+"Syracuse University",
+"New York",
+"Active",
+"2000s",
+"One of the longest-running and most important personalities in Barstool history.",
+["KFC Radio","Original","Podcast"],
+["KFC Radio"],
+["KFC Radio"],
+["Feits","John Feitelberg","Dave Portnoy"],
+["Built KFC Radio","Became one of the company's foundational personalities"],
+[
+["2000s","Joins the early Barstool ecosystem."],
+["2010s+","Continues as one of Barstool's longest-running personalities."]
+]
+),
+
+makePerson(
+"kb",
+"KB",
+"KB",
+"Writer / Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Active",
+"2010s",
+"Writer and personality associated with the modern Yak universe.",
+["The Yak","Comedy","Writer"],
+["The Yak"],
+["The Yak"],
+["Nick","Big Cat","Brandon Walker"],
+["Became an important part of The Yak's chemistry"],
+[
+["2010s","Begins working within the Barstool ecosystem."],
+["2020s","Becomes an important part of The Yak."]
+]
+),
+
+makePerson(
+"nick",
+"Nick",
+"N",
+"Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Active",
+"2010s",
+"Major personality associated with The Yak and the modern Barstool comedy ecosystem.",
+["The Yak","Comedy","Lore"],
+["The Yak"],
+["The Yak"],
+["KB","Big Cat"],
+["Became one of the defining personalities of the Yak group"],
+[
+["2010s+","Becomes part of the modern Barstool personality ecosystem."]
+]
+),
+
+makePerson(
+"brandon",
+"Brandon Walker",
+"BW",
+"Personality / Host",
+"Personality",
+"Mississippi State University",
+"Mississippi",
+"Active",
+"2010s",
+"Sports personality and major member of the modern Barstool ecosystem.",
+["Sports","College Football","The Yak"],
+["The Yak","Pick Em","Various Sports Content"],
+["The Yak","Sports Picks"],
+["Big Cat","KB","Nick","Rico Bosco"],
+["Built a major sports-media identity","Became a major part of The Yak"],
+[
+["2010s","Joins the Barstool ecosystem."],
+["2020s","Becomes a major sports voice and Yak personality."]
+]
+),
+
+makePerson(
+"mikey",
+"Mikey Bets",
+"MB",
+"Recurring Personality",
+"Niche Personality",
+"Information to be verified",
+"Information to be verified",
+"Recurring",
+"2020s",
+"Recognizable recurring figure connected to the wider Bets and Yak lore.",
+["Mikey Bets","Recurring Character","Lore"],
+["The Yak"],
+["Yak Universe"],
+["Green Greg","Red Bets"],
+["Became part of recurring Barstool lore","Connected to the Bets / Green Greg universe"],
+[
+["2020s","Becomes a recognizable recurring character."]
+]
+),
+
+makePerson(
+"greengreg",
+"Green Greg",
+"GG",
+"Recurring Personality",
+"Niche Personality",
+"Information to be verified",
+"Information to be verified",
+"Recurring",
+"2020s",
+"Obscure but recognizable recurring personality whose importance comes from specific appearances and lore.",
+["Green Greg","Recurring Character","Lore"],
+["The Yak"],
+["Yak Universe"],
+["Mikey Bets","Red Bets"],
+["Became part of recurring Yak lore"],
+[
+["2020s","Becomes a recognizable recurring character."]
+]
+),
+
+makePerson(
+"ethan",
+"Ethan Kamps",
+"EK",
+"Recurring Personality",
+"Niche Personality",
+"Information to be verified",
+"Information to be verified",
+"Recurring",
+"2020s",
+"Lesser-known Barstool-connected personality included because the database goes beyond only the biggest names.",
+["Niche","Recurring","Lore"],
+[],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"redbets",
+"Red Bets",
+"RB",
+"Recurring Personality",
+"Niche Personality",
+"Information to be verified",
+"Information to be verified",
+"Recurring",
+"2020s",
+"Recurring figure connected to the Bets and Yak lore.",
+["Red Bets","Bets Lore","Recurring"],
+["The Yak"],
+["Yak Universe"],
+["Mikey Bets","Green Greg"],
+[],
+[]
+),
+
+makePerson(
+"rico",
+"Rico Bosco",
+"RB",
+"Sports Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Active",
+"2010s",
+"Sports personality known for strong opinions, memorable appearances, and a major place in Barstool sports content.",
+["College Sports","Sports","Picks"],
+["Pick Em","Various Sports Content"],
+["Sports Picks"],
+["Brandon Walker","Big Cat"],
+["Became one of the recognizable sports personalities in the company"],
+[
+["2010s+","Becomes a recognizable Barstool sports personality."]
+]
+),
+
+makePerson(
+"frank",
+"Frank the Tank",
+"FT",
+"Personality",
+"Personality",
+"Information to be verified",
+"New Jersey",
+"Active / Recurring",
+"2010s",
+"One of the most recognizable recurring characters in the Barstool universe.",
+["Frank the Tank","New Jersey","Recurring","Lore"],
+["Various Barstool Content"],
+["New York / Jersey Universe"],
+["Dave Portnoy"],
+["Became one of the company's most recognizable recurring characters"],
+[
+["2010s+","Becomes a major recurring Barstool character."]
+]
+),
+
+makePerson(
+"erika",
+"Erika Ayers",
+"EA",
+"Executive / Former CEO",
+"Leadership",
+"University of Massachusetts Amherst",
+"United States",
+"Former / Connected",
+"2016",
+"Executive who became a major part of Barstool's corporate history.",
+["Leadership","Management","History"],
+[],
+["Barstool Leadership"],
+["Dave Portnoy"],
+["Led Barstool during a major period of expansion"],
+[
+["2016+","Becomes a major executive figure in Barstool's corporate era."]
+]
+),
+
+makePerson(
+"feits",
+"Feits",
+"F",
+"Personality / Host",
+"Personality",
+"Information to be verified",
+"United States",
+"Active",
+"2010s",
+"Personality associated with KFC Radio and Barstool comedy content.",
+["KFC Radio","Comedy"],
+["KFC Radio"],
+["KFC Radio"],
+["KFC","John Feitelberg"],
+[],
+[]
+),
+
+makePerson(
+"johnfeits",
+"John Feitelberg",
+"JF",
+"Writer / Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Active",
+"2000s",
+"Longtime writer and personality associated with KFC Radio and the early Barstool universe.",
+["KFC Radio","Comedy","Writing","Original"],
+["KFC Radio"],
+["KFC Radio"],
+["KFC","Feits"],
+[],
+[]
+),
+
+makePerson(
+"marty",
+"Marty Mush",
+"MM",
+"Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Active",
+"2010s",
+"Sports and comedy personality associated with Barstool content.",
+["Sports","Comedy"],
+["Various Barstool Shows"],
+[],
+["Brandon Walker"],
+[],
+[]
+),
+
+makePerson(
+"smitty",
+"Smitty",
+"SM",
+"Personality / Gamer",
+"Personality",
+"Information to be verified",
+"United States",
+"Active",
+"2010s",
+"Longtime personality associated with gaming and sports content.",
+["Gaming","Sports"],
+["Gaming Content","Various Shows"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"billy",
+"Billy Football",
+"BF",
+"Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Former / Connected",
+"2010s",
+"Personality associated with sports, comedy, and the Pardon My Take universe.",
+["Sports","Comedy","Pardon My Take"],
+["Pardon My Take Universe","Various Content"],
+["Pardon My Take"],
+["Big Cat","PFT Commenter"],
+[],
+[]
+),
+
+makePerson(
+"bri",
+"Brianna Chickenfry",
+"BCF",
+"Personality / Host",
+"Personality",
+"Information to be verified",
+"United States",
+"Former / Connected",
+"2020s",
+"Major modern Barstool personality and podcast host.",
+["Podcast","Personality","Modern Era"],
+["PlanBri Uncut","Various Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"alex",
+"Alex Cooper",
+"AC",
+"Former Personality / Host",
+"Former Personality",
+"Information to be verified",
+"United States",
+"Former",
+"2010s",
+"Former Barstool personality who became a major podcast host.",
+["Podcast","Former Barstool"],
+["Call Her Daddy"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"jared",
+"Jared Carrabis",
+"JC",
+"Baseball Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Former / Connected",
+"2010s",
+"Baseball personality and writer associated with Barstool history.",
+["Baseball","Writing"],
+["Baseball Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"kirk",
+"Kirk Minihane",
+"KM",
+"Host / Personality",
+"Personality",
+"Information to be verified",
+"Massachusetts",
+"Former / Connected",
+"2010s",
+"Host and personality with a major place in Barstool history.",
+["Podcast","Radio","Personality"],
+["The Kirk Minihane Show"],
+["Kirk Minihane Show"],
+[],
+[],
+[]
+),
+
+makePerson(
+"big_ev",
+"Big Ev",
+"BE",
+"Sports Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Active",
+"2020s",
+"Sports personality associated with Barstool's modern content ecosystem.",
+["Sports","Modern Era"],
+["Various Sports Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"glenny",
+"Glenny Balls",
+"GB",
+"Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Active",
+"2010s",
+"Food, sports, and entertainment personality associated with Barstool.",
+["Food","Sports","Comedy"],
+["Various Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"jackmac",
+"Jack Mac",
+"JM",
+"Sports Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Active",
+"2020s",
+"Sports personality associated with modern Barstool sports content.",
+["Sports","College Sports"],
+["Various Sports Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"jake",
+"Jake Marsh",
+"JM",
+"Play-by-Play / Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Active",
+"2020s",
+"Sports broadcaster and personality associated with Barstool sports content.",
+["Sports","Broadcasting","College Basketball"],
+["Various Sports Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"robbie",
+"Robbie Fox",
+"RF",
+"Writer / Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Former / Connected",
+"2010s",
+"Writer and personality associated with Barstool sports content.",
+["Sports","Writing"],
+["Various Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"chaps",
+"Chaps",
+"C",
+"Personality / Veteran",
+"Personality",
+"Information to be verified",
+"United States",
+"Former / Connected",
+"2010s",
+"Personality associated with military and sports content.",
+["Veteran","Sports"],
+["Various Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"michael",
+"Michael Rapaport",
+"MR",
+"Actor / Personality",
+"Connected Personality",
+"Information to be verified",
+"United States",
+"Connected",
+"2010s",
+"Actor and personality connected to Barstool sports content.",
+["Sports","Comedy","Actor"],
+["Various Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"will",
+"Will Compton",
+"WC",
+"Host / Former NFL Player",
+"Connected Personality",
+"University of Nebraska",
+"United States",
+"Connected",
+"2020s",
+"Former NFL player and media personality connected to the wider sports-media universe.",
+["NFL","Sports","Podcast"],
+["Bussin' With The Boys"],
+["Bussin' With The Boys"],
+[],
+[],
+[]
+),
+
+makePerson(
+"taylor",
+"Taylor Lewan",
+"TL",
+"Host / Former NFL Player",
+"Connected Personality",
+"University of Michigan",
+"United States",
+"Connected",
+"2020s",
+"Former NFL player and media personality connected to the wider sports-media universe.",
+["NFL","Sports","Podcast"],
+["Bussin' With The Boys"],
+["Bussin' With The Boys"],
+[],
+[],
+[]
+),
+
+makePerson(
+"keegs",
+"Kelly Keegs",
+"KK",
+"Personality / Writer",
+"Personality",
+"Information to be verified",
+"United States",
+"Former / Connected",
+"2010s",
+"Writer and personality associated with Barstool.",
+["Writer","Personality"],
+["Various Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"nicky",
+"Nicky Smokes",
+"NS",
+"Personality / Creator",
+"Niche Personality",
+"Information to be verified",
+"United States",
+"Connected",
+"2020s",
+"Niche personality associated with the modern creator ecosystem.",
+["Niche","Creator","Modern Era"],
+["Various Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"trysta",
+"Trysta Krick",
+"TK",
+"Sports Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Active / Connected",
+"2020s",
+"Sports personality associated with modern sports content.",
+["Sports","Basketball"],
+["Various Sports Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"casey",
+"Casey Smith",
+"CS",
+"Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Connected",
+"2020s",
+"Barstool-connected personality.",
+["Personality"],
+["Various Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"nickturani",
+"Nick Turani",
+"NT",
+"Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Active / Connected",
+"2020s",
+"Personality associated with modern Barstool content.",
+["Sports","Personality"],
+["Various Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"dan_greenberg",
+"Dan Greenberg",
+"DG",
+"Writer / Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Connected",
+"2020s",
+"Writer and personality associated with Barstool sports content.",
+["Sports","Writing"],
+["Various Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"matt_cahill",
+"Matt Cahill",
+"MC",
+"Personality",
+"Niche Personality",
+"Information to be verified",
+"United States",
+"Connected",
+"2020s",
+"Niche Barstool-connected personality.",
+["Niche","Personality"],
+["Various Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"henry",
+"Henry Lockwood",
+"HL",
+"Personality",
+"Niche Personality",
+"Information to be verified",
+"United States",
+"Connected",
+"2020s",
+"Niche Barstool-connected personality.",
+["Niche","Personality"],
+["Various Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"mike_grinnell",
+"Mike Grinnell",
+"MG",
+"Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Connected",
+"2020s",
+"Sports personality connected to Barstool content.",
+["Sports","Personality"],
+["Various Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"meatball",
+"Meatball Ron",
+"MR",
+"Recurring Personality",
+"Personality",
+"Information to be verified",
+"United States",
+"Active / Recurring",
+"2020s",
+"Recurring personality associated with the wider Barstool ecosystem.",
+["Recurring","Personality"],
+["Various Content"],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"person_1",
+"Barstool Personality 1",
+"P1",
+"Personality",
+"Niche Personality",
+"Information to be verified",
+"Information to be verified",
+"Connected",
+"Various",
+"Reserved database slot for a verified obscure personality, employee, guest, producer, or recurring character.",
+["Niche","Deep Cut"],
+[],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"person_2",
+"Barstool Personality 2",
+"P2",
+"Personality",
+"Niche Personality",
+"Information to be verified",
+"Information to be verified",
+"Connected",
+"Various",
+"Reserved database slot for a verified obscure personality, employee, guest, producer, or recurring character.",
+["Niche","Deep Cut"],
+[],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"person_3",
+"Barstool Personality 3",
+"P3",
+"Personality",
+"Niche Personality",
+"Information to be verified",
+"Information to be verified",
+"Connected",
+"Various",
+"Reserved database slot for a verified obscure personality, employee, guest, producer, or recurring character.",
+["Niche","Deep Cut"],
+[],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"person_4",
+"Barstool Personality 4",
+"P4",
+"Personality",
+"Niche Personality",
+"Information to be verified",
+"Information to be verified",
+"Connected",
+"Various",
+"Reserved database slot for a verified obscure personality, employee, guest, producer, or recurring character.",
+["Niche","Deep Cut"],
+[],
+[],
+[],
+[],
+[]
+),
+
+makePerson(
+"person_5",
+"Barstool Personality 5",
+"P5",
+"Personality",
+"Niche Personality",
+"Information to be verified",
+"Information to be verified",
+"Connected",
+"Various",
+"Reserved database slot for a verified obscure personality, employee, guest, producer, or recurring character.",
+["Niche","Deep Cut"],
+[],
+[],
+[],
+[],
+[]
+)
 
 ];
 
-/* =========================================================
-   HELPER FOR PERSON DATA
-========================================================= */
-
-function person(id,name,initials,role,category,school,hometown,status,joined,description,tags,shows,teams,relationships,moments,timeline){
-return{
-id,name,initials,role,category,school,hometown,status,joined,description,
-background:description,
-tags,shows,teams,relationships,moments,timeline
-};
-}
-
-/* =========================================================
-   SHOWS
-========================================================= */
+/* ============================================================
+   SHOW DATABASE
+============================================================ */
 
 const shows=[
 
 {
-id:"yak",
 name:"The Yak",
 type:"Daily Comedy / Variety",
 era:"Modern Era",
-description:"A chaotic, personality-driven show built around games, bits, arguments, characters, and recurring lore.",
+description:"A chaotic personality-driven show built around games, bits, arguments, characters, recurring lore, and unpredictable chemistry.",
 members:["Big Cat","KB","Nick","Brandon Walker","Mikey Bets","Green Greg","Red Bets"],
 tags:["Comedy","Chaos","Games","Lore"]
 },
 
 {
-id:"pmt",
 name:"Pardon My Take",
 type:"Sports Comedy Podcast",
 era:"2016–Present",
@@ -883,7 +1905,6 @@ tags:["NFL","Comedy","Sports"]
 },
 
 {
-id:"kfc",
 name:"KFC Radio",
 type:"Podcast",
 era:"2010s–Present",
@@ -893,212 +1914,389 @@ tags:["Podcast","Comedy","Original"]
 },
 
 {
-id:"rundown",
 name:"The Rundown",
 type:"Comedy / Sports",
 era:"Multiple Eras",
-description:"A major Barstool format that has featured many different personalities over time.",
+description:"A major Barstool format that has featured a constantly changing combination of personalities.",
 members:["Big Cat","Dave Portnoy","Brandon Walker","Rico Bosco"],
 tags:["Comedy","Sports","History"]
 },
 
 {
-id:"bussin",
 name:"Bussin' With The Boys",
 type:"Sports Podcast",
 era:"Modern Era",
-description:"A football-focused show connected to the wider Barstool sports-media universe.",
+description:"Football-focused sports media connected to the wider Barstool ecosystem.",
 members:["Will Compton","Taylor Lewan"],
 tags:["NFL","Football","Podcast"]
 },
 
 {
-id:"pickem",
 name:"Pick Em",
-type:"Sports / Gambling",
+type:"Sports / Competition",
 era:"Modern Era",
-description:"Sports-picking content involving multiple Barstool personalities.",
+description:"Sports-picking content involving multiple personalities and competitive dynamics.",
 members:["Brandon Walker","Rico Bosco","Big Ev"],
 tags:["Sports","Picks","Competition"]
+},
+
+{
+name:"One Bite",
+type:"Food / Personality",
+era:"Multiple Eras",
+description:"Dave Portnoy's pizza review universe and one of the most recognizable recurring Barstool formats.",
+members:["Dave Portnoy"],
+tags:["Food","Pizza","Dave"]
 }
 
 ];
 
-/* =========================================================
-   TEAMS / GROUPS
-========================================================= */
+/* ============================================================
+   GROUPS
+============================================================ */
 
 const teams=[
 
 {
 name:"The Yak",
-description:"A constantly evolving group of personalities, characters, games, and lore.",
+type:"Show / Group",
+description:"A constantly evolving group of personalities, games, bits, characters, and lore.",
 members:["Big Cat","KB","Nick","Brandon Walker","Mikey Bets","Green Greg","Red Bets"]
 },
 
 {
 name:"Pardon My Take",
-description:"The core team behind one of Barstool's biggest shows.",
+type:"Show / Group",
+description:"The core group behind one of Barstool's largest shows.",
 members:["Big Cat","PFT Commenter","Billy Football"]
 },
 
 {
 name:"KFC Radio",
-description:"A long-running Barstool podcast team.",
+type:"Show / Group",
+description:"A long-running Barstool podcast group.",
 members:["KFC","Feits","John Feitelberg"]
 },
 
 {
-name:"Sportsbook / Picks Universe",
-description:"The broad collection of personalities involved in sports picks, gambling content, and competition.",
-members:["Brandon Walker","Rico Bosco","Big Ev","Jake Marsh"]
+name:"Sports Picks Universe",
+type:"Sports Group",
+description:"The broad sports-picking and competition universe.",
+members:["Brandon Walker","Rico Bosco","Big Ev"]
 },
 
 {
 name:"Early Barstool",
-description:"The early personalities who helped build the company into what it became.",
+type:"Historical Group",
+description:"The personalities who helped build the company during its early era.",
 members:["Dave Portnoy","Big Cat","KFC"]
 }
 
 ];
 
-/* =========================================================
-   MAP
-========================================================= */
+/* ============================================================
+   LOCATIONS
+============================================================ */
 
 const locations=[
 
-{name:"New York Office",x:70,y:30,description:"One of the most important centers of the modern Barstool universe."},
-
-{name:"Chicago Era",x:38,y:42,description:"A major chapter in Barstool's development and the home of major personalities and shows."},
-
-{name:"Boston Origins",x:76,y:22,description:"Connected to the company's early history."},
-
-{name:"The Yak Universe",x:53,y:62,description:"Not technically a geographic location. Still deserves a place on the map."},
-
-{name:"Sports Media Universe",x:27,y:68,description:"A conceptual location representing Barstool's enormous sports-media network."}
-
-];
-
-/* =========================================================
-   TRIVIA
-========================================================= */
-
-const triviaQuestions=[
-
 {
-question:"Who founded Barstool Sports?",
-answers:["Big Cat","Dave Portnoy","PFT Commenter","KFC"],
-correct:1
+name:"New York Office",
+x:72,
+y:25,
+description:"A major center of the modern Barstool universe."
 },
 
 {
-question:"Which show is associated with Big Cat and PFT Commenter?",
-answers:["Pardon My Take","KFC Radio","The Yak","The Rundown"],
-correct:0
+name:"Chicago Era",
+x:37,
+y:40,
+description:"A crucial chapter in the history of Barstool and the home of major personalities."
 },
 
 {
-question:"Which show is known for its group dynamic, games, and recurring lore?",
-answers:["The Yak","Pardon My Take","KFC Radio","One Bite"],
-correct:0
+name:"Boston Origins",
+x:80,
+y:18,
+description:"Connected to the company's early history."
 },
 
 {
-question:"Which personality is associated with KFC Radio?",
-answers:["KFC","PFT Commenter","Green Greg","Jake Marsh"],
-correct:0
+name:"The Yak Universe",
+x:52,
+y:62,
+description:"Not technically a geographic location. It still deserves a place on the map."
 },
 
 {
-question:"Which group includes Mikey Bets and Green Greg in the database?",
-answers:["Yak Universe","Pardon My Take","Early Barstool","Bussin'"],
-correct:0
+name:"Sports Media Universe",
+x:25,
+y:70,
+description:"A conceptual location representing Barstool's massive sports-media network."
+},
+
+{
+name:"One Bite Universe",
+x:82,
+y:76,
+description:"A conceptual location where every pizza becomes a score."
 }
 
 ];
 
-/* =========================================================
+/* ============================================================
+   TIMELINE
+============================================================ */
+
+const timeline=[
+
+["2003","Barstool Sports begins as a sports newspaper."],
+["2000s","The early Barstool personality universe begins forming."],
+["2010s","Barstool expands into a major digital media company."],
+["2010s","KFC Radio becomes a major podcast presence."],
+["2016","Pardon My Take launches."],
+["Late 2010s","Barstool's personality and podcast ecosystem expands rapidly."],
+["2020s","The Yak becomes a major center of recurring lore and personality-driven content."],
+["2020s","The company continues expanding into sports, comedy, gambling, food, and creator content."]
+];
+
+/* ============================================================
+   TRIVIA
+============================================================ */
+
+const trivia=[
+
+{
+q:"Who founded Barstool Sports?",
+a:["Big Cat","Dave Portnoy","PFT Commenter","KFC"],
+correct:1,
+difficulty:"Easy"
+},
+
+{
+q:"Which show is associated with Big Cat and PFT Commenter?",
+a:["The Yak","Pardon My Take","KFC Radio","One Bite"],
+correct:1,
+difficulty:"Easy"
+},
+
+{
+q:"Which show is known for recurring games, bits, and chaotic lore?",
+a:["The Yak","Pardon My Take","KFC Radio","Bussin'"],
+correct:0,
+difficulty:"Easy"
+},
+
+{
+q:"Which personality is associated with KFC Radio?",
+a:["PFT Commenter","KFC","Green Greg","Jake Marsh"],
+correct:1,
+difficulty:"Easy"
+},
+
+{
+q:"Which group contains Mikey Bets and Green Greg?",
+a:["The Yak Universe","Pardon My Take","Early Barstool","Sports Picks"],
+correct:0,
+difficulty:"Medium"
+},
+
+{
+q:"Which show is primarily associated with pizza reviews?",
+a:["One Bite","The Yak","KFC Radio","Pick Em"],
+correct:0,
+difficulty:"Easy"
+},
+
+{
+q:"Which two personalities host Pardon My Take?",
+a:["KFC and Feits","Big Cat and PFT Commenter","Dave and Rico","Brandon and KB"],
+correct:1,
+difficulty:"Easy"
+},
+
+{
+q:"What is the purpose of the Stoolverse?",
+a:["Track only major personalities","Create an interactive Barstool universe","Sell pizza","Replace every show"],
+correct:1,
+difficulty:"Easy"
+}
+
+];
+
+/* ============================================================
+   ACHIEVEMENTS
+============================================================ */
+
+const achievements=[
+
+{
+name:"First Click",
+icon:"🖱️",
+description:"Open your first personality profile.",
+condition:()=>state.profileViews>=1
+},
+
+{
+name:"Rabbit Hole",
+icon:"🕳️",
+description:"Enter a rabbit hole.",
+condition:()=>state.rabbitHoles>=1
+},
+
+{
+name:"Sicko",
+icon:"🧠",
+description:"Open 10 different personality profiles.",
+condition:()=>state.profileViews>=10
+},
+
+{
+name:"Yak Head",
+icon:"🦆",
+description:"Build a hypothetical show.",
+condition:()=>state.showsBuilt>=1
+},
+
+{
+name:"Historian",
+icon:"📚",
+description:"Explore the full timeline.",
+condition:()=>state.timelineViewed
+},
+
+{
+name:"Stoolie",
+icon:"🍺",
+description:"Answer 5 trivia questions.",
+condition:()=>state.triviaAnswered>=5
+},
+
+{
+name:"Deep Cut",
+icon:"🔎",
+description:"Open a niche personality.",
+condition:()=>state.nicheViews>=1
+},
+
+{
+name:"Touch Grass",
+icon:"🌱",
+description:"This achievement is impossible.",
+condition:()=>false
+}
+
+];
+
+/* ============================================================
    STATE
-========================================================= */
+============================================================ */
 
-let currentTrivia=0;
-let triviaScore=0;
-let selectedSandboxPeople=[];
+const state={
 
-/* =========================================================
+profileViews:0,
+rabbitHoles:0,
+showsBuilt:0,
+timelineViewed:false,
+triviaAnswered:0,
+nicheViews:0,
+triviaScore:0,
+currentTrivia:0,
+selectedSandbox:[],
+logoClicks:0,
+secretClicks:0
+
+};
+
+/* ============================================================
    NAVIGATION
-========================================================= */
-
-function goHome(){renderHome()}
+============================================================ */
 
 function showPage(page){
 
-document.querySelectorAll(".nav-links button")
-.forEach(b=>b.classList.remove("active"));
-
-const active=document.getElementById("nav-"+page);
-if(active)active.classList.add("active");
-
+if(page==="home")renderHome();
 if(page==="people")renderPeople();
 if(page==="shows")renderShows();
 if(page==="teams")renderTeams();
+if(page==="timeline")renderTimeline();
 if(page==="map")renderMap();
-if(page==="trivia")renderTrivia();
 if(page==="sandbox")renderSandbox();
+if(page==="trivia")renderTrivia();
 if(page==="lore")renderLore();
+if(page==="hall")renderHall();
+
+window.scrollTo(0,0);
 
 }
 
-/* =========================================================
+/* ============================================================
    HOME
-========================================================= */
+============================================================ */
 
 function renderHome(){
 
 document.getElementById("app").innerHTML=`
 
 <section class="hero">
+
 <div class="hero-content">
 
-<div class="kicker">The unofficial interactive archive</div>
+<div class="kicker">
+The unofficial interactive archive
+</div>
 
-<h1>THE ENTIRE<br><span class="red">STOOLVERSE.</span></h1>
+<h1>
+THE ENTIRE<br>
+<span class="red">STOOLVERSE.</span>
+</h1>
 
 <p>
-A massive interactive database of Barstool personalities,
-shows, teams, locations, timelines, relationships, obscure
-characters, trivia, and the lore connecting everything together.
+Not just a list of people. A massive interactive universe of
+personalities, shows, teams, offices, eras, relationships,
+deep cuts, recurring characters, trivia, hypotheticals,
+and the lore connecting everything together.
 </p>
 
-<div style="margin-top:25px;display:flex;gap:10px;flex-wrap:wrap;">
-<button class="primary-btn" onclick="showPage('people')">Explore People</button>
-<button class="secondary-btn" onclick="showPage('sandbox')">Build A Show</button>
+<div class="button-row">
+
+<button class="primary-btn" onclick="showPage('people')">
+Explore The Database
+</button>
+
+<button class="secondary-btn" onclick="showPage('sandbox')">
+Build A Show
+</button>
+
+<button class="gold-btn" onclick="randomPerson()">
+Random Stoolie
+</button>
+
 </div>
 
 </div>
+
 </section>
 
 <div class="stats">
 
 <div class="stat">
 <div class="stat-number">${people.length}+</div>
-<div class="stat-label">PEOPLE CATALOGUED</div>
+<div class="stat-label">PEOPLE</div>
 </div>
 
 <div class="stat">
-<div class="stat-number">${shows.length}+</div>
+<div class="stat-number">${shows.length}</div>
 <div class="stat-label">SHOWS</div>
 </div>
 
 <div class="stat">
-<div class="stat-number">${teams.length}+</div>
+<div class="stat-number">${teams.length}</div>
 <div class="stat-label">GROUPS</div>
 </div>
 
 <div class="stat">
-<div class="stat-number">${locations.length}+</div>
-<div class="stat-label">MAP LOCATIONS</div>
+<div class="stat-number">${locations.length}</div>
+<div class="stat-label">LOCATIONS</div>
 </div>
 
 <div class="stat">
@@ -1106,82 +2304,142 @@ characters, trivia, and the lore connecting everything together.
 <div class="stat-label">RABBIT HOLES</div>
 </div>
 
+<div class="stat">
+<div class="stat-number">${state.profileViews}</div>
+<div class="stat-label">PROFILES EXPLORED</div>
+</div>
+
 </div>
 
 <section class="section">
 
 <div class="section-header">
+
 <div>
-<h2>Start Anywhere</h2>
-<p>There is no correct way to explore the Stoolverse.</p>
+
+<h2>
+Start Anywhere
+</h2>
+
+<p>
+There is no correct way to explore the Stoolverse.
+</p>
+
 </div>
+
 </div>
 
 <div class="grid">
 
 <div class="card" onclick="showPage('people')">
+
 <div class="card-image">👤</div>
+
 <div class="card-body">
+
 <h3>People Database</h3>
-<p>From the biggest names to the most obscure recurring characters.</p>
-</div>
+
+<p>
+From Dave and Big Cat to people you forgot existed.
+</p>
+
 </div>
 
-<div class="card" onclick="showPage('shows')">
+</div>
+
+<div class="card" onclick="showPage('timeline')">
+
+<div class="card-image">⏳</div>
+
+<div class="card-body">
+
+<h3>Timeline</h3>
+
+<p>
+Follow the entire story from the beginning.
+</p>
+
+</div>
+
+</div>
+
+<div class="card" onclick="showPage('sandbox')">
+
 <div class="card-image">🎙️</div>
+
 <div class="card-body">
-<h3>Shows & Eras</h3>
-<p>Explore casts, history, members, and changing lineups.</p>
-</div>
+
+<h3>Build A Show</h3>
+
+<p>
+Put anyone together and see what happens.
+</p>
+
 </div>
 
-<div class="card" onclick="showPage('map')">
-<div class="card-image">📍</div>
-<div class="card-body">
-<h3>The Map</h3>
-<p>Explore offices, cities, eras, and conceptual locations.</p>
-</div>
 </div>
 
 <div class="card" onclick="showPage('lore')">
+
 <div class="card-image">🕳️</div>
+
 <div class="card-body">
-<h3>Lore Rabbit Holes</h3>
-<p>Follow one obscure detail into an entirely different corner of the universe.</p>
-</div>
+
+<h3>Rabbit Holes</h3>
+
+<p>
+Click one thing. Lose an hour.
+</p>
+
 </div>
 
 </div>
+
+</div>
+
 </section>
 
 <section class="section">
 
 <div class="section-header">
+
 <div>
-<h2>Featured Personalities</h2>
-<p>Big names, niche names, and everybody in between.</p>
+
+<h2>
+Featured Personalities
+</h2>
+
+<p>
+The biggest names and the deepest cuts.
+</p>
+
 </div>
 
-<button class="secondary-btn" onclick="showPage('people')">View All</button>
+<button class="secondary-btn" onclick="showPage('people')">
+View All
+</button>
+
 </div>
 
 <div class="grid">
+
 ${people.slice(0,12).map(personCard).join("")}
+
 </div>
 
 </section>
 
 <div class="footer">
-STOOLVERSE — The interactive Barstool database concept.
+STOOLVERSE — A massive interactive Barstool database concept.
 </div>
 
 `;
 
 }
 
-/* =========================================================
+/* ============================================================
    PEOPLE
-========================================================= */
+============================================================ */
 
 function personCard(p){
 
@@ -1189,18 +2447,34 @@ return`
 
 <div class="card" onclick="openPerson('${p.id}')">
 
-<div class="card-image">${p.initials}</div>
+<div class="card-image">
+${p.initials}
+</div>
 
 <div class="card-body">
 
-<h3>${p.name}</h3>
+<h3>
+${p.name}
+</h3>
 
-<span class="tag red-tag">${p.role}</span>
+<span class="tag red-tag">
+${p.role}
+</span>
 
-<p>${p.description}</p>
+<p>
+${p.description}
+</p>
 
 <div>
-${p.tags.slice(0,3).map(t=>`<span class="tag">${t}</span>`).join("")}
+
+${p.tags.slice(0,4).map(tag=>`
+
+<span class="tag">
+${tag}
+</span>
+
+`).join("")}
+
 </div>
 
 </div>
@@ -1211,43 +2485,67 @@ ${p.tags.slice(0,3).map(t=>`<span class="tag">${t}</span>`).join("")}
 
 }
 
-function renderPeople(filtered=people){
+function renderPeople(list=people){
 
 document.getElementById("app").innerHTML=`
 
-<div class="kicker">The database</div>
+<div class="kicker">
+The Database
+</div>
 
-<h2>People</h2>
+<h2>
+People
+</h2>
 
-<p style="color:#888;margin-bottom:24px;">
-Every personality, recurring character, producer, host,
-writer, guest, former employee, and piece of the universe.
+<p style="color:#888;margin-bottom:25px;">
+Every personality, recurring character, writer, host,
+guest, employee, producer, and deep cut.
 </p>
 
 <div class="controls">
 
 <input
 id="peopleSearch"
-placeholder="Search names, roles, schools, shows, lore..."
+placeholder="Search names, schools, shows, roles, lore..."
 oninput="filterPeople(this.value)"
 >
 
 <select onchange="filterCategory(this.value)">
-<option value="all">All Categories</option>
-<option value="Founder">Founder</option>
-<option value="Personality">Personality</option>
-<option value="Niche Personality">Niche Personality</option>
-<option value="Connected Personality">Connected Personality</option>
-<option value="Behind The Scenes">Behind The Scenes</option>
+
+<option value="all">
+All Categories
+</option>
+
+<option value="Founder">
+Founders
+</option>
+
+<option value="Personality">
+Personalities
+</option>
+
+<option value="Niche Personality">
+Niche Personalities
+</option>
+
+<option value="Connected Personality">
+Connected Personalities
+</option>
+
 </select>
+
+<button class="gold-btn" onclick="randomPerson()">
+Random Person
+</button>
 
 </div>
 
 <div id="peopleGrid" class="grid">
 
-${filtered.length
-?filtered.map(personCard).join("")
-:`<div class="empty">No people found.</div>`}
+${list.length
+?list.map(personCard).join("")
+:`<div class="empty">No results found.</div>`
+}
 
 </div>
 
@@ -1257,9 +2555,11 @@ ${filtered.length
 
 function filterPeople(query){
 
-const result=people.filter(p=>
+const results=people.filter(p=>{
 
-`${p.name}
+const text=`
+
+${p.name}
 ${p.role}
 ${p.category}
 ${p.school}
@@ -1268,57 +2568,95 @@ ${p.description}
 ${p.tags.join(" ")}
 ${p.shows.join(" ")}
 ${p.teams.join(" ")}
-${p.relationships.join(" ")}`
-.toLowerCase()
-.includes(query.toLowerCase())
+${p.connections.join(" ")}
 
-);
+`.toLowerCase();
+
+return text.includes(query.toLowerCase());
+
+});
 
 document.getElementById("peopleGrid").innerHTML=
 
-result.length
-?result.map(personCard).join("")
-:`<div class="empty">No people found.</div>`;
+results.length
+?results.map(personCard).join("")
+:`<div class="empty">No results found.</div>`;
 
 }
 
 function filterCategory(category){
 
-if(category==="all")return renderPeople();
+if(category==="all"){
 
-renderPeople(people.filter(p=>p.category===category));
+renderPeople();
+
+return;
 
 }
 
-/* =========================================================
+renderPeople(
+
+people.filter(p=>p.category===category)
+
+);
+
+}
+
+/* ============================================================
    PERSON PROFILE
-========================================================= */
+============================================================ */
 
 function openPerson(id){
 
 const p=people.find(x=>x.id===id);
+
 if(!p)return;
+
+state.profileViews++;
+
+if(p.category==="Niche Personality")
+state.nicheViews++;
+
+checkAchievements();
+
+const connected=p.connections
+.map(name=>people.find(x=>x.name===name))
+.filter(Boolean);
 
 document.getElementById("modalContent").innerHTML=`
 
 <div class="profile">
 
-<div class="profile-top">
+<div class="profile-header">
 
-<div class="profile-avatar">${p.initials}</div>
+<div class="avatar">
+${p.initials}
+</div>
 
 <div>
 
-<div class="kicker">${p.category}</div>
+<div class="kicker">
+${p.category}
+</div>
 
-<div class="profile-name">${p.name}</div>
+<div class="profile-name">
+${p.name}
+</div>
 
 <div class="profile-subtitle">
 ${p.role} · ${p.status}
 </div>
 
-<div style="margin-top:12px;">
-${p.tags.map(t=>`<span class="tag red-tag">${t}</span>`).join("")}
+<div style="margin-top:13px;">
+
+${p.tags.map(t=>`
+
+<span class="tag red-tag">
+${t}
+</span>
+
+`).join("")}
+
 </div>
 
 </div>
@@ -1327,95 +2665,173 @@ ${p.tags.map(t=>`<span class="tag red-tag">${t}</span>`).join("")}
 
 <div class="profile-body">
 
-<h3>Overview</h3>
+<h3>
+Who Is ${p.name}?
+</h3>
 
-<p style="color:#aaa;line-height:1.7;">
-${p.background}
+<p style="color:#aaa;line-height:1.75;">
+${p.description}
 </p>
 
 <div class="info-grid">
 
 <div class="info-box">
-<small>School</small>
-<strong>${p.school}</strong>
+
+<small>
+School
+</small>
+
+<strong>
+${p.school}
+</strong>
+
 </div>
 
 <div class="info-box">
-<small>Hometown</small>
-<strong>${p.hometown}</strong>
+
+<small>
+Hometown
+</small>
+
+<strong>
+${p.hometown}
+</strong>
+
 </div>
 
 <div class="info-box">
-<small>Joined / Emerged</small>
-<strong>${p.joined}</strong>
-</div>
+
+<small>
+Status
+</small>
+
+<strong>
+${p.status}
+</strong>
 
 </div>
 
-<h3>Shows</h3>
+<div class="info-box">
+
+<small>
+Era
+</small>
+
+<strong>
+${p.joined}
+</strong>
+
+</div>
+
+</div>
+
+<h3>
+Shows
+</h3>
 
 <p style="color:#aaa;">
 ${p.shows.length?p.shows.join(" · "):"No major show currently catalogued."}
 </p>
 
-<h3>Teams & Groups</h3>
+<h3>
+Teams & Groups
+</h3>
 
 <p style="color:#aaa;">
-${p.teams.length?p.teams.join(" · "):"No major team currently catalogued."}
+${p.teams.length?p.teams.join(" · "):"No major group currently catalogued."}
 </p>
 
-<h3>Connections</h3>
+<h3>
+Connections
+</h3>
 
-<p style="color:#aaa;">
-${p.relationships.length
-?p.relationships.map(r=>`<span class="tag">${r}</span>`).join("")
-:"Connections still being documented."}
-</p>
+<div>
 
-<h3 style="margin-top:25px;">Major Moments</h3>
+${p.connections.length
+
+?p.connections.map(c=>`
+
+<span class="tag">
+${c}
+</span>
+
+`).join("")
+
+:"No major connections currently catalogued."
+}
+
+</div>
+
+<h3 style="margin-top:28px;">
+Major Moments
+</h3>
 
 <ul style="color:#aaa;line-height:1.8;">
 
 ${p.moments.length
+
 ?p.moments.map(m=>`<li>${m}</li>`).join("")
-:"<li>More lore to be added.</li>"}
+
+:"<li>More moments are waiting to be added.</li>"
+}
 
 </ul>
 
-<h3>Career Timeline</h3>
+<h3>
+Timeline
+</h3>
 
 <div class="timeline">
 
 ${p.timeline.length
 
-?p.timeline.map(t=>`
+?p.timeline.map(item=>`
 
 <div class="timeline-item">
 
-<div class="timeline-year">${t[0]}</div>
+<div class="timeline-year">
+${item[0]}
+</div>
 
-<div class="timeline-text">${t[1]}</div>
+<div class="timeline-text">
+${item[1]}
+</div>
 
 </div>
 
 `).join("")
 
-:`<div class="timeline-text">
-Timeline still being built.
-</div>`}
+:"No timeline currently catalogued."
+}
 
 </div>
 
-<div style="margin-top:25px;display:flex;gap:10px;flex-wrap:wrap;">
+${connected.length?`
 
-<button class="primary-btn"
-onclick="rabbitHole('${p.id}')">
+<h3 style="margin-top:28px;">
+Next Connections
+</h3>
+
+<div class="grid">
+
+${connected.map(personCard).join("")}
+
+</div>
+
+`:``}
+
+<div class="button-row">
+
+<button class="primary-btn" onclick="rabbitHole('${p.id}')">
 Enter Rabbit Hole
 </button>
 
-<button class="secondary-btn"
-onclick="addToSandbox('${p.id}')">
+<button class="secondary-btn" onclick="addToSandbox('${p.id}')">
 Add To Show Sandbox
+</button>
+
+<button class="gold-btn" onclick="randomPerson()">
+Randomize
 </button>
 
 </div>
@@ -1430,21 +2846,25 @@ openModal();
 
 }
 
-/* =========================================================
+/* ============================================================
    SHOWS
-========================================================= */
+============================================================ */
 
 function renderShows(){
 
 document.getElementById("app").innerHTML=`
 
-<div class="kicker">The programming universe</div>
+<div class="kicker">
+Programming Universe
+</div>
 
-<h2>Shows</h2>
+<h2>
+Shows
+</h2>
 
 <p style="color:#888;margin-bottom:25px;">
-Explore the shows that created the personalities
-and the personalities that created the shows.
+The shows that created the personalities and the personalities
+that created the shows.
 </p>
 
 <div class="grid">
@@ -1453,20 +2873,35 @@ ${shows.map((show,i)=>`
 
 <div class="card" onclick="openShow(${i})">
 
-<div class="card-image">🎙️</div>
+<div class="card-image">
+🎙️
+</div>
 
 <div class="card-body">
 
-<h3>${show.name}</h3>
+<h3>
+${show.name}
+</h3>
 
-<span class="tag red-tag">${show.type}</span>
+<span class="tag red-tag">
+${show.type}
+</span>
 
-<p>${show.description}</p>
-
-<p style="margin-top:12px;">
-<b>${show.members.length}</b>
-catalogued members · ${show.era}
+<p>
+${show.description}
 </p>
+
+<div>
+
+${show.tags.map(t=>`
+
+<span class="tag">
+${t}
+</span>
+
+`).join("")}
+
+</div>
 
 </div>
 
@@ -1484,11 +2919,19 @@ function openShow(index){
 
 const show=shows[index];
 
+const members=show.members
+.map(name=>people.find(p=>p.name===name))
+.filter(Boolean);
+
 document.getElementById("modalContent").innerHTML=`
 
-<div class="kicker">${show.type}</div>
+<div class="kicker">
+${show.type}
+</div>
 
-<h2>${show.name}</h2>
+<h2>
+${show.name}
+</h2>
 
 <p style="color:#aaa;line-height:1.7;">
 ${show.description}
@@ -1497,35 +2940,62 @@ ${show.description}
 <div class="info-grid">
 
 <div class="info-box">
-<small>Era</small>
-<strong>${show.era}</strong>
+
+<small>
+Era
+</small>
+
+<strong>
+${show.era}
+</strong>
+
 </div>
 
 <div class="info-box">
-<small>Members</small>
-<strong>${show.members.length}</strong>
+
+<small>
+Members
+</small>
+
+<strong>
+${show.members.length}
+</strong>
+
 </div>
 
 <div class="info-box">
-<small>Tags</small>
-<strong>${show.tags.join(", ")}</strong>
-</div>
+
+<small>
+Format
+</small>
+
+<strong>
+${show.type}
+</strong>
 
 </div>
 
-<h3>Members</h3>
+<div class="info-box">
+
+<small>
+Lore Level
+</small>
+
+<strong>
+${show.name==="The Yak"?"Extreme":"High"}
+</strong>
+
+</div>
+
+</div>
+
+<h3>
+Members
+</h3>
 
 <div class="grid">
 
-${show.members.map(name=>{
-
-const p=people.find(x=>x.name===name);
-
-return p
-?personCard(p)
-:`<div class="info-box">${name}</div>`;
-
-}).join("")}
+${members.map(personCard).join("")}
 
 </div>
 
@@ -1535,17 +3005,21 @@ openModal();
 
 }
 
-/* =========================================================
+/* ============================================================
    TEAMS
-========================================================= */
+============================================================ */
 
 function renderTeams(){
 
 document.getElementById("app").innerHTML=`
 
-<div class="kicker">The crews</div>
+<div class="kicker">
+The Crews
+</div>
 
-<h2>Teams & Groups</h2>
+<h2>
+Teams & Groups
+</h2>
 
 <p style="color:#888;margin-bottom:25px;">
 Who was together, when, and why it mattered.
@@ -1557,18 +3031,32 @@ ${teams.map((team,i)=>`
 
 <div class="card" onclick="openTeam(${i})">
 
-<div class="card-image">👥</div>
+<div class="card-image">
+👥
+</div>
 
 <div class="card-body">
 
-<h3>${team.name}</h3>
+<h3>
+${team.name}
+</h3>
 
-<p>${team.description}</p>
+<span class="tag red-tag">
+${team.type}
+</span>
 
-<div style="margin-top:12px;">
+<p>
+${team.description}
+</p>
+
+<div>
 
 ${team.members.map(m=>`
-<span class="tag">${m}</span>
+
+<span class="tag">
+${m}
+</span>
+
 `).join("")}
 
 </div>
@@ -1589,29 +3077,31 @@ function openTeam(index){
 
 const team=teams[index];
 
+const members=team.members
+.map(name=>people.find(p=>p.name===name))
+.filter(Boolean);
+
 document.getElementById("modalContent").innerHTML=`
 
-<div class="kicker">Group Profile</div>
+<div class="kicker">
+${team.type}
+</div>
 
-<h2>${team.name}</h2>
+<h2>
+${team.name}
+</h2>
 
 <p style="color:#aaa;line-height:1.7;">
 ${team.description}
 </p>
 
-<h3>Members</h3>
+<h3>
+Members
+</h3>
 
 <div class="grid">
 
-${team.members.map(name=>{
-
-const p=people.find(x=>x.name===name);
-
-return p
-?personCard(p)
-:`<div class="info-box">${name}</div>`;
-
-}).join("")}
+${members.map(personCard).join("")}
 
 </div>
 
@@ -1621,20 +3111,81 @@ openModal();
 
 }
 
-/* =========================================================
+/* ============================================================
+   TIMELINE
+============================================================ */
+
+function renderTimeline(){
+
+state.timelineViewed=true;
+
+checkAchievements();
+
+document.getElementById("app").innerHTML=`
+
+<div class="kicker">
+The History
+</div>
+
+<h2>
+The Stoolverse Timeline
+</h2>
+
+<p style="color:#888;margin-bottom:30px;">
+The eras, turning points, shows, personalities, and moments
+that created the universe.
+</p>
+
+<div class="profile">
+
+<div class="profile-body">
+
+<div class="timeline">
+
+${timeline.map(item=>`
+
+<div class="timeline-item">
+
+<div class="timeline-year">
+${item[0]}
+</div>
+
+<div class="timeline-text">
+${item[1]}
+</div>
+
+</div>
+
+`).join("")}
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+/* ============================================================
    MAP
-========================================================= */
+============================================================ */
 
 function renderMap(){
 
 document.getElementById("app").innerHTML=`
 
-<div class="kicker">The physical universe</div>
+<div class="kicker">
+The Physical Universe
+</div>
 
-<h2>The Stoolverse Map</h2>
+<h2>
+The Stoolverse Map
+</h2>
 
-<p style="color:#888;margin-bottom:22px;">
-Offices, cities, eras, and locations connected to the story.
+<p style="color:#888;margin-bottom:25px;">
+Offices, cities, eras, and conceptual locations.
 </p>
 
 <div class="map">
@@ -1669,16 +3220,20 @@ const l=locations[index];
 
 document.getElementById("modalContent").innerHTML=`
 
-<div class="kicker">Map Location</div>
+<div class="kicker">
+Map Location
+</div>
 
-<h2>${l.name}</h2>
+<h2>
+${l.name}
+</h2>
 
 <p style="color:#aaa;line-height:1.7;">
 ${l.description}
 </p>
 
 <button class="primary-btn" onclick="closeModal()">
-Continue Exploring
+Keep Exploring
 </button>
 
 `;
@@ -1687,41 +3242,48 @@ openModal();
 
 }
 
-/* =========================================================
+/* ============================================================
    SHOW SANDBOX
-========================================================= */
+============================================================ */
 
 function renderSandbox(){
 
 document.getElementById("app").innerHTML=`
 
-<div class="kicker">Build the impossible</div>
+<div class="kicker">
+Build The Impossible
+</div>
 
-<h2>Show Sandbox</h2>
+<h2>
+Show Sandbox
+</h2>
 
 <p style="color:#888;margin-bottom:25px;">
-Choose personalities and create a hypothetical show.
-The site analyzes the theoretical chemistry, roles,
-chaos level, and rabbit-hole potential.
+Choose any combination of personalities and build a hypothetical
+show. The Stoolverse will calculate the chemistry.
 </p>
 
-<div class="sandbox">
+<div class="sandbox-layout">
 
 <div class="sandbox-panel">
 
-<h3>Select Personalities</h3>
+<h3>
+Choose Your Cast
+</h3>
 
 <p style="color:#777;font-size:13px;">
-Add anyone from the database.
+Add as many people as you want.
 </p>
 
-<div id="sandboxPeople">
+<div class="cast-list">
 
 ${people.map(p=>`
 
-<div class="person-select">
+<div class="cast-person">
 
-<span>${p.name}</span>
+<span>
+${p.name}
+</span>
 
 <button onclick="addToSandbox('${p.id}')">
 +
@@ -1739,7 +3301,9 @@ ${people.map(p=>`
 
 <div class="show-preview">
 
-<div class="kicker">Hypothetical Show</div>
+<div class="kicker">
+Hypothetical Show
+</div>
 
 <h2 id="sandboxTitle">
 Untitled Show
@@ -1748,20 +3312,22 @@ Untitled Show
 <div id="sandboxOutput">
 
 <p style="color:#777;">
-Add personalities to generate the show's chemistry.
+Add personalities to begin.
 </p>
 
 </div>
 
-<button class="primary-btn"
-onclick="generateShow()">
-Generate Show Dynamic
+<div class="button-row">
+
+<button class="primary-btn" onclick="generateShow()">
+Generate Show
 </button>
 
-<button class="secondary-btn"
-onclick="clearSandbox()">
+<button class="secondary-btn" onclick="clearSandbox()">
 Clear
 </button>
+
+</div>
 
 </div>
 
@@ -1777,13 +3343,13 @@ updateSandbox();
 
 function addToSandbox(id){
 
-if(!selectedSandboxPeople.includes(id))
-selectedSandboxPeople.push(id);
+if(!state.selectedSandbox.includes(id)){
 
-if(document.getElementById("sandboxOutput"))
+state.selectedSandbox.push(id);
+
+}
+
 updateSandbox();
-else
-showPage("sandbox");
 
 }
 
@@ -1793,16 +3359,18 @@ const output=document.getElementById("sandboxOutput");
 
 if(!output)return;
 
-const selected=selectedSandboxPeople
+const selected=state.selectedSandbox
 .map(id=>people.find(p=>p.id===id))
 .filter(Boolean);
 
 if(!selected.length){
 
 output.innerHTML=`
+
 <p style="color:#777;">
-Add personalities to generate the show's chemistry.
+Add personalities to begin.
 </p>
+
 `;
 
 return;
@@ -1812,25 +3380,24 @@ return;
 output.innerHTML=`
 
 <p style="color:#aaa;">
-Current cast:
+Current Cast:
 </p>
 
 ${selected.map((p,i)=>`
 
 <div class="role">
 
-<strong>${p.name}</strong>
+<strong>
+${p.name}
+</strong>
 
-<br>
-
-<span style="color:#888;">
-
+<span>
 ${i===0
-?"Likely central host / anchor"
+?"Likely central anchor"
 :i===1
-?"Primary co-host / counterbalance"
-:"Chaos agent / supporting personality"}
-
+?"Primary counterbalance"
+:"Chaos agent / supporting character"
+}
 </span>
 
 </div>
@@ -1843,29 +3410,35 @@ ${i===0
 
 function generateShow(){
 
-const selected=selectedSandboxPeople
+const selected=state.selectedSandbox
 .map(id=>people.find(p=>p.id===id))
 .filter(Boolean);
 
 if(!selected.length)return;
 
+state.showsBuilt++;
+
 const title=selected
 .map(p=>p.name.split(" ")[0])
 .join(" & ")+" Show";
 
-document.getElementById("sandboxTitle").textContent=title;
+const chaos=Math.min(100,selected.length*15+Math.floor(Math.random()*25));
 
-let chaos=Math.min(100,selected.length*17);
+const fights=Math.min(100,selected.length*11+Math.floor(Math.random()*30));
+
+const chemistry=Math.min(100,45+selected.length*9+Math.floor(Math.random()*20));
+
+document.getElementById("sandboxTitle").textContent=title;
 
 document.getElementById("sandboxOutput").innerHTML=`
 
 <div class="role">
 
-<strong>Show Identity</strong>
+<strong>
+Show Premise
+</strong>
 
-<br>
-
-<span style="color:#aaa;">
+<span>
 A personality-driven show built around
 ${selected.map(p=>p.name).join(", ")}.
 </span>
@@ -1874,39 +3447,35 @@ ${selected.map(p=>p.name).join(", ")}.
 
 <div class="role">
 
-<strong>Central Host</strong>
+<strong>
+Main Host
+</strong>
 
-<br>
-
-<span style="color:#aaa;">
+<span>
 ${selected[0].name}
-would likely become the main anchor.
 </span>
 
 </div>
 
 <div class="role">
 
-<strong>Primary Counterbalance</strong>
+<strong>
+Primary Counterbalance
+</strong>
 
-<br>
-
-<span style="color:#aaa;">
-${selected[1]
-?selected[1].name
-:"The audience"}
-would create the main contrast.
+<span>
+${selected[1]?selected[1].name:"The audience"}
 </span>
 
 </div>
 
 <div class="role">
 
-<strong>Chaos Level</strong>
+<strong>
+Chaos Level
+</strong>
 
-<br>
-
-<span style="color:#aaa;">
+<span>
 ${chaos}/100
 </span>
 
@@ -1914,76 +3483,99 @@ ${chaos}/100
 
 <div class="role">
 
-<strong>Rabbit Hole Potential</strong>
+<strong>
+Chance Of An Argument
+</strong>
 
-<br>
-
-<span style="color:#aaa;">
-${Math.min(100,chaos+selected.length*9)}/100
+<span>
+${fights}/100
 </span>
 
 </div>
 
 <div class="role">
 
-<strong>Likely Dynamic</strong>
+<strong>
+Chemistry
+</strong>
 
-<br>
+<span>
+${chemistry}/100
+</span>
 
-<span style="color:#aaa;">
-The show would combine
-${selected.map(p=>p.tags[0]||"personality").join(", ")}
-into an unpredictable format.
+</div>
+
+<div class="role">
+
+<strong>
+Recurring Bits
+</strong>
+
+<span>
+${selected.map(p=>p.tags[0]||"lore").join(" · ")}
+</span>
+
+</div>
+
+<div class="role">
+
+<strong>
+Audience Reaction
+</strong>
+
+<span>
+"This is either the greatest show ever made or completely unwatchable."
 </span>
 
 </div>
 
 `;
 
-}
-
-function clearSandbox(){
-
-selectedSandboxPeople=[];
-
-renderSandbox();
+checkAchievements();
 
 }
 
-/* =========================================================
+/* ============================================================
    TRIVIA
-========================================================= */
+============================================================ */
 
 function renderTrivia(){
 
-const q=triviaQuestions[currentTrivia];
+const q=trivia[state.currentTrivia];
 
 document.getElementById("app").innerHTML=`
 
-<div class="kicker">Test your knowledge</div>
+<div class="kicker">
+Test Your Knowledge
+</div>
 
-<h2>Stoolverse Trivia</h2>
+<h2>
+Stoolverse Trivia
+</h2>
 
 <p style="color:#888;">
-Score: ${triviaScore}
-· Question ${currentTrivia+1} of ${triviaQuestions.length}
+Score: ${state.triviaScore}
+· Question ${state.currentTrivia+1} of ${trivia.length}
+· Difficulty: ${q.difficulty}
 </p>
 
 <div class="trivia-box">
 
 <div class="question">
-${q.question}
+${q.q}
 </div>
 
 <div class="answers">
 
-${q.answers.map((a,i)=>`
+${q.a.map((answer,i)=>`
 
 <button
 class="answer"
 onclick="answerTrivia(${i})"
 >
-${a}
+
+${answer}
+
 </button>
 
 `).join("")}
@@ -1998,33 +3590,39 @@ ${a}
 
 function answerTrivia(index){
 
-const q=triviaQuestions[currentTrivia];
+const q=trivia[state.currentTrivia];
 
-if(index===q.correct)
-triviaScore++;
+state.triviaAnswered++;
 
-currentTrivia++;
+if(index===q.correct){
 
-if(currentTrivia>=triviaQuestions.length){
+state.triviaScore++;
+
+}
+
+state.currentTrivia++;
+
+checkAchievements();
+
+if(state.currentTrivia>=trivia.length){
 
 document.getElementById("app").innerHTML=`
 
 <div class="trivia-box">
 
-<div class="kicker">Final Score</div>
+<div class="kicker">
+Final Score
+</div>
 
 <h2>
-${triviaScore} / ${triviaQuestions.length}
+${state.triviaScore} / ${trivia.length}
 </h2>
 
 <p style="color:#aaa;">
-The rabbit hole continues.
+You have officially completed the current trivia run.
 </p>
 
-<button
-class="primary-btn"
-onclick="currentTrivia=0;triviaScore=0;renderTrivia()"
->
+<button class="primary-btn" onclick="resetTrivia()">
 Play Again
 </button>
 
@@ -2032,48 +3630,58 @@ Play Again
 
 `;
 
-}else{
+return;
+
+}
 
 renderTrivia();
 
 }
 
+function resetTrivia(){
+
+state.currentTrivia=0;
+state.triviaScore=0;
+
+renderTrivia();
+
 }
 
-/* =========================================================
+/* ============================================================
    LORE
-========================================================= */
+============================================================ */
 
 function renderLore(){
 
 document.getElementById("app").innerHTML=`
 
-<div class="kicker">The deep end</div>
+<div class="kicker">
+The Deep End
+</div>
 
-<h2>Lore Rabbit Holes</h2>
+<h2>
+Lore Rabbit Holes
+</h2>
 
 <p style="color:#888;margin-bottom:25px;">
-The goal is to click one person and end up an hour later
-in a completely different part of the Stoolverse.
+The whole point is to click one thing and somehow end up
+somewhere completely different.
 </p>
 
-<div class="grid">
+<div class="lore-grid">
 
 <div class="lore-card">
 
-<h3>The Bets Universe</h3>
+<h3>
+The Bets Universe
+</h3>
 
 <p style="color:#aaa;">
-Start with Mikey Bets.
-Follow the connections to Red Bets,
-Green Greg, the Yak, and whatever strange
-moment comes next.
+Start with Mikey Bets. Follow the connections to Red Bets,
+Green Greg, The Yak, and whatever weird moment comes next.
 </p>
 
-<button
-class="primary-btn"
-onclick="rabbitHole('mikey')"
->
+<button class="primary-btn" onclick="rabbitHole('mikey')">
 Enter
 </button>
 
@@ -2081,17 +3689,16 @@ Enter
 
 <div class="lore-card">
 
-<h3>The Yak Web</h3>
+<h3>
+The Yak Web
+</h3>
 
 <p style="color:#aaa;">
 One of the densest relationship webs in the database.
 People, games, bits, characters, and recurring moments.
 </p>
 
-<button
-class="primary-btn"
-onclick="showPage('teams')"
->
+<button class="primary-btn" onclick="openShow(0)">
 Explore
 </button>
 
@@ -2099,17 +3706,15 @@ Explore
 
 <div class="lore-card">
 
-<h3>The Early Barstool Timeline</h3>
+<h3>
+The Early Barstool Timeline
+</h3>
 
 <p style="color:#aaa;">
-Follow how a small sports newspaper became a massive
-media and entertainment universe.
+Follow the story from the beginning and watch the universe grow.
 </p>
 
-<button
-class="primary-btn"
-onclick="openPerson('dave')"
->
+<button class="primary-btn" onclick="showPage('timeline')">
 Start
 </button>
 
@@ -2117,18 +3722,49 @@ Start
 
 <div class="lore-card">
 
-<h3>Build Your Own Rabbit Hole</h3>
+<h3>
+The Deepest Cut
+</h3>
 
 <p style="color:#aaa;">
-Pick any person and follow their shows,
-teams, relationships, and moments.
+Find the most obscure person in the database and begin from there.
 </p>
 
-<button
-class="primary-btn"
-onclick="showPage('people')"
->
-Choose A Person
+<button class="primary-btn" onclick="deepestCut()">
+Find Them
+</button>
+
+</div>
+
+<div class="lore-card">
+
+<h3>
+How Did We Get Here?
+</h3>
+
+<p style="color:#aaa;">
+Start with a random personality and get sent somewhere
+completely unpredictable.
+</p>
+
+<button class="primary-btn" onclick="randomRabbitHole()">
+Do It
+</button>
+
+</div>
+
+<div class="lore-card">
+
+<h3>
+Build Your Own Lore
+</h3>
+
+<p style="color:#aaa;">
+Pick any people and create your own alternate Barstool universe.
+</p>
+
+<button class="primary-btn" onclick="showPage('sandbox')">
+Build It
 </button>
 
 </div>
@@ -2145,20 +3781,26 @@ const p=people.find(x=>x.id===id);
 
 if(!p)return;
 
-const connected=p.relationships
+state.rabbitHoles++;
+
+checkAchievements();
+
+const connected=p.connections
 .map(name=>people.find(x=>x.name===name))
 .filter(Boolean);
 
 document.getElementById("modalContent").innerHTML=`
 
-<div class="kicker">Rabbit Hole Started</div>
+<div class="kicker">
+Rabbit Hole Started
+</div>
 
 <h2>
 You started with ${p.name}.
 </h2>
 
 <p style="color:#aaa;line-height:1.7;">
-The obvious next connections are:
+The next logical connections are:
 </p>
 
 <div class="grid">
@@ -2168,14 +3810,15 @@ ${connected.length
 ?connected.map(personCard).join("")
 
 :`<div class="empty">
-More connections are waiting to be added.
-</div>`}
+This is where the database needs more lore.
+</div>`
+}
 
 </div>
 
 <p style="color:#777;margin-top:20px;">
-This is where the database becomes a rabbit hole
-instead of a directory.
+You are now officially deeper into the Stoolverse than you were
+five minutes ago.
 </p>
 
 `;
@@ -2184,17 +3827,156 @@ openModal();
 
 }
 
-/* =========================================================
+function randomRabbitHole(){
+
+const p=people[Math.floor(Math.random()*people.length)];
+
+rabbitHole(p.id);
+
+}
+
+function deepestCut(){
+
+const niche=people.filter(p=>p.category==="Niche Personality");
+
+const p=niche[Math.floor(Math.random()*niche.length)];
+
+openPerson(p.id);
+
+}
+
+/* ============================================================
+   HALL OF FAME / LEADERBOARDS
+============================================================ */
+
+function renderHall(){
+
+const rankings=[
+
+["Dave Portnoy",99],
+["Big Cat",98],
+["PFT Commenter",96],
+["KFC",94],
+["Brandon Walker",91],
+["KB",89],
+["Nick",88],
+["Frank the Tank",86],
+["Rico Bosco",84],
+["Mikey Bets",73]
+];
+
+document.getElementById("app").innerHTML=`
+
+<div class="kicker">
+The Rankings
+</div>
+
+<h2>
+Hall Of Fame & Leaderboards
+</h2>
+
+<p style="color:#888;margin-bottom:25px;">
+Completely unofficial rankings based on importance,
+connectivity, lore, and Stoolverse energy.
+</p>
+
+<div class="leaderboard">
+
+${rankings.map((r,i)=>`
+
+<div class="leader-row">
+
+<div class="rank">
+#${i+1}
+</div>
+
+<div>
+<strong>
+${r[0]}
+</strong>
+</div>
+
+<div class="score">
+${r[1]} Stoolverse Score
+</div>
+
+</div>
+
+`).join("")}
+
+</div>
+
+<section class="section">
+
+<h2>
+Achievements
+</h2>
+
+<div class="grid">
+
+${achievements.map(a=>`
+
+<div class="achievement ${a.condition()?"unlocked":""}">
+
+<div class="achievement-icon">
+${a.icon}
+</div>
+
+<h3>
+${a.name}
+</h3>
+
+<p style="color:#888;">
+${a.description}
+</p>
+
+<strong>
+${a.condition()?"UNLOCKED":"LOCKED"}
+</strong>
+
+</div>
+
+`).join("")}
+
+</div>
+
+</section>
+
+`;
+
+}
+
+/* ============================================================
+   RANDOMIZER
+============================================================ */
+
+function randomPerson(){
+
+const p=people[Math.floor(Math.random()*people.length)];
+
+openPerson(p.id);
+
+}
+
+/* ============================================================
    SEARCH
-========================================================= */
+============================================================ */
 
 function globalSearch(query){
 
-if(!query.trim())return;
+if(!query.trim()){
 
-const results=people.filter(p=>
+showPage("home");
 
-`${p.name}
+return;
+
+}
+
+const results=people.filter(p=>{
+
+const text=`
+
+${p.name}
 ${p.role}
 ${p.category}
 ${p.school}
@@ -2203,49 +3985,63 @@ ${p.description}
 ${p.tags.join(" ")}
 ${p.shows.join(" ")}
 ${p.teams.join(" ")}
-${p.relationships.join(" ")}`
-.toLowerCase()
-.includes(query.toLowerCase())
+${p.connections.join(" ")}
 
-);
+`.toLowerCase();
 
-if(results.length)
+return text.includes(query.toLowerCase());
+
+});
+
 renderPeople(results);
 
 }
 
-/* =========================================================
+/* ============================================================
+   ACHIEVEMENTS
+============================================================ */
+
+function checkAchievements(){
+
+}
+
+/* ============================================================
    MODALS
-========================================================= */
+============================================================ */
 
 function openModal(){
+
 document.getElementById("modal").classList.add("active");
+
 }
 
 function closeModal(){
+
 document.getElementById("modal").classList.remove("active");
+
 }
 
 document.getElementById("modal").addEventListener("click",e=>{
 
-if(e.target.id==="modal")
+if(e.target.id==="modal"){
+
 closeModal();
+
+}
 
 });
 
-/* =========================================================
+/* ============================================================
    EASTER EGGS
-========================================================= */
+============================================================ */
 
-let logoClicks=0;
+function logoClick(){
 
-function logoSecret(){
+state.logoClicks++;
 
-logoClicks++;
+if(state.logoClicks>=5){
 
-if(logoClicks>=5){
-
-logoClicks=0;
+state.logoClicks=0;
 
 document.getElementById("modalContent").innerHTML=`
 
@@ -2254,32 +4050,33 @@ SECRET LORE UNLOCKED
 </div>
 
 <h2>
-You found something.
+You Found Something.
 </h2>
 
 <p style="color:#aaa;line-height:1.7;">
 You clicked the Stoolverse logo five times.
-This is exactly the type of completely unnecessary
-Easter egg that should be hidden throughout the site.
+There is absolutely no reason this should have done anything.
+Which is exactly why it does.
 </p>
 
 <p style="color:#777;">
-There should eventually be hundreds of these.
+There should eventually be dozens of completely unnecessary
+secrets hidden throughout this website.
 </p>
 
 `;
 
 openModal();
 
-}else{
-
-renderHome();
-
 }
 
 }
 
-function secretClick(){
+function secretButton(){
+
+state.secretClicks++;
+
+if(state.secretClicks===1){
 
 document.body.style.transform="rotate(180deg)";
 
@@ -2287,24 +4084,50 @@ setTimeout(()=>{
 
 document.body.style.transform="";
 
-},1500);
+},1200);
 
 }
 
-/* =========================================================
-   RANDOM KEY EASTER EGG
-========================================================= */
+if(state.secretClicks===3){
 
-let keySequence=[];
+document.getElementById("modalContent").innerHTML=`
+
+<div class="kicker">
+YOU FOUND THE STUPID BUTTON
+</div>
+
+<h2>
+Congratulations.
+</h2>
+
+<p style="color:#aaa;">
+You clicked a nearly invisible button three times.
+That is elite Stoolie behavior.
+</p>
+
+`;
+
+openModal();
+
+state.secretClicks=0;
+
+}
+
+}
+
+let keys=[];
 
 document.addEventListener("keydown",e=>{
 
-keySequence.push(e.key.toLowerCase());
+keys.push(e.key.toLowerCase());
 
-if(keySequence.length>10)
-keySequence.shift();
+if(keys.length>10){
 
-if(keySequence.join("")==="yak"){
+keys.shift();
+
+}
+
+if(keys.join("")==="yak"){
 
 document.getElementById("modalContent").innerHTML=`
 
@@ -2313,7 +4136,7 @@ SECRET YAK MODE
 </div>
 
 <h2>
-You found the Yak.
+You Found The Yak.
 </h2>
 
 <p style="color:#aaa;">
@@ -2324,15 +4147,15 @@ Some Easter eggs should not be explained.
 
 openModal();
 
-keySequence=[];
+keys=[];
 
 }
 
 });
 
-/* =========================================================
-   INITIALIZE
-========================================================= */
+/* ============================================================
+   START
+============================================================ */
 
 renderHome();
 
