@@ -3,506 +3,727 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>STOOLVERSE</title>
+<title>STOOLVERSE — Barstool Dynasty Simulator</title>
 
 <style>
-:root {
-    --bg: #090909;
-    --panel: #121212;
-    --panel2: #181818;
-    --border: #292929;
-    --text: #f4f4f4;
-    --muted: #929292;
-    --accent: #e31837;
-    --accent2: #ff304f;
+:root{
+    --bg:#080808;
+    --panel:#111111;
+    --panel2:#181818;
+    --panel3:#222222;
+    --border:#2c2c2c;
+    --text:#f5f5f5;
+    --muted:#929292;
+    --red:#e31837;
+    --red2:#ff3655;
+    --green:#35d27b;
+    --yellow:#f1c84b;
+    --blue:#5ca8ff;
+    --purple:#a979ff;
 }
 
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
 }
 
-body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: Arial, Helvetica, sans-serif;
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    background:
+        radial-gradient(circle at 80% -10%,#281014 0,#080808 35%);
+    color:var(--text);
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 button,
 input,
-select {
-    font-family: inherit;
+select,
+textarea{
+    font:inherit;
 }
 
-button {
-    cursor: pointer;
+button{
+    cursor:pointer;
 }
 
-header {
-    height: 72px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 5%;
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(9,9,9,.95);
-    backdrop-filter: blur(12px);
+header{
+    height:72px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 4%;
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(8,8,8,.95);
+    backdrop-filter:blur(15px);
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: 900;
-    letter-spacing: -1px;
+.logo{
+    font-size:25px;
+    font-weight:1000;
+    letter-spacing:-1.5px;
+    cursor:pointer;
 }
 
-.logo span {
-    color: var(--accent);
+.logo span{
+    color:var(--red);
 }
 
-nav {
-    display: flex;
-    gap: 24px;
+nav{
+    display:flex;
+    gap:4px;
+    overflow:auto;
 }
 
-nav button {
-    color: var(--muted);
-    background: none;
-    border: none;
-    font-weight: bold;
-    font-size: 13px;
+nav button{
+    background:none;
+    border:0;
+    color:var(--muted);
+    padding:10px 12px;
+    font-size:11px;
+    font-weight:1000;
+    white-space:nowrap;
 }
 
-nav button:hover {
-    color: white;
+nav button:hover,
+nav button.active{
+    color:white;
+    background:#181818;
 }
 
-main {
-    max-width: 1400px;
-    margin: auto;
-    padding: 35px 5% 80px;
+main{
+    max-width:1500px;
+    margin:auto;
+    padding:32px 4% 100px;
 }
 
-.page {
-    display: none;
+.page{
+    display:none;
 }
 
-.page.active {
-    display: block;
+.page.active{
+    display:block;
 }
 
-.hero {
-    min-height: 400px;
-    display: flex;
-    align-items: center;
-    padding: 40px 0;
+.hero{
+    min-height:520px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
 }
 
-.hero-text {
-    max-width: 700px;
+.hero:after{
+    content:"STOOL";
+    position:absolute;
+    right:-70px;
+    bottom:-80px;
+    font-size:260px;
+    font-weight:1000;
+    color:#141414;
+    z-index:-1;
 }
 
-.kicker {
-    color: var(--accent);
-    font-weight: 900;
-    letter-spacing: 2px;
-    font-size: 13px;
-    text-transform: uppercase;
+.hero-text{
+    max-width:760px;
 }
 
-h1 {
-    font-size: clamp(52px, 9vw, 120px);
-    line-height: .85;
-    margin: 15px 0 25px;
-    letter-spacing: -7px;
+.kicker{
+    color:var(--red);
+    font-size:12px;
+    font-weight:1000;
+    letter-spacing:2px;
+    text-transform:uppercase;
 }
 
-h2 {
-    font-size: 36px;
-    margin-top: 0;
+h1{
+    font-size:clamp(55px,9vw,130px);
+    line-height:.82;
+    letter-spacing:-8px;
+    margin:16px 0 28px;
 }
 
-h3 {
-    margin-top: 0;
+h2{
+    font-size:36px;
+    letter-spacing:-1.5px;
+    margin:0 0 15px;
 }
 
-.hero p {
-    color: var(--muted);
-    font-size: 18px;
-    max-width: 600px;
-    line-height: 1.6;
+h3{
+    margin:0 0 8px;
 }
 
-.primary-btn {
-    background: var(--accent);
-    color: white;
-    border: none;
-    padding: 15px 24px;
-    font-weight: 900;
-    margin-top: 15px;
+p{
+    line-height:1.55;
 }
 
-.primary-btn:hover {
-    background: var(--accent2);
+.hero p{
+    max-width:650px;
+    color:#aaa;
+    font-size:18px;
 }
 
-.secondary-btn {
-    background: var(--panel2);
-    color: white;
-    border: 1px solid var(--border);
-    padding: 14px 20px;
-    font-weight: bold;
+.primary-btn,
+.secondary-btn,
+.danger-btn{
+    border:0;
+    padding:14px 20px;
+    font-weight:1000;
+    margin:8px 8px 0 0;
 }
 
-.section-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 45px 0 20px;
+.primary-btn{
+    background:var(--red);
+    color:white;
 }
 
-.section-title h2 {
-    margin: 0;
+.primary-btn:hover{
+    background:var(--red2);
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 16px;
+.secondary-btn{
+    background:var(--panel2);
+    border:1px solid var(--border);
+    color:white;
 }
 
-.card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 18px;
-    transition: .2s;
+.secondary-btn:hover{
+    border-color:var(--red);
 }
 
-.card:hover {
-    border-color: var(--accent);
-    transform: translateY(-3px);
+.danger-btn{
+    background:#38151b;
+    color:#ff8b9c;
+    border:1px solid #68202c;
 }
 
-.person-card {
-    cursor: pointer;
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:38px 0 18px;
+    gap:15px;
 }
 
-.person-photo {
-    height: 190px;
-    background: #222;
-    margin: -18px -18px 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+.section-title h2{
+    margin:0;
 }
 
-.person-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+    gap:15px;
 }
 
-.photo-placeholder {
-    font-size: 48px;
-    font-weight: 900;
-    color: #444;
+.grid-3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
 }
 
-.person-card h3 {
-    margin-bottom: 5px;
+.card,
+.panel{
+    background:linear-gradient(145deg,#151515,#101010);
+    border:1px solid var(--border);
+    padding:18px;
+    box-shadow:0 18px 50px rgba(0,0,0,.3);
 }
 
-.role {
-    color: var(--accent);
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
+.card{
+    transition:.2s;
 }
 
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 12px;
+.card:hover{
+    border-color:var(--red);
+    transform:translateY(-3px);
 }
 
-.tag {
-    font-size: 11px;
-    color: #bbb;
-    border: 1px solid #333;
-    padding: 5px 8px;
+.person-card{
+    cursor:pointer;
 }
 
-.search-box {
-    width: 100%;
-    background: var(--panel);
-    color: white;
-    border: 1px solid var(--border);
-    padding: 17px;
-    font-size: 16px;
-    margin: 20px 0;
+.person-photo{
+    height:190px;
+    background:linear-gradient(135deg,#222,#101010);
+    margin:-18px -18px 15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
 }
 
-.profile-header {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 35px;
-    margin-bottom: 40px;
+.person-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
-.profile-photo {
-    height: 350px;
-    background: #222;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+.photo-placeholder{
+    font-size:54px;
+    font-weight:1000;
+    color:#444;
 }
 
-.profile-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.role{
+    color:var(--red);
+    font-size:11px;
+    font-weight:1000;
+    text-transform:uppercase;
 }
 
-.profile-name {
-    font-size: clamp(42px, 7vw, 85px);
-    line-height: .9;
-    margin: 0 0 10px;
-    letter-spacing: -4px;
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:12px;
 }
 
-.profile-subtitle {
-    color: var(--accent);
-    font-size: 15px;
-    font-weight: bold;
-    text-transform: uppercase;
+.tag{
+    font-size:10px;
+    color:#bbb;
+    border:1px solid #363636;
+    padding:5px 8px;
 }
 
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px;
-    margin-top: 25px;
+.muted{
+    color:var(--muted);
 }
 
-.info-box {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 15px;
+.small{
+    font-size:12px;
 }
 
-.info-box label {
-    color: var(--muted);
-    display: block;
-    font-size: 11px;
-    text-transform: uppercase;
-    margin-bottom: 7px;
+.search-box,
+.field{
+    width:100%;
+    background:#0b0b0b;
+    color:white;
+    border:1px solid var(--border);
+    padding:14px;
+    margin:8px 0 14px;
+    outline:none;
 }
 
-.timeline {
-    border-left: 2px solid var(--accent);
-    margin-left: 10px;
-    padding-left: 25px;
+.search-box:focus,
+.field:focus{
+    border-color:var(--red);
 }
 
-.timeline-item {
-    position: relative;
-    margin-bottom: 25px;
+.profile-header{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:35px;
+    margin-bottom:35px;
 }
 
-.timeline-item::before {
-    content: "";
-    position: absolute;
-    left: -33px;
-    top: 4px;
-    width: 12px;
-    height: 12px;
-    background: var(--accent);
-    border-radius: 50%;
+.profile-photo{
+    height:350px;
+    background:#222;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
 }
 
-.timeline-year {
-    color: var(--accent);
-    font-weight: 900;
-    font-size: 13px;
+.profile-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
-.moment {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 18px;
-    margin-bottom: 12px;
+.profile-name{
+    font-size:clamp(42px,7vw,85px);
+    line-height:.9;
+    margin:0 0 10px;
+    letter-spacing:-5px;
 }
 
-.moment h3 {
-    margin-bottom: 8px;
+.profile-subtitle{
+    color:var(--red);
+    font-size:14px;
+    font-weight:1000;
+    text-transform:uppercase;
 }
 
-.moment p {
-    color: #bbb;
-    line-height: 1.5;
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:10px;
+    margin-top:22px;
 }
 
-.moment-meta {
-    color: var(--muted);
-    font-size: 12px;
+.info-box{
+    background:var(--panel);
+    border:1px solid var(--border);
+    padding:14px;
 }
 
-.builder {
-    max-width: 900px;
+.info-box label{
+    color:var(--muted);
+    display:block;
+    font-size:10px;
+    text-transform:uppercase;
+    margin-bottom:6px;
 }
 
-.builder-panel {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 25px;
-    margin-bottom: 20px;
+.timeline{
+    border-left:2px solid var(--red);
+    margin-left:10px;
+    padding-left:25px;
 }
 
-.builder-panel label {
-    display: block;
-    color: var(--muted);
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 7px;
-    text-transform: uppercase;
+.timeline-item{
+    position:relative;
+    margin-bottom:25px;
 }
 
-.builder-panel input,
-.builder-panel select {
-    width: 100%;
-    background: #0b0b0b;
-    color: white;
-    border: 1px solid var(--border);
-    padding: 14px;
-    margin-bottom: 15px;
+.timeline-item:before{
+    content:"";
+    position:absolute;
+    left:-33px;
+    top:4px;
+    width:12px;
+    height:12px;
+    background:var(--red);
+    border-radius:50%;
 }
 
-.cast-search {
-    display: flex;
-    gap: 10px;
+.timeline-year{
+    color:var(--red);
+    font-weight:1000;
+    font-size:13px;
 }
 
-.cast-search input {
-    margin: 0;
+.back-btn{
+    background:none;
+    border:0;
+    color:var(--muted);
+    padding:0;
+    margin-bottom:25px;
 }
 
-.cast-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 15px;
+.back-btn:hover{
+    color:white;
 }
 
-.cast-person {
-    background: #252525;
-    padding: 9px 12px;
-    font-size: 13px;
+.tabs{
+    display:flex;
+    gap:5px;
+    border-bottom:1px solid var(--border);
+    margin-bottom:20px;
+    overflow:auto;
 }
 
-.cast-person button {
-    background: none;
-    color: #aaa;
-    border: none;
-    margin-left: 8px;
+.tab{
+    background:none;
+    border:0;
+    color:var(--muted);
+    font-weight:900;
+    padding:13px 16px;
+    white-space:nowrap;
 }
 
-.result {
-    display: none;
-    background: linear-gradient(135deg, #171717, #0c0c0c);
-    border: 1px solid var(--accent);
-    padding: 28px;
-    margin-top: 20px;
+.tab.active{
+    color:white;
+    border-bottom:2px solid var(--red);
 }
 
-.result.show {
-    display: block;
+.stat-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:12px;
 }
 
-.reaction {
-    font-size: 30px;
-    font-weight: 900;
-    color: var(--accent);
+.stat{
+    background:var(--panel);
+    border:1px solid var(--border);
+    padding:18px;
 }
 
-.map-container {
-    min-height: 600px;
+.stat-number{
+    font-size:30px;
+    font-weight:1000;
+}
+
+.stat-label{
+    font-size:10px;
+    color:var(--muted);
+    text-transform:uppercase;
+    margin-top:5px;
+}
+
+.progress{
+    height:9px;
+    background:#252525;
+    overflow:hidden;
+    margin-top:9px;
+}
+
+.progress i{
+    display:block;
+    height:100%;
+    background:var(--red);
+}
+
+.news{
+    border-left:3px solid var(--red);
+    padding:14px 16px;
+    background:#151515;
+    margin-bottom:10px;
+}
+
+.news b{
+    display:block;
+    margin-bottom:5px;
+}
+
+.builder{
+    max-width:1000px;
+}
+
+.builder-panel{
+    background:var(--panel);
+    border:1px solid var(--border);
+    padding:24px;
+    margin-bottom:16px;
+}
+
+.builder-panel label{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    font-weight:1000;
+    text-transform:uppercase;
+    margin:12px 0 6px;
+}
+
+.cast-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:15px;
+}
+
+.cast-person{
+    background:#262626;
+    padding:9px 12px;
+    font-size:13px;
+}
+
+.cast-person button{
+    background:none;
+    border:0;
+    color:#aaa;
+    margin-left:8px;
+}
+
+.result{
+    display:none;
+    background:linear-gradient(135deg,#1c1718,#0d0d0d);
+    border:1px solid var(--red);
+    padding:28px;
+    margin-top:18px;
+}
+
+.result.show{
+    display:block;
+}
+
+.reaction{
+    font-size:28px;
+    font-weight:1000;
+    color:var(--red);
+    margin-top:20px;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns:1.3fr .7fr;
+    gap:16px;
+}
+
+.event-card{
+    border:1px solid var(--border);
+    background:#151515;
+    padding:16px;
+    margin-bottom:10px;
+}
+
+.event-card:hover{
+    border-color:var(--red);
+}
+
+.event-date{
+    color:var(--red);
+    font-weight:1000;
+    font-size:11px;
+    text-transform:uppercase;
+}
+
+.map-container{
+    min-height:600px;
     background:
-        radial-gradient(circle at 20% 30%, #252525 0 2px, transparent 3px),
-        radial-gradient(circle at 70% 60%, #252525 0 2px, transparent 3px),
+        radial-gradient(circle at 20% 30%,#252525 0 2px,transparent 3px),
+        radial-gradient(circle at 70% 60%,#252525 0 2px,transparent 3px),
         #101010;
-    background-size: 80px 80px;
-    border: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
+    background-size:80px 80px;
+    border:1px solid var(--border);
+    position:relative;
+    overflow:hidden;
 }
 
-.map-location {
-    position: absolute;
-    background: var(--accent);
-    color: white;
-    border: none;
-    padding: 10px 13px;
-    font-weight: 900;
-    border-radius: 3px;
+.map-location{
+    position:absolute;
+    background:var(--red);
+    color:white;
+    border:0;
+    padding:10px 13px;
+    font-weight:1000;
+    border-radius:3px;
 }
 
-.map-location:hover {
-    transform: scale(1.08);
+.map-location:hover{
+    transform:scale(1.08);
 }
 
-.location-info {
-    margin-top: 20px;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    padding: 25px;
-    display: none;
+.location-info{
+    margin-top:20px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    padding:25px;
+    display:none;
 }
 
-.location-info.show {
-    display: block;
+.location-info.show{
+    display:block;
 }
 
-.empty {
-    color: var(--muted);
-    padding: 30px 0;
+.table-wrap{
+    overflow:auto;
 }
 
-.back-btn {
-    background: none;
-    border: none;
-    color: var(--muted);
-    padding: 0;
-    margin-bottom: 25px;
+.data-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:700px;
 }
 
-.back-btn:hover {
-    color: white;
+.data-table th,
+.data-table td{
+    text-align:left;
+    padding:13px;
+    border-bottom:1px solid var(--border);
 }
 
-@media (max-width: 700px) {
-    nav {
-        gap: 10px;
+.data-table th{
+    font-size:10px;
+    color:var(--muted);
+    text-transform:uppercase;
+}
+
+.data-table tr:hover td{
+    background:#151515;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    z-index:150;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(800px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:#131313;
+    border:1px solid var(--border);
+    padding:25px;
+}
+
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:white;
+    color:black;
+    padding:15px 18px;
+    font-weight:900;
+    box-shadow:0 18px 50px rgba(0,0,0,.5);
+    transform:translateY(130px);
+    transition:.25s;
+    z-index:200;
+}
+
+.toast.show{
+    transform:translateY(0);
+}
+
+.two-col{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+@media(max-width:850px){
+
+    .dashboard,
+    .two-col,
+    .grid-3{
+        grid-template-columns:1fr;
     }
 
-    nav button {
-        font-size: 10px;
+    .profile-header{
+        grid-template-columns:1fr;
     }
 
-    .profile-header {
-        grid-template-columns: 1fr;
+    .profile-photo{
+        height:300px;
     }
 
-    .profile-photo {
-        height: 300px;
+    .hero:after{
+        font-size:130px;
+    }
+}
+
+@media(max-width:600px){
+
+    header{
+        padding:0 3%;
     }
 
-    h1 {
-        letter-spacing: -4px;
+    .logo{
+        font-size:20px;
+    }
+
+    nav button{
+        font-size:9px;
+        padding:9px 6px;
+    }
+
+    main{
+        padding:25px 3%;
+    }
+
+    h1{
+        letter-spacing:-5px;
+    }
+
+    .profile-name{
+        letter-spacing:-3px;
     }
 }
 </style>
@@ -511,46 +732,133 @@ h3 {
 <body>
 
 <header>
-    <div class="logo" onclick="showPage('home')">STOOL<span>VERSE</span></div>
+
+    <div class="logo" onclick="showPage('home')">
+        STOOL<span>VERSE</span>
+    </div>
 
     <nav>
-        <button onclick="showPage('people')">PEOPLE</button>
-        <button onclick="showPage('builder')">BUILD A SHOW</button>
-        <button onclick="showPage('map')">MAP</button>
+
+        <button data-page="home" onclick="showPage('home')">
+            HOME
+        </button>
+
+        <button data-page="people" onclick="showPage('people')">
+            PEOPLE
+        </button>
+
+        <button data-page="shows" onclick="showPage('shows')">
+            SHOWS
+        </button>
+
+        <button data-page="builder" onclick="showPage('builder')">
+            BUILD
+        </button>
+
+        <button data-page="dynasty" onclick="showPage('dynasty')">
+            DYNASTY
+        </button>
+
+        <button data-page="moments" onclick="showPage('moments')">
+            MOMENTS
+        </button>
+
+        <button data-page="map" onclick="showPage('map')">
+            MAP
+        </button>
+
     </nav>
+
 </header>
 
 <main>
 
-<!-- =====================================================
-     HOME
-===================================================== -->
+<!-- HOME -->
 
 <section id="home" class="page active">
 
     <div class="hero">
-        <div class="hero-text">
-            <div class="kicker">The Interactive Barstool Universe</div>
 
-            <h1>EXPLORE<br>THE STOOLVERSE.</h1>
+        <div class="hero-text">
+
+            <div class="kicker">
+                THE INTERACTIVE BARSTOOL UNIVERSE
+            </div>
+
+            <h1>
+                EXPLORE<br>
+                THE STOOLVERSE.
+            </h1>
 
             <p>
-                Explore the people, places, shows, moments, chaos and history
-                that make up the Barstool universe.
+                People. Shows. Beef. Chaos. Dynasties. Moments.
+                Build your own Barstool universe and watch the ecosystem evolve.
             </p>
 
-            <button class="primary-btn" onclick="showPage('builder')">
-                BUILD A SHOW
+            <button class="primary-btn" onclick="showPage('dynasty')">
+                ENTER DYNASTY MODE
             </button>
 
             <button class="secondary-btn" onclick="randomPerson()">
                 RANDOM PERSONALITY
             </button>
+
         </div>
+
     </div>
 
     <div class="section-title">
-        <h2>Featured Personalities</h2>
+
+        <h2>
+            STOOLVERSE PULSE
+        </h2>
+
+        <button class="secondary-btn" onclick="advanceDay()">
+            ADVANCE THE UNIVERSE
+        </button>
+
+    </div>
+
+    <div id="homeStats" class="stat-grid"></div>
+
+    <div class="dashboard">
+
+        <div>
+
+            <div class="section-title">
+                <h2>
+                    LATEST HEADLINES
+                </h2>
+            </div>
+
+            <div id="newsFeed"></div>
+
+        </div>
+
+        <div>
+
+            <div class="section-title">
+                <h2>
+                    TRENDING NOW
+                </h2>
+            </div>
+
+            <div class="panel" id="trending"></div>
+
+        </div>
+
+    </div>
+
+    <div class="section-title">
+
+        <h2>
+            FEATURED PERSONALITIES
+        </h2>
+
+        <button class="secondary-btn" onclick="showPage('people')">
+            VIEW ALL
+        </button>
+
     </div>
 
     <div id="featuredPeople" class="grid"></div>
@@ -558,19 +866,33 @@ h3 {
 </section>
 
 
-<!-- =====================================================
-     PEOPLE DATABASE
-===================================================== -->
+<!-- PEOPLE -->
 
 <section id="people" class="page">
 
-    <button class="back-btn" onclick="showPage('home')">← BACK HOME</button>
+    <button class="back-btn" onclick="showPage('home')">
+        ← BACK HOME
+    </button>
 
-    <h2>PERSONALITIES</h2>
+    <div class="section-title">
 
-    <p style="color:var(--muted)">
-        Search the Stoolverse.
-    </p>
+        <div>
+
+            <h2>
+                PERSONALITIES
+            </h2>
+
+            <p class="muted">
+                The people who make the Stoolverse what it is.
+            </p>
+
+        </div>
+
+        <button class="primary-btn" onclick="openAddPerson()">
+            + ADD PERSONALITY
+        </button>
+
+    </div>
 
     <input
         class="search-box"
@@ -579,83 +901,207 @@ h3 {
         oninput="renderPeople()"
     >
 
+    <div class="tabs">
+
+        <button class="tab active" onclick="setPeopleFilter('all',this)">
+            ALL
+        </button>
+
+        <button class="tab" onclick="setPeopleFilter('core',this)">
+            CORE
+        </button>
+
+        <button class="tab" onclick="setPeopleFilter('yak',this)">
+            YAK
+        </button>
+
+        <button class="tab" onclick="setPeopleFilter('sports',this)">
+            SPORTS
+        </button>
+
+        <button class="tab" onclick="setPeopleFilter('comedy',this)">
+            COMEDY
+        </button>
+
+        <button class="tab" onclick="setPeopleFilter('chaos',this)">
+            CHAOS
+        </button>
+
+    </div>
+
     <div id="peopleGrid" class="grid"></div>
 
 </section>
 
 
-<!-- =====================================================
-     PROFILE PAGE
-===================================================== -->
+<!-- PROFILE -->
 
 <section id="profile" class="page">
 
-    <button class="back-btn" onclick="showPage('people')">← BACK TO PEOPLE</button>
+    <button class="back-btn" onclick="showPage('people')">
+        ← BACK TO PEOPLE
+    </button>
 
     <div id="profileContent"></div>
 
 </section>
 
 
-<!-- =====================================================
-     SHOW BUILDER
-===================================================== -->
+<!-- SHOWS -->
+
+<section id="shows" class="page">
+
+    <button class="back-btn" onclick="showPage('home')">
+        ← BACK HOME
+    </button>
+
+    <div class="section-title">
+
+        <div>
+
+            <h2>
+                THE SHOW UNIVERSE
+            </h2>
+
+            <p class="muted">
+                Every show is its own ecosystem.
+            </p>
+
+        </div>
+
+        <button class="primary-btn" onclick="showPage('builder')">
+            BUILD A SHOW
+        </button>
+
+    </div>
+
+    <div id="showsGrid" class="grid"></div>
+
+</section>
+
+
+<!-- BUILDER -->
 
 <section id="builder" class="page">
 
-    <button class="back-btn" onclick="showPage('home')">← BACK HOME</button>
+    <button class="back-btn" onclick="showPage('home')">
+        ← BACK HOME
+    </button>
 
     <div class="builder">
 
-        <h2>BUILD A SHOW</h2>
+        <h2>
+            BUILD A SHOW
+        </h2>
 
-        <p style="color:var(--muted)">
-            Put anybody together. See what happens.
+        <p class="muted">
+            Put anybody together. Create chemistry, rivalries, chaos and a potential empire.
         </p>
 
         <div class="builder-panel">
 
-            <label>Show Name</label>
+            <label>
+                Show Name
+            </label>
 
             <input
+                class="field"
                 id="showName"
                 placeholder="Example: The Worst Show Ever"
             >
 
-            <label>Show Format</label>
+            <label>
+                Show Format
+            </label>
 
-            <select id="showFormat">
-                <option>Talk Show</option>
-                <option>Sports Talk</option>
-                <option>Comedy Show</option>
-                <option>Cooking Show</option>
-                <option>Pick'em Show</option>
-                <option>Trivia Show</option>
-                <option>Debate Show</option>
-                <option>Travel Show</option>
-                <option>Competition Show</option>
-                <option>Custom</option>
+            <select class="field" id="showFormat">
+
+                <option>
+                    Talk Show
+                </option>
+
+                <option>
+                    Sports Talk
+                </option>
+
+                <option>
+                    Comedy Show
+                </option>
+
+                <option>
+                    Cooking Show
+                </option>
+
+                <option>
+                    Pick'em Show
+                </option>
+
+                <option>
+                    Trivia Show
+                </option>
+
+                <option>
+                    Debate Show
+                </option>
+
+                <option>
+                    Travel Show
+                </option>
+
+                <option>
+                    Competition Show
+                </option>
+
+            </select>
+
+            <label>
+                Show Energy
+            </label>
+
+            <select class="field" id="showEnergy">
+
+                <option>
+                    Professional
+                </option>
+
+                <option>
+                    Chaotic
+                </option>
+
+                <option>
+                    Unhinged
+                </option>
+
+                <option>
+                    Sports-First
+                </option>
+
+                <option>
+                    Comedy-First
+                </option>
+
             </select>
 
         </div>
 
         <div class="builder-panel">
 
-            <label>Add Cast Members</label>
+            <label>
+                Add Cast Members
+            </label>
 
-            <div class="cast-search">
-                <input
-                    id="castSearch"
-                    placeholder="Search for someone..."
-                    oninput="showCastSuggestions()"
-                >
-            </div>
+            <input
+                class="field"
+                id="castSearch"
+                placeholder="Search for someone..."
+                oninput="showCastSuggestions()"
+            >
 
             <div id="castSuggestions"></div>
 
-            <div>
-                <strong>CAST:</strong>
-            </div>
+            <strong>
+                CAST:
+            </strong>
 
             <div id="selectedCast" class="cast-list"></div>
 
@@ -672,17 +1118,145 @@ h3 {
 </section>
 
 
-<!-- =====================================================
-     MAP
-===================================================== -->
+<!-- DYNASTY -->
+
+<section id="dynasty" class="page">
+
+    <button class="back-btn" onclick="showPage('home')">
+        ← BACK HOME
+    </button>
+
+    <div class="section-title">
+
+        <div>
+
+            <h2>
+                STOOL DYNASTY
+            </h2>
+
+            <p class="muted">
+                Run the company. Make the calls. Create the next empire or burn the whole thing down.
+            </p>
+
+        </div>
+
+        <button class="danger-btn" onclick="resetDynasty()">
+            RESET DYNASTY
+        </button>
+
+    </div>
+
+    <div id="dynastyStats" class="stat-grid"></div>
+
+    <div class="dashboard">
+
+        <div>
+
+            <div class="section-title">
+                <h2>
+                    DECISIONS
+                </h2>
+            </div>
+
+            <div id="dynastyEvents"></div>
+
+        </div>
+
+        <div>
+
+            <div class="section-title">
+                <h2>
+                    COMPANY HEALTH
+                </h2>
+            </div>
+
+            <div class="panel" id="companyHealth"></div>
+
+            <div class="section-title">
+                <h2>
+                    POWER RANKINGS
+                </h2>
+            </div>
+
+            <div class="panel" id="powerRankings"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MOMENTS -->
+
+<section id="moments" class="page">
+
+    <button class="back-btn" onclick="showPage('home')">
+        ← BACK HOME
+    </button>
+
+    <div class="section-title">
+
+        <div>
+
+            <h2>
+                THE MOMENT ARCHIVE
+            </h2>
+
+            <p class="muted">
+                The clips, beefs, incidents and moments that define the timeline.
+            </p>
+
+        </div>
+
+        <button class="primary-btn" onclick="openAddMoment()">
+            + ADD MOMENT
+        </button>
+
+    </div>
+
+    <div class="tabs">
+
+        <button class="tab active" onclick="setMomentFilter('all',this)">
+            ALL
+        </button>
+
+        <button class="tab" onclick="setMomentFilter('chaos',this)">
+            CHAOS
+        </button>
+
+        <button class="tab" onclick="setMomentFilter('beef',this)">
+            BEEF
+        </button>
+
+        <button class="tab" onclick="setMomentFilter('sports',this)">
+            SPORTS
+        </button>
+
+        <button class="tab" onclick="setMomentFilter('classic',this)">
+            CLASSICS
+        </button>
+
+    </div>
+
+    <div id="momentsList"></div>
+
+</section>
+
+
+<!-- MAP -->
 
 <section id="map" class="page">
 
-    <button class="back-btn" onclick="showPage('home')">← BACK HOME</button>
+    <button class="back-btn" onclick="showPage('home')">
+        ← BACK HOME
+    </button>
 
-    <h2>THE STOOLVERSE MAP</h2>
+    <h2>
+        THE STOOLVERSE MAP
+    </h2>
 
-    <p style="color:var(--muted)">
+    <p class="muted">
         Offices, cities, events, incidents and places connected to the universe.
     </p>
 
@@ -690,30 +1264,42 @@ h3 {
 
         <button
             class="map-location"
-            style="left:22%;top:22%;"
-            onclick="showLocation('newyork')">
+            style="left:22%;top:22%"
+            onclick="showLocation('newyork')"
+        >
             NEW YORK
         </button>
 
         <button
             class="map-location"
-            style="left:43%;top:40%;"
-            onclick="showLocation('chicago')">
+            style="left:43%;top:40%"
+            onclick="showLocation('chicago')"
+        >
             CHICAGO
         </button>
 
         <button
             class="map-location"
-            style="left:28%;top:58%;"
-            onclick="showLocation('philadelphia')">
+            style="left:28%;top:58%"
+            onclick="showLocation('philadelphia')"
+        >
             PHILADELPHIA
         </button>
 
         <button
             class="map-location"
-            style="left:70%;top:48%;"
-            onclick="showLocation('arizona')">
+            style="left:70%;top:48%"
+            onclick="showLocation('arizona')"
+        >
             ARIZONA
+        </button>
+
+        <button
+            class="map-location"
+            style="left:58%;top:20%"
+            onclick="showLocation('indiana')"
+        >
+            INDIANA
         </button>
 
     </div>
@@ -725,878 +1311,1330 @@ h3 {
 </main>
 
 
+<div class="modal" id="modal">
+
+    <div class="modal-box" id="modalContent"></div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
 <script>
 
-/* =====================================================
-=========================================================
-    STOOLVERSE CONTENT DATABASE
-
-    THIS IS THE SECTION YOU WILL MOSTLY EDIT.
-
-    ADD PEOPLE HERE.
-    ADD MOMENTS HERE.
-    ADD SHOWS HERE.
-    ADD CONNECTIONS HERE.
-
-=========================================================
-========================================================= */
-
+/* ============================================================
+   PERSONALITIES
+============================================================ */
 
 const personalities = [
 
-    {
-        name: "Dave Portnoy",
-        aliases: ["El Pres", "Dave"],
-        role: "Founder / Personality",
-        image: "",
-        college: "University of Michigan",
-        hometown: "Swampscott, Massachusetts",
-        tags: ["Founder", "Business", "Sports", "Chaos"],
-        shows: ["One Bite", "The Dave Portnoy Show"],
-        bio: "Founder of Barstool Sports and one of the central figures in the Barstool universe.",
-        career: [
-            {
-                year: "2003",
-                title: "Barstool begins",
-                description: "The beginning of the Barstool Sports universe."
-            },
-            {
-                year: "Today",
-                title: "The Stoolverse expands",
-                description: "Continues to be connected to major Barstool events, shows and moments."
-            }
-        ],
-        funnyMoments: [
-            {
-                title: "One Bite Reviews",
-                description: "The pizza review universe becomes one of the most recognizable parts of Barstool.",
-                location: "Everywhere"
-            }
-        ],
-        connections: ["Big Cat", "PFT Commenter", "KFC", "Feits"]
-    },
+{
+    name:"Dave Portnoy",
+    aliases:["El Pres","Dave"],
+    role:"Founder / Personality",
+    image:"",
+    college:"University of Michigan",
+    hometown:"Swampscott, Massachusetts",
+    tags:["Founder","Business","Sports","Chaos"],
+    shows:["One Bite","The Dave Portnoy Show"],
+    bio:"Founder of Barstool Sports and one of the central figures in the Barstool universe.",
+    power:100,
+    connections:["Big Cat","PFT Commenter","KFC","Feits"]
+},
 
-    {
-        name: "Big Cat",
-        aliases: ["Dan Katz"],
-        role: "Host / Personality",
-        image: "",
-        college: "University of Wisconsin",
-        hometown: "Chicago",
-        tags: ["Comedy", "Sports", "Host", "The Yak"],
-        shows: ["Pardon My Take", "The Yak"],
-        bio: "One of the central personalities in the Barstool universe.",
-        career: [
-            {
-                year: "Early Barstool",
-                title: "Becomes a major Barstool personality",
-                description: "Develops into one of the company's most recognizable voices."
-            }
-        ],
-        funnyMoments: [],
-        connections: ["PFT Commenter", "Nick Turani", "KB", "Brandon Walker"]
-    },
+{
+    name:"Big Cat",
+    aliases:["Dan Katz"],
+    role:"Host / Personality",
+    image:"",
+    college:"University of Wisconsin",
+    hometown:"Chicago",
+    tags:["Comedy","Sports","Host","The Yak"],
+    shows:["Pardon My Take","The Yak"],
+    bio:"One of the central personalities in the Barstool universe.",
+    power:99,
+    connections:["PFT Commenter","Nick Turani","KB","Brandon Walker"]
+},
 
-    {
-        name: "PFT Commenter",
-        aliases: ["PFT"],
-        role: "Host / Comedy",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Comedy", "Football", "Host", "Pardon My Take"],
-        shows: ["Pardon My Take"],
-        bio: "Co-host of Pardon My Take and one of the most recognizable comedic sports personalities.",
-        career: [],
-        funnyMoments: [],
-        connections: ["Big Cat", "Jake Marsh", "Dave Portnoy"]
-    },
+{
+    name:"PFT Commenter",
+    aliases:["PFT"],
+    role:"Host / Comedy",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Comedy","Football","Host"],
+    shows:["Pardon My Take"],
+    bio:"Co-host of Pardon My Take and one of the most recognizable comedic sports personalities.",
+    power:96,
+    connections:["Big Cat","Jake Marsh","Dave Portnoy"]
+},
 
-    {
-        name: "Brandon Walker",
-        aliases: ["Brandon"],
-        role: "Personality / Sports",
-        image: "",
-        college: "",
-        hometown: "Mississippi",
-        tags: ["Sports", "Debate", "Comedy", "The Yak"],
-        shows: ["Mostly Sports", "The Yak", "The Dozen"],
-        bio: "Sports personality known for strong opinions, debates and a massive personality.",
-        career: [],
-        funnyMoments: [],
-        connections: ["Rico Bosco", "Big Cat", "Nick Turani", "TJ"]
-    },
+{
+    name:"Brandon Walker",
+    aliases:["Brandon"],
+    role:"Personality / Sports",
+    image:"",
+    college:"",
+    hometown:"Mississippi",
+    tags:["Sports","Debate","Comedy","The Yak"],
+    shows:["Mostly Sports","The Yak","The Dozen"],
+    bio:"Sports personality known for strong opinions, debates and a massive personality.",
+    power:94,
+    connections:["Rico Bosco","Big Cat","Nick Turani","TJ"]
+},
 
-    {
-        name: "Rico Bosco",
-        aliases: ["Rico"],
-        role: "Sports Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Sports", "Debate", "Chaos", "College Sports"],
-        shows: ["The Dozen", "College Football Content"],
-        bio: "A highly recognizable sports personality known for strong opinions and intense debates.",
-        career: [],
-        funnyMoments: [],
-        connections: ["Brandon Walker", "Big Cat", "Frank the Tank"]
-    },
+{
+    name:"Rico Bosco",
+    aliases:["Rico"],
+    role:"Sports Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Sports","Debate","Chaos","College Sports"],
+    shows:["The Dozen"],
+    bio:"A highly recognizable sports personality known for strong opinions and intense debates.",
+    power:91,
+    connections:["Brandon Walker","Big Cat","Frank the Tank"]
+},
 
-    {
-        name: "Nick Turani",
-        aliases: ["Nick"],
-        role: "Comedy / Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Comedy", "The Yak", "Chaos"],
-        shows: ["The Yak"],
-        bio: "A major part of the chaotic comedy ecosystem.",
-        career: [],
-        funnyMoments: [],
-        connections: ["KB", "Brandon Walker", "TJ", "Rone"]
-    },
+{
+    name:"Nick Turani",
+    aliases:["Nick"],
+    role:"Comedy / Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Comedy","The Yak","Chaos"],
+    shows:["The Yak"],
+    bio:"A major part of the chaotic comedy ecosystem.",
+    power:87,
+    connections:["KB","Brandon Walker","TJ","Rone"]
+},
 
-    {
-        name: "KB",
-        aliases: ["KB No Swag"],
-        role: "Comedy / Writer",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Comedy", "Writing", "The Yak"],
-        shows: ["The Yak"],
-        bio: "Known for comedy, writing and unpredictable contributions.",
-        career: [],
-        funnyMoments: [],
-        connections: ["Nick Turani", "Rone", "Sas"]
-    },
+{
+    name:"KB",
+    aliases:["KB No Swag"],
+    role:"Comedy / Writer",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Comedy","Writing","The Yak"],
+    shows:["The Yak"],
+    bio:"Known for comedy, writing and unpredictable contributions.",
+    power:86,
+    connections:["Nick Turani","Rone","Sas"]
+},
 
-    {
-        name: "Rone",
-        aliases: ["Rone"],
-        role: "Comedy / Rapper",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Comedy", "Rap", "The Yak"],
-        shows: ["The Yak"],
-        bio: "Comedian, rapper and personality with a strong connection to the Chicago comedy universe.",
-        career: [],
-        funnyMoments: [],
-        connections: ["Nick Turani", "KB", "Sas"]
-    },
+{
+    name:"Rone",
+    aliases:["Rone"],
+    role:"Comedy / Rapper",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Comedy","Rap","The Yak"],
+    shows:["The Yak"],
+    bio:"Comedian, rapper and personality with a strong connection to the Chicago comedy universe.",
+    power:88,
+    connections:["Nick Turani","KB","Sas"]
+},
 
-    {
-        name: "Sas",
-        aliases: ["Sas"],
-        role: "Comedy / Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Comedy", "The Yak", "Young Guns"],
-        shows: ["The Yak"],
-        bio: "Comedy personality associated with the younger Barstool comedy ecosystem.",
-        career: [],
-        funnyMoments: [],
-        connections: ["Rone", "KB", "Nick Turani"]
-    },
+{
+    name:"Sas",
+    aliases:["Sas"],
+    role:"Comedy / Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Comedy","The Yak","Young Guns"],
+    shows:["The Yak"],
+    bio:"Comedy personality associated with the younger Barstool comedy ecosystem.",
+    power:80,
+    connections:["Rone","KB","Nick Turani"]
+},
 
-    {
-        name: "TJ",
-        aliases: ["TJ Hitchings"],
-        role: "Producer",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Producer", "The Yak", "Chaos"],
-        shows: ["The Yak"],
-        bio: "Producer and major behind-the-scenes personality.",
-        career: [],
-        funnyMoments: [],
-        connections: ["Nick Turani", "Brandon Walker", "Big Cat"]
-    },
+{
+    name:"TJ",
+    aliases:["TJ Hitchings"],
+    role:"Producer",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Producer","The Yak","Chaos"],
+    shows:["The Yak"],
+    bio:"Producer and major behind-the-scenes personality.",
+    power:77,
+    connections:["Nick Turani","Brandon Walker","Big Cat"]
+},
 
-    {
-        name: "Mintzy",
-        aliases: ["Mintzy"],
-        role: "Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Chaos", "Baseball", "Unpredictable", "Travel"],
-        shows: [],
-        bio: "A highly unpredictable personality associated with baseball, chaos and memorable incidents.",
-        career: [],
-        funnyMoments: [
-            {
-                title: "The Arizona Incident",
-                description: "A memorable moment connected to Mintzy and the Arizona Barstool universe.",
-                location: "Arizona"
-            }
-        ],
-        connections: ["Brandon Walker", "TJ", "Big Cat"]
-    },
+{
+    name:"Mintzy",
+    aliases:["Mintzy"],
+    role:"Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Chaos","Baseball","Unpredictable","Travel"],
+    shows:[],
+    bio:"A highly unpredictable personality associated with baseball, chaos and memorable incidents.",
+    power:82,
+    connections:["Brandon Walker","TJ","Big Cat"]
+},
 
-    {
-        name: "Frank the Tank",
-        aliases: ["Frank"],
-        role: "Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Sports", "Chaos", "The Dozen"],
-        shows: ["The Dozen"],
-        bio: "One of the most recognizable personalities in the Barstool universe.",
-        career: [],
-        funnyMoments: [],
-        connections: ["Rico Bosco", "Brandon Walker", "Jeff D. Lowe"]
-    },
+{
+    name:"Frank the Tank",
+    aliases:["Frank"],
+    role:"Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Sports","Chaos","The Dozen"],
+    shows:["The Dozen"],
+    bio:"One of the most recognizable personalities in the Barstool universe.",
+    power:84,
+    connections:["Rico Bosco","Brandon Walker","Jeff D. Lowe"]
+},
 
-    {
-        name: "Jeff D. Lowe",
-        aliases: ["Jeff"],
-        role: "Host / Trivia",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Trivia", "The Dozen", "Host"],
-        shows: ["The Dozen"],
-        bio: "Host and central figure of The Dozen trivia universe.",
-        career: [],
-        funnyMoments: [],
-        connections: ["Frank the Tank", "Brandon Walker", "Rico Bosco"]
-    },
+{
+    name:"Jeff D. Lowe",
+    aliases:["Jeff"],
+    role:"Host / Trivia",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Trivia","The Dozen","Host"],
+    shows:["The Dozen"],
+    bio:"Host and central figure of The Dozen trivia universe.",
+    power:88,
+    connections:["Frank the Tank","Brandon Walker","Rico Bosco"]
+},
 
-    {
-        name: "Dana Beers",
-        aliases: ["Dana"],
-        role: "Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Personality", "Comedy", "Travel"],
-        shows: [],
-        bio: "Personality associated with multiple Barstool projects and the broader Stoolverse.",
-        career: [],
-        funnyMoments: [],
-        connections: []
-    },
+{
+    name:"Dana Beers",
+    aliases:["Dana"],
+    role:"Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Personality","Comedy","Travel"],
+    shows:[],
+    bio:"Personality associated with multiple Barstool projects and the broader Stoolverse.",
+    power:75,
+    connections:[]
+},
 
-    {
-        name: "Mike Katic",
-        aliases: ["Katic"],
-        role: "Personality",
-        image: "",
-        college: "Indiana University",
-        hometown: "",
-        tags: ["Sports", "Football", "Personality"],
-        shows: [],
-        bio: "Sports personality connected to the Barstool ecosystem.",
-        career: [],
-        funnyMoments: [],
-        connections: []
-    },
+{
+    name:"Mike Katic",
+    aliases:["Katic"],
+    role:"Personality",
+    image:"",
+    college:"Indiana University",
+    hometown:"",
+    tags:["Sports","Football","Personality"],
+    shows:[],
+    bio:"Sports personality connected to the Barstool ecosystem.",
+    power:72,
+    connections:[]
+},
 
-    {
-        name: "Zac",
-        aliases: ["Zac"],
-        role: "Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Personality", "Comedy"],
-        shows: [],
-        bio: "A recognizable member of the wider Barstool personality ecosystem.",
-        career: [],
-        funnyMoments: [],
-        connections: []
-    },
+{
+    name:"Zac",
+    aliases:["Zac"],
+    role:"Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Personality","Comedy"],
+    shows:[],
+    bio:"A recognizable member of the wider Barstool personality ecosystem.",
+    power:70,
+    connections:[]
+},
 
-    {
-        name: "KFC",
-        aliases: ["Kevin Clancy"],
-        role: "Writer / Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Comedy", "Writing", "New York"],
-        shows: ["KFC Radio"],
-        bio: "One of the major personalities from Barstool's New York era.",
-        career: [],
-        funnyMoments: [],
-        connections: ["Feits", "Dave Portnoy"]
-    },
+{
+    name:"KFC",
+    aliases:["Kevin Clancy"],
+    role:"Writer / Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Comedy","Writing","New York"],
+    shows:["KFC Radio"],
+    bio:"One of the major personalities from Barstool's New York era.",
+    power:89,
+    connections:["Feits","Dave Portnoy"]
+},
 
-    {
-        name: "Feits",
-        aliases: ["John Feitelberg"],
-        role: "Comedy / Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Comedy", "New York"],
-        shows: ["KFC Radio"],
-        bio: "Longtime Barstool personality and part of the KFC Radio universe.",
-        career: [],
-        funnyMoments: [],
-        connections: ["KFC", "Dave Portnoy"]
-    },
+{
+    name:"Feits",
+    aliases:["John Feitelberg"],
+    role:"Comedy / Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Comedy","New York"],
+    shows:["KFC Radio"],
+    bio:"Longtime Barstool personality and part of the KFC Radio universe.",
+    power:86,
+    connections:["KFC","Dave Portnoy"]
+},
 
-    {
-        name: "Jake Marsh",
-        aliases: ["Jake"],
-        role: "Sports / Trivia",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Sports", "Trivia", "The Dozen"],
-        shows: ["The Dozen"],
-        bio: "Sports and trivia personality associated with multiple Barstool projects.",
-        career: [],
-        funnyMoments: [],
-        connections: ["Jeff D. Lowe", "PFT Commenter"]
-    },
+{
+    name:"Jake Marsh",
+    aliases:["Jake"],
+    role:"Sports / Trivia",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Sports","Trivia","The Dozen"],
+    shows:["The Dozen"],
+    bio:"Sports and trivia personality associated with multiple Barstool projects.",
+    power:79,
+    connections:["Jeff D. Lowe","PFT Commenter"]
+},
 
-    {
-        name: "Large",
-        aliases: ["Large"],
-        role: "Sports / Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Sports", "Trivia", "New York"],
-        shows: ["The Dozen"],
-        bio: "Recognizable Barstool personality connected to sports and trivia content.",
-        career: [],
-        funnyMoments: [],
-        connections: ["Jeff D. Lowe"]
-    },
+{
+    name:"Large",
+    aliases:["Large"],
+    role:"Sports / Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Sports","Trivia","New York"],
+    shows:["The Dozen"],
+    bio:"Recognizable Barstool personality connected to sports and trivia content.",
+    power:78,
+    connections:["Jeff D. Lowe"]
+},
 
-    {
-        name: "Marty Mush",
-        aliases: ["Marty"],
-        role: "Sports / Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Sports", "Comedy", "New York"],
-        shows: [],
-        bio: "Sports personality with a recognizable place in the Barstool universe.",
-        career: [],
-        funnyMoments: [],
-        connections: []
-    },
+{
+    name:"Marty Mush",
+    aliases:["Marty"],
+    role:"Sports / Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Sports","Comedy","New York"],
+    shows:[],
+    bio:"Sports personality with a recognizable place in the Barstool universe.",
+    power:77,
+    connections:[]
+},
 
-    {
-        name: "Billy Football",
-        aliases: ["Billy"],
-        role: "Sports / Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Football", "Chaos", "Comedy"],
-        shows: ["Pardon My Take"],
-        bio: "Formerly associated with Pardon My Take and the wider Barstool universe.",
-        career: [],
-        funnyMoments: [],
-        connections: ["Big Cat", "PFT Commenter"]
-    },
+{
+    name:"Billy Football",
+    aliases:["Billy"],
+    role:"Sports / Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Football","Chaos","Comedy"],
+    shows:["Pardon My Take"],
+    bio:"Formerly associated with Pardon My Take and the wider Barstool universe.",
+    power:81,
+    connections:["Big Cat","PFT Commenter"]
+},
 
-    {
-        name: "Caleb Pressley",
-        aliases: ["Caleb"],
-        role: "Interviewer / Comedy",
-        image: "",
-        college: "University of North Carolina",
-        hometown: "",
-        tags: ["Comedy", "Interviews", "Sports"],
-        shows: [],
-        bio: "Interview personality known for a distinctive comedic style.",
-        career: [],
-        funnyMoments: [],
-        connections: []
-    },
+{
+    name:"Caleb Pressley",
+    aliases:["Caleb"],
+    role:"Interviewer / Comedy",
+    image:"",
+    college:"University of North Carolina",
+    hometown:"",
+    tags:["Comedy","Interviews","Sports"],
+    shows:[],
+    bio:"Interview personality known for a distinctive comedic style.",
+    power:85,
+    connections:[]
+},
 
-    {
-        name: "Francis Ellis",
-        aliases: ["Francis"],
-        role: "Comedy",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Comedy", "Writing", "New York"],
-        shows: [],
-        bio: "Comedian and writer associated with Barstool's comedy ecosystem.",
-        career: [],
-        funnyMoments: [],
-        connections: []
-    },
+{
+    name:"Francis Ellis",
+    aliases:["Francis"],
+    role:"Comedy",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Comedy","Writing","New York"],
+    shows:[],
+    bio:"Comedian and writer associated with Barstool's comedy ecosystem.",
+    power:76,
+    connections:[]
+},
 
-    {
-        name: "Kate",
-        aliases: ["Kate"],
-        role: "Comedy / Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Comedy", "The Yak"],
-        shows: ["The Yak"],
-        bio: "Personality associated with the Chicago comedy ecosystem.",
-        career: [],
-        funnyMoments: [],
-        connections: ["Nick Turani", "KB"]
-    },
+{
+    name:"Kate",
+    aliases:["Kate"],
+    role:"Comedy / Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Comedy","The Yak"],
+    shows:["The Yak"],
+    bio:"Personality associated with the Chicago comedy ecosystem.",
+    power:74,
+    connections:["Nick Turani","KB"]
+},
 
-    {
-        name: "Owen",
-        aliases: ["Owen"],
-        role: "Producer / Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Producer", "Comedy", "Chicago"],
-        shows: [],
-        bio: "Producer and personality connected to the Chicago Barstool ecosystem.",
-        career: [],
-        funnyMoments: [],
-        connections: []
-    },
+{
+    name:"Owen",
+    aliases:["Owen"],
+    role:"Producer / Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Producer","Comedy","Chicago"],
+    shows:[],
+    bio:"Producer and personality connected to the Chicago Barstool ecosystem.",
+    power:69,
+    connections:[]
+},
 
-    {
-        name: "Chief",
-        aliases: ["Chief"],
-        role: "Sports / Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Sports", "Chicago", "Trivia"],
-        shows: [],
-        bio: "Chicago-associated personality connected to sports and Barstool content.",
-        career: [],
-        funnyMoments: [],
-        connections: []
-    },
+{
+    name:"Chief",
+    aliases:["Chief"],
+    role:"Sports / Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Sports","Chicago","Trivia"],
+    shows:[],
+    bio:"Chicago-associated personality connected to sports and Barstool content.",
+    power:73,
+    connections:[]
+},
 
-    {
-        name: "Nicky Smokes",
-        aliases: ["Nicky"],
-        role: "Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Chaos", "Comedy", "Personality"],
-        shows: [],
-        bio: "A chaotic personality associated with the newer Barstool ecosystem.",
-        career: [],
-        funnyMoments: [],
-        connections: []
-    },
+{
+    name:"Nicky Smokes",
+    aliases:["Nicky"],
+    role:"Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Chaos","Comedy","Personality"],
+    shows:[],
+    bio:"A chaotic personality associated with the newer Barstool ecosystem.",
+    power:78,
+    connections:[]
+},
 
-    {
-        name: "Tommy Smokes",
-        aliases: ["Tommy"],
-        role: "Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Comedy", "Chaos", "New York"],
-        shows: [],
-        bio: "Recognizable personality associated with Barstool's New York and comedy ecosystem.",
-        career: [],
-        funnyMoments: [],
-        connections: []
-    },
+{
+    name:"Tommy Smokes",
+    aliases:["Tommy"],
+    role:"Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Comedy","Chaos","New York"],
+    shows:[],
+    bio:"Recognizable personality associated with Barstool's New York and comedy ecosystem.",
+    power:80,
+    connections:[]
+},
 
-    {
-        name: "Hank",
-        aliases: ["Hank"],
-        role: "Producer / Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Producer", "Sports", "Comedy"],
-        shows: ["Pardon My Take"],
-        bio: "Producer and personality associated with major Barstool content.",
-        career: [],
-        funnyMoments: [],
-        connections: ["Big Cat", "PFT Commenter"]
-    },
+{
+    name:"Hank",
+    aliases:["Hank"],
+    role:"Producer / Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Producer","Sports","Comedy"],
+    shows:["Pardon My Take"],
+    bio:"Producer and personality associated with major Barstool content.",
+    power:83,
+    connections:["Big Cat","PFT Commenter"]
+},
 
-    {
-        name: "Klemmer",
-        aliases: ["Klemmer"],
-        role: "Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Comedy", "Sports", "The Dozen"],
-        shows: ["The Dozen"],
-        bio: "Personality connected to the newer Barstool ecosystem and trivia universe.",
-        career: [],
-        funnyMoments: [],
-        connections: ["Jeff D. Lowe", "Frank the Tank"]
-    },
+{
+    name:"Klemmer",
+    aliases:["Klemmer"],
+    role:"Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Comedy","Sports","The Dozen"],
+    shows:["The Dozen"],
+    bio:"Personality connected to the newer Barstool ecosystem and trivia universe.",
+    power:74,
+    connections:["Jeff D. Lowe","Frank the Tank"]
+},
 
-    {
-        name: "Smitty",
-        aliases: ["Smitty"],
-        role: "Sports / Personality",
-        image: "",
-        college: "",
-        hometown: "",
-        tags: ["Sports", "Gaming", "Personality"],
-        shows: [],
-        bio: "Sports and gaming personality associated with the wider Barstool world.",
-        career: [],
-        funnyMoments: [],
-        connections: []
-    }
+{
+    name:"Smitty",
+    aliases:["Smitty"],
+    role:"Sports / Personality",
+    image:"",
+    college:"",
+    hometown:"",
+    tags:["Sports","Gaming","Personality"],
+    shows:[],
+    bio:"Sports and gaming personality associated with the wider Barstool world.",
+    power:71,
+    connections:[]
+}
 
 ];
 
 
-/* =====================================================
-    MAP DATA
-===================================================== */
+/* ============================================================
+   SHOW DATABASE
+============================================================ */
+
+const shows = [
+
+{
+    name:"Pardon My Take",
+    type:"Sports Comedy",
+    hosts:["Big Cat","PFT Commenter"],
+    rating:99,
+    description:"The flagship sports-comedy machine."
+},
+
+{
+    name:"The Yak",
+    type:"Chaos / Comedy",
+    hosts:["Big Cat","Nick Turani","KB","Rone","Sas","TJ"],
+    rating:98,
+    description:"A daily ecosystem where almost anything can happen."
+},
+
+{
+    name:"The Dozen",
+    type:"Trivia",
+    hosts:["Jeff D. Lowe","Frank the Tank","Rico Bosco","Jake Marsh"],
+    rating:91,
+    description:"Trivia, rivalries, teams and endless arguments."
+},
+
+{
+    name:"Mostly Sports",
+    type:"Sports Talk",
+    hosts:["Brandon Walker"],
+    rating:88,
+    description:"Sports opinions with the Brandon Walker intensity dial turned all the way up."
+},
+
+{
+    name:"KFC Radio",
+    type:"Comedy",
+    hosts:["KFC","Feits"],
+    rating:87,
+    description:"A major piece of the New York-era Barstool universe."
+},
+
+{
+    name:"One Bite",
+    type:"Food / Travel",
+    hosts:["Dave Portnoy"],
+    rating:94,
+    description:"Pizza reviews that became a universe of their own."
+}
+
+];
+
+
+/* ============================================================
+   MOMENTS
+============================================================ */
+
+const moments = [
+
+{
+    title:"The Arizona Incident",
+    type:"chaos",
+    year:"Modern Era",
+    people:["Mintzy"],
+    description:"A legendary piece of Stoolverse chaos that permanently entered the archive.",
+    location:"Arizona",
+    impact:91
+},
+
+{
+    title:"The Yak Becomes Its Own Universe",
+    type:"classic",
+    year:"Modern Era",
+    people:["Big Cat","Nick Turani","KB","Rone","Sas","TJ"],
+    description:"The Yak develops a culture, language and ecosystem that feels completely separate from normal media.",
+    location:"Chicago",
+    impact:98
+},
+
+{
+    title:"One Bite Goes National",
+    type:"sports",
+    year:"Modern Era",
+    people:["Dave Portnoy"],
+    description:"The pizza review format evolves into a major cultural phenomenon.",
+    location:"Everywhere",
+    impact:95
+},
+
+{
+    title:"Rico vs Brandon",
+    type:"beef",
+    year:"Ongoing",
+    people:["Rico Bosco","Brandon Walker"],
+    description:"A rivalry that turns ordinary sports conversations into full-scale events.",
+    location:"Everywhere",
+    impact:94
+},
+
+{
+    title:"The Dozen Rivalry Era",
+    type:"beef",
+    year:"Modern Era",
+    people:["Jeff D. Lowe","Frank the Tank","Rico Bosco"],
+    description:"Trivia becomes personal, competitive and dramatically more serious than it needs to be.",
+    location:"Studio",
+    impact:88
+},
+
+{
+    title:"The New York Office Era",
+    type:"classic",
+    year:"Legacy Era",
+    people:["KFC","Feits","Dave Portnoy","Large"],
+    description:"A foundational era that helped create the modern Barstool personality ecosystem.",
+    location:"New York",
+    impact:96
+}
+
+];
+
+
+/* ============================================================
+   LOCATIONS
+============================================================ */
 
 const locations = {
 
-    newyork: {
-        name: "NEW YORK",
-        description: "One of the most important cities in Barstool history.",
-        people: ["Dave Portnoy", "KFC", "Feits", "Large", "Tommy Smokes"],
-        moments: [
-            "Early Barstool history",
-            "The New York office era",
-            "KFC Radio universe"
-        ]
+    newyork:{
+        name:"NEW YORK",
+        description:"One of the most important cities in Barstool history.",
+        people:["Dave Portnoy","KFC","Feits","Large","Tommy Smokes"],
+        moments:["Early Barstool history","The New York office era","KFC Radio universe"]
     },
 
-    chicago: {
-        name: "CHICAGO",
-        description: "A major center of the modern Barstool universe.",
-        people: ["Big Cat", "Brandon Walker", "Nick Turani", "KB", "Rone", "TJ"],
-        moments: [
-            "The Yak universe",
-            "Chicago office chaos",
-            "Major sports and comedy shows"
-        ]
+    chicago:{
+        name:"CHICAGO",
+        description:"A major center of the modern Barstool universe.",
+        people:["Big Cat","Brandon Walker","Nick Turani","KB","Rone","TJ"],
+        moments:["The Yak universe","Chicago office chaos","Major sports and comedy shows"]
     },
 
-    philadelphia: {
-        name: "PHILADELPHIA",
-        description: "A major sports city with deep connections to Barstool personalities and content.",
-        people: ["Brandon Walker"],
-        moments: [
-            "Sports culture",
-            "Barstool events",
-            "Philadelphia personalities"
-        ]
+    philadelphia:{
+        name:"PHILADELPHIA",
+        description:"A major sports city with deep connections to Barstool personalities and content.",
+        people:["Brandon Walker"],
+        moments:["Sports culture","Barstool events","Philadelphia personalities"]
     },
 
-    arizona: {
-        name: "ARIZONA",
-        description: "A location connected to memorable Barstool chaos.",
-        people: ["Mintzy"],
-        moments: [
-            "The Mintzy Arizona incident"
-        ]
+    arizona:{
+        name:"ARIZONA",
+        description:"A location connected to memorable Barstool chaos.",
+        people:["Mintzy"],
+        moments:["The Mintzy Arizona incident"]
+    },
+
+    indiana:{
+        name:"INDIANA",
+        description:"A sports-heavy region connected to multiple personalities and college sports culture.",
+        people:["Mike Katic"],
+        moments:["College sports debates","The sports ecosystem"]
     }
 
 };
 
 
-/* =====================================================
-    WEBSITE FUNCTIONS
-===================================================== */
+/* ============================================================
+   DYNASTY SAVE DATA
+============================================================ */
 
-function showPage(pageId) {
+let dynasty =
+JSON.parse(localStorage.getItem("stoolverseDynasty") || "null")
+||
+{
+    day:1,
+    cash:100,
+    audience:72,
+    morale:78,
+    chaos:54,
+    reputation:82,
+    events:[]
+};
 
-    document.querySelectorAll(".page").forEach(page => {
-        page.classList.remove("active");
-    });
 
-    document.getElementById(pageId).classList.add("active");
+/* ============================================================
+   DYNASTY EVENTS
+============================================================ */
+
+const dynastyEventPool = [
+
+{
+    title:"A personality starts an unexpected beef",
+    text:"A completely avoidable argument starts trending.",
+
+    choices:[
+
+        [
+            "Lean into it",
+
+            function(){
+
+                dynasty.audience += 8;
+                dynasty.chaos += 12;
+                dynasty.reputation -= 3;
+
+                return "The beef becomes content. Everyone wins. Probably.";
+
+            }
+        ],
+
+        [
+            "Shut it down",
+
+            function(){
+
+                dynasty.morale += 5;
+                dynasty.audience -= 3;
+
+                return "The company chooses peace. The internet is disappointed.";
+
+            }
+        ],
+
+        [
+            "Make it a show",
+
+            function(){
+
+                dynasty.audience += 12;
+                dynasty.cash += 10;
+                dynasty.chaos += 8;
+
+                return "The beef becomes a weekly series.";
+
+            }
+        ]
+
+    ]
+
+},
+
+{
+    title:"A new show is pitched",
+    text:"The concept is either genius or absolutely terrible.",
+
+    choices:[
+
+        [
+            "Greenlight it",
+
+            function(){
+
+                dynasty.cash -= 12;
+                dynasty.audience += 10;
+
+                return "The new show launches with immediate attention.";
+
+            }
+        ],
+
+        [
+            "Test it first",
+
+            function(){
+
+                dynasty.cash -= 4;
+                dynasty.audience += 4;
+                dynasty.reputation += 3;
+
+                return "A pilot gets made. The numbers are promising.";
+
+            }
+        ],
+
+        [
+            "Kill the idea",
+
+            function(){
+
+                dynasty.morale -= 3;
+
+                return "The pitch is buried in the idea graveyard.";
+
+            }
+        ]
+
+    ]
+
+},
+
+{
+    title:"The office is becoming too chaotic",
+    text:"Morale is high. Productivity is questionable.",
+
+    choices:[
+
+        [
+            "Embrace the chaos",
+
+            function(){
+
+                dynasty.chaos += 15;
+                dynasty.audience += 5;
+                dynasty.morale += 4;
+
+                return "The chaos becomes the brand.";
+
+            }
+        ],
+
+        [
+            "Install structure",
+
+            function(){
+
+                dynasty.chaos -= 12;
+                dynasty.reputation += 5;
+                dynasty.morale -= 2;
+
+                return "Meetings are scheduled. People are suspicious.";
+
+            }
+        ],
+
+        [
+            "Create a chaos department",
+
+            function(){
+
+                dynasty.cash -= 8;
+                dynasty.chaos += 8;
+                dynasty.audience += 8;
+
+                return "The chaos is now officially organized.";
+
+            }
+        ]
+
+    ]
+
+},
+
+{
+    title:"A major personality wants a new show",
+    text:"The talent believes they can carry an entire universe.",
+
+    choices:[
+
+        [
+            "Give them the keys",
+
+            function(){
+
+                dynasty.audience += 9;
+                dynasty.cash -= 10;
+                dynasty.morale += 5;
+
+                return "A new franchise is born.";
+
+            }
+        ],
+
+        [
+            "Pair them with a rival",
+
+            function(){
+
+                dynasty.audience += 14;
+                dynasty.chaos += 15;
+
+                return "The chemistry is incredible and deeply uncomfortable.";
+
+            }
+        ],
+
+        [
+            "Make them prove it",
+
+            function(){
+
+                dynasty.reputation += 5;
+                dynasty.morale -= 4;
+
+                return "They return with an even bigger pitch.";
+
+            }
+        ]
+
+    ]
+
+}
+
+];
+
+
+let currentDynastyEvent = null;
+
+
+/* ============================================================
+   CORE FUNCTIONS
+============================================================ */
+
+function showPage(pageId){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page => page.classList.remove("active"));
+
+    const page =
+        document.getElementById(pageId);
+
+    if(!page) return;
+
+    page.classList.add("active");
+
+    document
+        .querySelectorAll("nav button")
+        .forEach(button => {
+
+            button.classList.toggle(
+                "active",
+                button.dataset.page === pageId
+            );
+
+        });
 
     window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+        top:0,
+        behavior:"smooth"
     });
 
-    if (pageId === "people") {
+    if(pageId === "people"){
         renderPeople();
     }
+
+    if(pageId === "shows"){
+        renderShows();
+    }
+
+    if(pageId === "moments"){
+        renderMoments();
+    }
+
+    if(pageId === "dynasty"){
+        renderDynasty();
+    }
+
 }
 
 
-function initials(name) {
+function initials(name){
 
     return name
         .split(" ")
         .map(word => word[0])
         .join("")
-        .slice(0, 2)
+        .slice(0,2)
         .toUpperCase();
 
 }
 
 
-function personCard(person) {
+function escapeHtml(value){
+
+    return String(value || "")
+        .replace(/[&<>"']/g, function(character){
+
+            return {
+
+                "&":"&amp;",
+                "<":"&lt;",
+                ">":"&gt;",
+                '"':"&quot;",
+                "'":"&#039;"
+
+            }[character];
+
+        });
+
+}
+
+
+function escapeAttr(value){
+
+    return String(value || "")
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'");
+
+}
+
+
+/* ============================================================
+   PEOPLE
+============================================================ */
+
+let peopleFilter = "all";
+
+function personCard(person){
 
     return `
-        <div class="card person-card" onclick="openProfile('${person.name}')">
+
+        <div
+            class="card person-card"
+            onclick="openProfile('${escapeAttr(person.name)}')"
+        >
 
             <div class="person-photo">
 
                 ${
                     person.image
-                    ? `<img src="${person.image}" alt="${person.name}">`
-                    : `<div class="photo-placeholder">${initials(person.name)}</div>`
+
+                    ?
+
+                    `<img
+                        src="${person.image}"
+                        alt="${escapeHtml(person.name)}"
+                    >`
+
+                    :
+
+                    `<div class="photo-placeholder">
+                        ${initials(person.name)}
+                    </div>`
+
                 }
 
             </div>
 
-            <div class="role">${person.role}</div>
+            <div class="role">
+                ${escapeHtml(person.role)}
+            </div>
 
-            <h3>${person.name}</h3>
+            <h3>
+                ${escapeHtml(person.name)}
+            </h3>
 
-            <div style="color:var(--muted);font-size:13px;">
-                ${person.bio || ""}
+            <div class="muted small">
+                ${escapeHtml(person.bio)}
             </div>
 
             <div class="tags">
 
                 ${
-                    person.tags
-                    .slice(0, 4)
-                    .map(tag => `<span class="tag">${tag}</span>`)
+                    (person.tags || [])
+                    .slice(0,4)
+                    .map(tag => `
+                        <span class="tag">
+                            ${escapeHtml(tag)}
+                        </span>
+                    `)
                     .join("")
                 }
 
             </div>
 
         </div>
+
     `;
 
 }
 
 
-function renderFeatured() {
+function renderFeatured(){
 
-    const featured = personalities.slice(0, 8);
-
-    document.getElementById("featuredPeople").innerHTML =
-        featured.map(personCard).join("");
+    document
+        .getElementById("featuredPeople")
+        .innerHTML =
+        personalities
+        .slice(0,8)
+        .map(personCard)
+        .join("");
 
 }
 
 
-function renderPeople() {
+function setPeopleFilter(filter,button){
+
+    peopleFilter = filter;
+
+    document
+        .querySelectorAll("#people .tab")
+        .forEach(tab => tab.classList.remove("active"));
+
+    button.classList.add("active");
+
+    renderPeople();
+
+}
+
+
+function renderPeople(){
 
     const search =
-        document
-        .getElementById("personSearch")
-        .value
+        (
+            document
+                .getElementById("personSearch")
+                ?.value
+            ||
+            ""
+        )
         .toLowerCase();
 
-    const filtered = personalities.filter(person => {
+    const filtered =
+        personalities.filter(person => {
 
-        const searchable = [
+            const searchable = [
 
-            person.name,
-            ...(person.aliases || []),
-            person.role,
-            person.college,
-            person.hometown,
-            ...(person.tags || []),
-            ...(person.shows || [])
+                person.name,
 
-        ]
-        .join(" ")
-        .toLowerCase();
+                ...(person.aliases || []),
 
-        return searchable.includes(search);
+                person.role,
 
-    });
+                person.college,
 
-    document.getElementById("peopleGrid").innerHTML =
+                person.hometown,
+
+                ...(person.tags || []),
+
+                ...(person.shows || [])
+
+            ]
+            .join(" ")
+            .toLowerCase();
+
+            const filterOkay =
+
+                peopleFilter === "all"
+
+                ||
+
+                (
+                    peopleFilter === "core"
+                    &&
+                    person.power >= 90
+                )
+
+                ||
+
+                (
+                    peopleFilter === "yak"
+                    &&
+                    (person.shows || []).includes("The Yak")
+                )
+
+                ||
+
+                (
+                    peopleFilter === "sports"
+                    &&
+                    (person.tags || []).includes("Sports")
+                )
+
+                ||
+
+                (
+                    peopleFilter === "comedy"
+                    &&
+                    (person.tags || []).includes("Comedy")
+                )
+
+                ||
+
+                (
+                    peopleFilter === "chaos"
+                    &&
+                    (person.tags || []).includes("Chaos")
+                );
+
+            return searchable.includes(search) && filterOkay;
+
+        });
+
+    document
+        .getElementById("peopleGrid")
+        .innerHTML =
 
         filtered.length
-        ? filtered.map(personCard).join("")
-        : `<div class="empty">No personalities found.</div>`;
+
+        ?
+
+        filtered
+            .map(personCard)
+            .join("")
+
+        :
+
+        `<div class="empty">
+            No personalities found.
+        </div>`;
 
 }
 
 
-function openProfile(name) {
+function openProfile(name){
 
     const person =
-        personalities.find(p => p.name === name);
+        personalities.find(
+            p => p.name === name
+        );
 
-    if (!person) return;
+    if(!person) return;
 
-    const career = person.career || [];
-    const funny = person.funnyMoments || [];
+    const connections =
+        (person.connections || [])
+        .map(name =>
+            personalities.find(
+                p => p.name === name
+            )
+        )
+        .filter(Boolean);
 
-    document.getElementById("profileContent").innerHTML = `
+    document
+        .getElementById("profileContent")
+        .innerHTML = `
 
-        <div class="profile-header">
+            <div class="profile-header">
 
-            <div class="profile-photo">
-
-                ${
-                    person.image
-                    ? `<img src="${person.image}" alt="${person.name}">`
-                    : `<div class="photo-placeholder">${initials(person.name)}</div>`
-                }
-
-            </div>
-
-            <div>
-
-                <div class="profile-subtitle">
-                    ${person.role}
-                </div>
-
-                <h1 class="profile-name">
-                    ${person.name}
-                </h1>
-
-                <p style="color:#bbb;line-height:1.7;">
-                    ${person.bio || ""}
-                </p>
-
-                <div class="tags">
+                <div class="profile-photo">
 
                     ${
-                        person.tags
-                        .map(tag => `<span class="tag">${tag}</span>`)
-                        .join("")
+                        person.image
+
+                        ?
+
+                        `<img
+                            src="${person.image}"
+                            alt="${escapeHtml(person.name)}"
+                        >`
+
+                        :
+
+                        `<div class="photo-placeholder">
+                            ${initials(person.name)}
+                        </div>`
+
                     }
 
                 </div>
 
-                <div class="info-grid">
+                <div>
 
-                    <div class="info-box">
-                        <label>College</label>
-                        ${person.college || "Unknown"}
+                    <div class="profile-subtitle">
+                        ${escapeHtml(person.role)}
                     </div>
 
-                    <div class="info-box">
-                        <label>Hometown</label>
-                        ${person.hometown || "Unknown"}
+                    <h1 class="profile-name">
+                        ${escapeHtml(person.name)}
+                    </h1>
+
+                    <p class="muted">
+                        ${escapeHtml(person.bio)}
+                    </p>
+
+                    <div class="tags">
+
+                        ${
+                            (person.tags || [])
+                            .map(tag => `
+                                <span class="tag">
+                                    ${escapeHtml(tag)}
+                                </span>
+                            `)
+                            .join("")
+                        }
+
                     </div>
 
-                    <div class="info-box">
-                        <label>Shows</label>
-                        ${(person.shows || []).join(", ") || "None listed"}
+                    <div class="info-grid">
+
+                        <div class="info-box">
+                            <label>
+                                College
+                            </label>
+
+                            ${escapeHtml(person.college || "Unknown")}
+
+                        </div>
+
+                        <div class="info-box">
+                            <label>
+                                Hometown
+                            </label>
+
+                            ${escapeHtml(person.hometown || "Unknown")}
+
+                        </div>
+
+                        <div class="info-box">
+                            <label>
+                                Power Level
+                            </label>
+
+                            ${person.power}/100
+
+                        </div>
+
+                        <div class="info-box">
+                            <label>
+                                Shows
+                            </label>
+
+                            ${
+                                (person.shows || [])
+                                .join(", ")
+                                ||
+                                "None listed"
+                            }
+
+                        </div>
+
                     </div>
 
                 </div>
 
             </div>
 
-        </div>
+            <div class="section-title">
+                <h2>
+                    CONNECTIONS
+                </h2>
+            </div>
 
+            <div class="grid">
 
-        <div class="section-title">
-            <h2>Career Timeline</h2>
-        </div>
+                ${
+                    connections
+                    .map(personCard)
+                    .join("")
+                    ||
+                    `<div class="empty">
+                        No connections added yet.
+                    </div>`
+                }
 
-        <div class="timeline">
+            </div>
 
-            ${
-                career.length
-                ? career.map(item => `
-
-                    <div class="timeline-item">
-
-                        <div class="timeline-year">
-                            ${item.year}
-                        </div>
-
-                        <h3>
-                            ${item.title}
-                        </h3>
-
-                        <p style="color:#aaa;">
-                            ${item.description}
-                        </p>
-
-                    </div>
-
-                `).join("")
-                : `<div class="empty">More moments coming soon.</div>`
-            }
-
-        </div>
-
-
-        <div class="section-title">
-            <h2>Funny / Iconic Moments</h2>
-        </div>
-
-        ${
-            funny.length
-            ? funny.map(moment => `
-
-                <div class="moment">
-
-                    <h3>
-                        ${moment.title}
-                    </h3>
-
-                    <p>
-                        ${moment.description}
-                    </p>
-
-                    <div class="moment-meta">
-                        📍 ${moment.location || "Unknown"}
-                    </div>
-
-                </div>
-
-            `).join("")
-            : `<div class="empty">No moments added yet.</div>`
-        }
-
-
-        <div class="section-title">
-            <h2>Connections</h2>
-        </div>
-
-        <div class="grid">
-
-            ${
-                (person.connections || []).map(connection => {
-
-                    const connected =
-                        personalities.find(p => p.name === connection);
-
-                    return connected
-                    ? personCard(connected)
-                    : "";
-
-                }).join("")
-
-            }
-
-        </div>
-
-    `;
+        `;
 
     showPage("profile");
 
 }
 
 
-function randomPerson() {
+function randomPerson(){
 
     const random =
         personalities[
-            Math.floor(Math.random() * personalities.length)
+            Math.floor(
+                Math.random() * personalities.length
+            )
         ];
 
     openProfile(random.name);
@@ -1604,24 +2642,102 @@ function randomPerson() {
 }
 
 
-/* =====================================================
-    SHOW BUILDER
-===================================================== */
+/* ============================================================
+   SHOWS
+============================================================ */
+
+function renderShows(){
+
+    document
+        .getElementById("showsGrid")
+        .innerHTML =
+
+        shows
+        .map(show => `
+
+            <div class="card">
+
+                <div class="kicker">
+                    ${escapeHtml(show.type)}
+                </div>
+
+                <h2>
+                    ${escapeHtml(show.name)}
+                </h2>
+
+                <p class="muted">
+                    ${escapeHtml(show.description)}
+                </p>
+
+                <div class="stat-grid">
+
+                    <div class="stat">
+
+                        <div class="stat-number">
+                            ${show.rating}
+                        </div>
+
+                        <div class="stat-label">
+                            IMPACT
+                        </div>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <div class="stat-number">
+                            ${show.hosts.length}
+                        </div>
+
+                        <div class="stat-label">
+                            CORE CAST
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="tags">
+
+                    ${
+                        show.hosts
+                        .map(host => `
+                            <span class="tag">
+                                ${escapeHtml(host)}
+                            </span>
+                        `)
+                        .join("")
+                    }
+
+                </div>
+
+            </div>
+
+        `)
+        .join("");
+
+}
+
+
+/* ============================================================
+   SHOW BUILDER
+============================================================ */
 
 let selectedCast = [];
 
-
-function showCastSuggestions() {
+function showCastSuggestions(){
 
     const query =
         document
-        .getElementById("castSearch")
-        .value
-        .toLowerCase();
+            .getElementById("castSearch")
+            .value
+            .toLowerCase();
 
-    if (!query) {
+    if(!query){
 
-        document.getElementById("castSuggestions").innerHTML = "";
+        document
+            .getElementById("castSuggestions")
+            .innerHTML = "";
 
         return;
 
@@ -1629,76 +2745,90 @@ function showCastSuggestions() {
 
     const matches =
         personalities
-        .filter(person => {
+        .filter(person =>
 
-            return person.name
+            person.name
                 .toLowerCase()
-                .includes(query);
+                .includes(query)
 
-        })
-        .slice(0, 8);
+            &&
 
-    document.getElementById("castSuggestions").innerHTML =
+            !selectedCast.includes(person.name)
 
-        matches.map(person => `
+        )
+        .slice(0,8);
+
+    document
+        .getElementById("castSuggestions")
+        .innerHTML =
+
+        matches
+        .map(person => `
 
             <button
                 class="secondary-btn"
-                style="margin:5px 5px 0 0;"
-                onclick="addCast('${person.name}')">
+                onclick="addCast('${escapeAttr(person.name)}')"
+            >
 
-                ${person.name}
+                ${escapeHtml(person.name)}
 
             </button>
 
-        `).join("");
+        `)
+        .join("");
 
 }
 
 
-function addCast(name) {
+function addCast(name){
 
-    if (!selectedCast.includes(name)) {
+    if(!selectedCast.includes(name)){
 
         selectedCast.push(name);
 
     }
 
     document
-    .getElementById("castSearch")
-    .value = "";
+        .getElementById("castSearch")
+        .value = "";
 
     document
-    .getElementById("castSuggestions")
-    .innerHTML = "";
+        .getElementById("castSuggestions")
+        .innerHTML = "";
 
     renderCast();
 
 }
 
 
-function removeCast(name) {
+function removeCast(name){
 
     selectedCast =
-        selectedCast.filter(person => person !== name);
+        selectedCast.filter(
+            person => person !== name
+        );
 
     renderCast();
 
 }
 
 
-function renderCast() {
+function renderCast(){
 
-    document.getElementById("selectedCast").innerHTML =
+    document
+        .getElementById("selectedCast")
+        .innerHTML =
 
-        selectedCast.map(name => `
+        selectedCast
+        .map(name => `
 
             <div class="cast-person">
 
-                ${name}
+                ${escapeHtml(name)}
 
                 <button
-                    onclick="removeCast('${name}')">
+                    onclick="removeCast('${escapeAttr(name)}')"
+                >
 
                     ✕
 
@@ -1706,33 +2836,47 @@ function renderCast() {
 
             </div>
 
-        `).join("");
+        `)
+        .join("");
 
 }
 
 
-function generateShow() {
+function generateShow(){
 
     const name =
         document
-        .getElementById("showName")
-        .value
-        || "Untitled Show";
+            .getElementById("showName")
+            .value
+        ||
+        "Untitled Show";
 
     const format =
         document
-        .getElementById("showFormat")
-        .value;
+            .getElementById("showFormat")
+            .value;
+
+    const energy =
+        document
+            .getElementById("showEnergy")
+            .value;
 
     const result =
         document
-        .getElementById("showResult");
+            .getElementById("showResult");
 
-    if (selectedCast.length === 0) {
+    if(selectedCast.length === 0){
 
         result.innerHTML = `
-            <h2>YOU NEED A CAST.</h2>
-            <p>Unless this is a very experimental podcast.</p>
+
+            <h2>
+                YOU NEED A CAST.
+            </h2>
+
+            <p>
+                Unless this is a very experimental podcast.
+            </p>
+
         `;
 
         result.classList.add("show");
@@ -1741,64 +2885,87 @@ function generateShow() {
 
     }
 
-    const chaosPeople =
-        selectedCast.filter(name => {
+    const people =
+        selectedCast
+        .map(name =>
+            personalities.find(
+                p => p.name === name
+            )
+        )
+        .filter(Boolean);
 
-            const person =
-                personalities.find(p => p.name === name);
+    const chaos =
+        people.filter(
+            p => p.tags.includes("Chaos")
+        ).length;
 
-            return person &&
-                person.tags.includes("Chaos");
+    const comedy =
+        people.filter(
+            p => p.tags.includes("Comedy")
+        ).length;
 
-        }).length;
+    const sports =
+        people.filter(
+            p => p.tags.includes("Sports")
+        ).length;
 
-    const comedyPeople =
-        selectedCast.filter(name => {
+    const chemistry =
+        Math.min(
+            99,
+            Math.round(
+                45
+                +
+                chaos * 8
+                +
+                comedy * 5
+                +
+                sports * 3
+                +
+                Math.random() * 20
+            )
+        );
 
-            const person =
-                personalities.find(p => p.name === name);
+    const risk =
+        Math.min(
+            99,
+            Math.round(
+                20
+                +
+                chaos * 12
+                +
+                Math.random() * 25
+            )
+        );
 
-            return person &&
-                person.tags.includes("Comedy");
+    let description;
 
-        }).length;
-
-    const sportsPeople =
-        selectedCast.filter(name => {
-
-            const person =
-                personalities.find(p => p.name === name);
-
-            return person &&
-                person.tags.includes("Sports");
-
-        }).length;
-
-
-    let description = "";
-
-    if (chaosPeople >= 2) {
+    if(chaos >= 2){
 
         description =
-        "This show has an extremely high chance of completely losing control.";
-
-    } else if (comedyPeople >= 2) {
-
-        description =
-        "The chemistry is built around jokes, personalities and people trying to derail the conversation.";
-
-    } else if (sportsPeople >= 2) {
-
-        description =
-        "This show would probably begin with sports and eventually turn into an argument about something completely different.";
-
-    } else {
-
-        description =
-        "A completely unpredictable combination that could either be brilliant or an absolute disaster.";
+            "This show has an extremely high chance of completely losing control.";
 
     }
 
+    else if(comedy >= 2){
+
+        description =
+            "The chemistry is built around jokes, personalities and people trying to derail the conversation.";
+
+    }
+
+    else if(sports >= 2){
+
+        description =
+            "This show would probably begin with sports and eventually turn into an argument about something completely different.";
+
+    }
+
+    else{
+
+        description =
+            "A completely unpredictable combination that could either be brilliant or an absolute disaster.";
+
+    }
 
     const reactions = [
 
@@ -1814,13 +2981,6 @@ function generateShow() {
 
     ];
 
-
-    const reaction =
-        reactions[
-            Math.floor(Math.random() * reactions.length)
-        ];
-
-
     result.innerHTML = `
 
         <div class="kicker">
@@ -1828,11 +2988,15 @@ function generateShow() {
         </div>
 
         <h2>
-            ${name}
+            ${escapeHtml(name)}
         </h2>
 
-        <p style="color:var(--muted);">
-            Format: ${format}
+        <p class="muted">
+            Format:
+            ${escapeHtml(format)}
+            ·
+            Energy:
+            ${escapeHtml(energy)}
         </p>
 
         <h3>
@@ -1840,19 +3004,67 @@ function generateShow() {
         </h3>
 
         <p>
-            ${selectedCast.join(" • ")}
+            ${
+                selectedCast
+                .map(escapeHtml)
+                .join(" • ")
+            }
         </p>
 
-        <h3>
+        <div class="stat-grid">
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    ${chemistry}
+                </div>
+
+                <div class="stat-label">
+                    CHEMISTRY
+                </div>
+
+                <div class="progress">
+                    <i style="width:${chemistry}%"></i>
+                </div>
+
+            </div>
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    ${risk}
+                </div>
+
+                <div class="stat-label">
+                    CHAOS RISK
+                </div>
+
+                <div class="progress">
+                    <i style="width:${risk}%"></i>
+                </div>
+
+            </div>
+
+        </div>
+
+        <h3 style="margin-top:22px">
             WHAT THIS SHOW WOULD BE LIKE
         </h3>
 
-        <p style="color:#bbb;line-height:1.6;">
+        <p class="muted">
             ${description}
         </p>
 
         <div class="reaction">
-            ${reaction}
+
+            ${
+                reactions[
+                    Math.floor(
+                        Math.random() * reactions.length
+                    )
+                ]
+            }
+
         </div>
 
     `;
@@ -1862,18 +3074,448 @@ function generateShow() {
 }
 
 
-/* =====================================================
-    MAP
-===================================================== */
+/* ============================================================
+   DYNASTY MODE
+============================================================ */
 
-function showLocation(locationId) {
+function saveDynasty(){
+
+    localStorage.setItem(
+        "stoolverseDynasty",
+        JSON.stringify(dynasty)
+    );
+
+}
+
+
+function clampStats(){
+
+    [
+
+        "cash",
+        "audience",
+        "morale",
+        "chaos",
+        "reputation"
+
+    ]
+    .forEach(key => {
+
+        dynasty[key] =
+            Math.max(
+                0,
+                Math.min(
+                    100,
+                    dynasty[key]
+                )
+            );
+
+    });
+
+}
+
+
+function advanceDay(){
+
+    dynasty.day++;
+
+    currentDynastyEvent =
+        dynastyEventPool[
+            Math.floor(
+                Math.random()
+                *
+                dynastyEventPool.length
+            )
+        ];
+
+    dynasty.events.unshift({
+
+        day:dynasty.day,
+
+        title:currentDynastyEvent.title,
+
+        text:currentDynastyEvent.text
+
+    });
+
+    dynasty.audience +=
+        Math.floor(Math.random() * 5) - 1;
+
+    dynasty.cash +=
+        Math.floor(Math.random() * 8) - 3;
+
+    clampStats();
+
+    saveDynasty();
+
+    renderDynasty();
+
+    renderHome();
+
+    toast(
+        "The Stoolverse advanced one day."
+    );
+
+    showPage("dynasty");
+
+}
+
+
+function chooseDynasty(index){
+
+    if(!currentDynastyEvent){
+
+        advanceDay();
+
+        return;
+
+    }
+
+    const result =
+        currentDynastyEvent
+            .choices[index][1]();
+
+    clampStats();
+
+    saveDynasty();
+
+    renderDynasty();
+
+    renderHome();
+
+    toast(result);
+
+}
+
+
+function resetDynasty(){
+
+    if(
+        confirm(
+            "Reset the entire dynasty?"
+        )
+    ){
+
+        localStorage.removeItem(
+            "stoolverseDynasty"
+        );
+
+        location.reload();
+
+    }
+
+}
+
+
+function renderDynasty(){
+
+    document
+        .getElementById("dynastyStats")
+        .innerHTML = [
+
+            ["$" + dynasty.cash,"Cash"],
+
+            [dynasty.audience,"Audience"],
+
+            [dynasty.morale,"Morale"],
+
+            [dynasty.chaos,"Chaos"],
+
+            [dynasty.reputation,"Reputation"],
+
+            ["DAY " + dynasty.day,"Timeline"]
+
+        ]
+        .map(stat => `
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    ${stat[0]}
+                </div>
+
+                <div class="stat-label">
+                    ${stat[1]}
+                </div>
+
+            </div>
+
+        `)
+        .join("");
+
+    document
+        .getElementById("dynastyEvents")
+        .innerHTML =
+
+        currentDynastyEvent
+
+        ?
+
+        `
+
+            <div class="event-card">
+
+                <div class="event-date">
+                    DAY ${dynasty.day}
+                </div>
+
+                <h2>
+                    ${currentDynastyEvent.title}
+                </h2>
+
+                <p class="muted">
+                    ${currentDynastyEvent.text}
+                </p>
+
+                ${
+                    currentDynastyEvent.choices
+                    .map(
+                        (choice,index) => `
+
+                            <button
+                                class="secondary-btn"
+                                onclick="chooseDynasty(${index})"
+                            >
+
+                                ${choice[0]}
+
+                            </button>
+
+                        `
+                    )
+                    .join("")
+                }
+
+            </div>
+
+        `
+
+        :
+
+        `
+
+            <div class="panel">
+
+                <h3>
+                    The dynasty is waiting.
+                </h3>
+
+                <p class="muted">
+                    Advance the universe to generate your first major decision.
+                </p>
+
+                <button
+                    class="primary-btn"
+                    onclick="advanceDay()"
+                >
+
+                    ADVANCE DAY
+
+                </button>
+
+            </div>
+
+        `;
+
+    document
+        .getElementById("companyHealth")
+        .innerHTML = [
+
+            "audience",
+
+            "morale",
+
+            "chaos",
+
+            "reputation"
+
+        ]
+        .map(key => `
+
+            <div style="margin-bottom:15px">
+
+                <div style="display:flex;justify-content:space-between">
+
+                    <b>
+                        ${key}
+                    </b>
+
+                    <span>
+                        ${dynasty[key]}/100
+                    </span>
+
+                </div>
+
+                <div class="progress">
+
+                    <i
+                        style="width:${dynasty[key]}%"
+                    ></i>
+
+                </div>
+
+            </div>
+
+        `)
+        .join("");
+
+    const rankings =
+        [...personalities]
+        .sort(
+            (a,b) =>
+                b.power - a.power
+        )
+        .slice(0,8);
+
+    document
+        .getElementById("powerRankings")
+        .innerHTML =
+
+        rankings
+        .map(
+            (person,index) => `
+
+                <div
+                    style="
+                        display:flex;
+                        justify-content:space-between;
+                        padding:9px 0;
+                        border-bottom:1px solid #292929
+                    "
+                >
+
+                    <span>
+                        ${index + 1}.
+                        ${escapeHtml(person.name)}
+                    </span>
+
+                    <b>
+                        ${person.power}
+                    </b>
+
+                </div>
+
+            `
+        )
+        .join("");
+
+}
+
+
+/* ============================================================
+   MOMENTS
+============================================================ */
+
+let momentFilter = "all";
+
+
+function setMomentFilter(filter,button){
+
+    momentFilter = filter;
+
+    document
+        .querySelectorAll("#moments .tab")
+        .forEach(tab =>
+            tab.classList.remove("active")
+        );
+
+    button.classList.add("active");
+
+    renderMoments();
+
+}
+
+
+function renderMoments(){
+
+    const filtered =
+        moments.filter(moment =>
+
+            momentFilter === "all"
+
+            ||
+
+            moment.type === momentFilter
+
+        );
+
+    document
+        .getElementById("momentsList")
+        .innerHTML =
+
+        filtered
+        .map(moment => `
+
+            <div class="event-card">
+
+                <div class="event-date">
+
+                    ${escapeHtml(moment.year)}
+
+                    ·
+
+                    ${escapeHtml(moment.type)}
+
+                </div>
+
+                <h3>
+                    ${escapeHtml(moment.title)}
+                </h3>
+
+                <p class="muted">
+                    ${escapeHtml(moment.description)}
+                </p>
+
+                <div class="tags">
+
+                    ${
+                        moment.people
+                        .map(person => `
+
+                            <span class="tag">
+
+                                ${escapeHtml(person)}
+
+                            </span>
+
+                        `)
+                        .join("")
+                    }
+
+                </div>
+
+                <div class="small muted">
+
+                    📍
+                    ${escapeHtml(moment.location)}
+
+                    ·
+
+                    Impact
+                    ${moment.impact}/100
+
+                </div>
+
+            </div>
+
+        `)
+        .join("");
+
+}
+
+
+/* ============================================================
+   MAP
+============================================================ */
+
+function showLocation(locationId){
 
     const location =
         locations[locationId];
 
     const box =
         document
-        .getElementById("locationInfo");
+            .getElementById("locationInfo");
 
     box.innerHTML = `
 
@@ -1882,11 +3524,11 @@ function showLocation(locationId) {
         </div>
 
         <h2>
-            ${location.name}
+            ${escapeHtml(location.name)}
         </h2>
 
-        <p style="color:#bbb;">
-            ${location.description}
+        <p class="muted">
+            ${escapeHtml(location.description)}
         </p>
 
         <h3>
@@ -1894,7 +3536,11 @@ function showLocation(locationId) {
         </h3>
 
         <p>
-            ${location.people.join(" • ")}
+            ${
+                location.people
+                .map(escapeHtml)
+                .join(" • ")
+            }
         </p>
 
         <h3>
@@ -1905,7 +3551,11 @@ function showLocation(locationId) {
 
             ${
                 location.moments
-                .map(moment => `<li>${moment}</li>`)
+                .map(moment => `
+                    <li>
+                        ${escapeHtml(moment)}
+                    </li>
+                `)
                 .join("")
             }
 
@@ -1918,13 +3568,518 @@ function showLocation(locationId) {
 }
 
 
-/* =====================================================
-    START WEBSITE
-===================================================== */
+/* ============================================================
+   CUSTOM PEOPLE
+============================================================ */
 
-renderFeatured();
+function openAddPerson(){
 
-renderPeople();
+    openModal(`
+
+        <h2>
+            ADD PERSONALITY
+        </h2>
+
+        <p class="muted">
+            Add somebody to your custom Stoolverse database.
+        </p>
+
+        <label>
+            Name
+        </label>
+
+        <input
+            class="field"
+            id="newPersonName"
+        >
+
+        <label>
+            Role
+        </label>
+
+        <input
+            class="field"
+            id="newPersonRole"
+        >
+
+        <label>
+            Tags
+        </label>
+
+        <input
+            class="field"
+            id="newPersonTags"
+            placeholder="Comedy, Sports, Chaos"
+        >
+
+        <label>
+            Bio
+        </label>
+
+        <textarea
+            class="field"
+            id="newPersonBio"
+            rows="4"
+        ></textarea>
+
+        <button
+            class="primary-btn"
+            onclick="savePerson()"
+        >
+
+            ADD TO UNIVERSE
+
+        </button>
+
+        <button
+            class="secondary-btn"
+            onclick="closeModal()"
+        >
+
+            CANCEL
+
+        </button>
+
+    `);
+
+}
+
+
+function savePerson(){
+
+    const name =
+        document
+            .getElementById("newPersonName")
+            .value
+            .trim();
+
+    if(!name){
+
+        toast(
+            "Name required."
+        );
+
+        return;
+
+    }
+
+    personalities.push({
+
+        name:name,
+
+        aliases:[],
+
+        role:
+            document
+                .getElementById("newPersonRole")
+                .value
+            ||
+            "Personality",
+
+        image:"",
+
+        college:"",
+
+        hometown:"",
+
+        tags:
+            document
+                .getElementById("newPersonTags")
+                .value
+                .split(",")
+                .map(tag => tag.trim())
+                .filter(Boolean),
+
+        shows:[],
+
+        bio:
+            document
+                .getElementById("newPersonBio")
+                .value
+            ||
+            "A new member of the Stoolverse.",
+
+        power:50,
+
+        connections:[]
+
+    });
+
+    closeModal();
+
+    renderAll();
+
+    toast(
+        name
+        +
+        " added to the Stoolverse."
+    );
+
+}
+
+
+/* ============================================================
+   CUSTOM MOMENTS
+============================================================ */
+
+function openAddMoment(){
+
+    openModal(`
+
+        <h2>
+            ADD MOMENT
+        </h2>
+
+        <label>
+            Title
+        </label>
+
+        <input
+            class="field"
+            id="newMomentTitle"
+        >
+
+        <label>
+            Type
+        </label>
+
+        <select
+            class="field"
+            id="newMomentType"
+        >
+
+            <option>
+                chaos
+            </option>
+
+            <option>
+                beef
+            </option>
+
+            <option>
+                sports
+            </option>
+
+            <option>
+                classic
+            </option>
+
+        </select>
+
+        <label>
+            Description
+        </label>
+
+        <textarea
+            class="field"
+            id="newMomentDescription"
+            rows="4"
+        ></textarea>
+
+        <label>
+            Location
+        </label>
+
+        <input
+            class="field"
+            id="newMomentLocation"
+        >
+
+        <button
+            class="primary-btn"
+            onclick="saveMoment()"
+        >
+
+            ARCHIVE MOMENT
+
+        </button>
+
+        <button
+            class="secondary-btn"
+            onclick="closeModal()"
+        >
+
+            CANCEL
+
+        </button>
+
+    `);
+
+}
+
+
+function saveMoment(){
+
+    const title =
+        document
+            .getElementById("newMomentTitle")
+            .value
+            .trim();
+
+    if(!title){
+
+        toast(
+            "Title required."
+        );
+
+        return;
+
+    }
+
+    moments.unshift({
+
+        title:title,
+
+        type:
+            document
+                .getElementById("newMomentType")
+                .value,
+
+        year:"Custom",
+
+        people:[],
+
+        description:
+            document
+                .getElementById("newMomentDescription")
+                .value
+            ||
+            "A newly archived Stoolverse moment.",
+
+        location:
+            document
+                .getElementById("newMomentLocation")
+                .value
+            ||
+            "Unknown",
+
+        impact:75
+
+    });
+
+    closeModal();
+
+    renderAll();
+
+    toast(
+        "Moment archived."
+    );
+
+}
+
+
+/* ============================================================
+   HOME
+============================================================ */
+
+function renderHome(){
+
+    document
+        .getElementById("homeStats")
+        .innerHTML = [
+
+            [
+                personalities.length,
+                "Personalities"
+            ],
+
+            [
+                shows.length,
+                "Shows"
+            ],
+
+            [
+                moments.length,
+                "Archived Moments"
+            ],
+
+            [
+                dynasty.day,
+                "Dynasty Day"
+            ]
+
+        ]
+        .map(stat => `
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    ${stat[0]}
+                </div>
+
+                <div class="stat-label">
+                    ${stat[1]}
+                </div>
+
+            </div>
+
+        `)
+        .join("");
+
+    const headlines =
+        [...moments]
+        .sort(
+            () =>
+                Math.random() - .5
+        )
+        .slice(0,4);
+
+    document
+        .getElementById("newsFeed")
+        .innerHTML =
+
+        headlines
+        .map(moment => `
+
+            <div class="news">
+
+                <b>
+                    ${escapeHtml(moment.title)}
+                </b>
+
+                <span class="muted">
+                    ${escapeHtml(moment.description)}
+                </span>
+
+            </div>
+
+        `)
+        .join("");
+
+    const trending =
+        [...personalities]
+        .sort(
+            (a,b) =>
+                b.power - a.power
+        )
+        .slice(0,7);
+
+    document
+        .getElementById("trending")
+        .innerHTML =
+
+        trending
+        .map(
+            (person,index) => `
+
+                <div
+                    style="
+                        display:flex;
+                        justify-content:space-between;
+                        padding:9px 0;
+                        border-bottom:1px solid #292929
+                    "
+                >
+
+                    <span>
+
+                        ${index + 1}.
+                        ${escapeHtml(person.name)}
+
+                    </span>
+
+                    <b>
+                        ${person.power}
+                    </b>
+
+                </div>
+
+            `
+        )
+        .join("");
+
+}
+
+
+/* ============================================================
+   MODALS
+============================================================ */
+
+function openModal(html){
+
+    document
+        .getElementById("modalContent")
+        .innerHTML = html;
+
+    document
+        .getElementById("modal")
+        .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+    document
+        .getElementById("modal")
+        .classList.remove("show");
+
+}
+
+
+document
+    .getElementById("modal")
+    .addEventListener(
+        "click",
+        function(event){
+
+            if(
+                event.target.id === "modal"
+            ){
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+function toast(message){
+
+    const element =
+        document
+            .getElementById("toast");
+
+    element.textContent = message;
+
+    element.classList.add("show");
+
+    setTimeout(
+        () =>
+            element.classList.remove("show"),
+        3000
+    );
+
+}
+
+
+/* ============================================================
+   RENDER EVERYTHING
+============================================================ */
+
+function renderAll(){
+
+    renderHome();
+
+    renderFeatured();
+
+    renderPeople();
+
+    renderShows();
+
+    renderMoments();
+
+    renderDynasty();
+
+}
+
+
+renderAll();
 
 </script>
 
